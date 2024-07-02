@@ -6,17 +6,47 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Current File",
+            "name": "Test",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "Test",
+            "projectName": "BMS_c99aa464"
         },
         {
             "type": "java",
-            "name": "HelloFX",
+            "name": "SerialPortReader",
             "request": "launch",
-            "mainClass": "HelloFX",
+            "mainClass": "SerialPortReader",
+            "projectName": "BMS_c99aa464"
+        },
+        {
+            "type": "java",
+            "name": "Serial2",
+            "request": "launch",
+            "mainClass": "Serial2",
             "projectName": "BMS_c99aa464",
             "vmArgs": "--module-path /Users/anhvo/Downloads/javafx-sdk-17.0.11/lib --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "SerialDataApp",
+            "request": "launch",
+            "mainClass": "SerialDataApp",
+            "projectName": "BMS_c99aa464",
+            "vmArgs": "--module-path /Users/anhvo/Downloads/javafx-sdk-17.0.11/lib --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "BMS",
+            "request": "launch",
+            "mainClass": "BMS",
+            "projectName": "BMS_c99aa464",
+            "vmArgs": "--module-path /Users/anhvo/Downloads/javafx-sdk-17.0.11/lib --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
         }
     ]
 }
