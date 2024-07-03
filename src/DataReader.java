@@ -31,7 +31,7 @@ public class DataReader implements Runnable {
                     JSONObject jsonObject = new JSONObject(jsonData);
                     JSONArray dataArray = jsonObject.getJSONArray("data");
 
-                    controller.processSensorData(dataArray);
+                    controller.processData(dataArray);
                     Thread.sleep(1000); // Read every 1s
                 }
             }
