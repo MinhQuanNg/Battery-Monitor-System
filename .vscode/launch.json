@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DataReader",
+            "request": "launch",
+            "mainClass": "DataReader",
+            "projectName": "BMS_c99aa464"
+        },
+        {
+            "type": "java",
             "name": "Test",
             "request": "launch",
             "mainClass": "Test",

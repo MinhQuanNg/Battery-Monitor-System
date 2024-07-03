@@ -101,7 +101,7 @@
             </Label>
          </children>
       </Pane>
-      <GridPane layoutX="52.0" layoutY="75.0" prefHeight="224.0" prefWidth="500.0">
+      <GridPane id="cellPane" layoutX="52.0" layoutY="75.0" prefHeight="224.0" prefWidth="500.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -1,17 +1,16 @@
 import com.fazecast.jSerialComm.SerialPort;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.Scanner;
-import java.util.concurrent.BlockingQueue;
 
 public class DataReader implements Runnable {
     private SerialPort USB;
-    private BlockingQueue<JSONArray> dataQueue; // Assuming you're using a thread-safe queue
+    private ControllerGeneral controller;
 
-    public DataReader(SerialPort USB, BlockingQueue<JSONArray> dataQueue) {
+    public DataReader(ControllerGeneral controller, SerialPort USB) {
         this.USB = USB;
-        this.dataQueue = dataQueue;
+        this.controller = controller;
     }
 
     @Override
@@ -21,31 +20,36 @@ public class DataReader implements Runnable {
                 System.out.println("No data to read.");
                 System.exit(0);
             }
-            while (scanner.nextLine() != "END") { // Infinite loop to continuously read data
-                    String jsonData = scanner.nextLine(); // Read data from USB
+
+            // Infinite loop to continuously read data from USB
+            while (scanner.nextLine() != "END") {
+                    String jsonData = scanner.nextLine();
                     if (jsonData == null || jsonData.isEmpty()) {
                         System.out.println("No data received. Exiting program.");
                         System.exit(0);
                     } else {
                     JSONObject jsonObject = new JSONObject(jsonData);
                     JSONArray dataArray = jsonObject.getJSONArray("data");
-                    processSensorData(dataArray); // Call a separate method to process data
-                    Thread.sleep(2000);
+
+                    controller.processSensorData(dataArray);
+                    Thread.sleep(1000); // Read every 1s
                 }
+            }
         } catch (Exception e) {
-            e.printStackTrace(); // Pause for 2 seconds              
+            e.printStackTrace();
         }          
     }
 
-    private void processSensorData(JSONArray dataArray) throws JSONException {
-        for (int i = 0; i < dataArray.length(); i++) {
-            JSONObject dataObject = dataArray.getJSONObject(i);
-            double voltage = dataObject.optDouble("voltage", Double.NaN);
-            double temperature = dataObject.optDouble("temperature", Double.NaN);
-            int SOC = dataObject.optInt("SOC", 0);
-            System.out.println("Battery Level: " + SOC + "%");
-            System.out.println("Cell " + i + ": " + "Voltage: " + voltage + ", Temperature: " + temperature);
+    public static void main(String[] args) {
+        SerialPort USB = PortChecker.getPort();
+
+        // Run if port available
+        if (USB != null) {
+            DataReader reader = new DataReader(new ControllerGeneral(), USB);
+            Thread thread = new Thread(reader);
+            thread.start();
+        } else {
+            System.out.println("No USB found.");
         }
     }
-    
 }

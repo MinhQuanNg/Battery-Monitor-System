@@ -4,17 +4,12 @@
     ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "src/lib/Medusa-8.0.jar",
-        "/Users/anhvo/Downloads/javafx-sdk-17.0.11/lib/javafx.swing.jar",
-        "/Users/anhvo/Downloads/javafx-sdk-17.0.11/lib/javafx-swt.jar",
-        "/Users/anhvo/Downloads/javafx-sdk-17.0.11/lib/javafx.graphics.jar",
-        "/Users/anhvo/Downloads/javafx-sdk-17.0.11/lib/javafx.base.jar",
-        "/Users/anhvo/Downloads/javafx-sdk-17.0.11/lib/javafx.web.jar",
-        "/Users/anhvo/Downloads/javafx-sdk-17.0.11/lib/javafx.fxml.jar",
-        "/Users/anhvo/Downloads/javafx-sdk-17.0.11/lib/javafx.controls.jar",
-        "/Users/anhvo/Downloads/javafx-sdk-17.0.11/lib/javafx.media.jar",
-        "/Users/anhvo/Downloads/jSerialComm-2.11.0 (1).jar",
-        "/Users/anhvo/Downloads/jssc-2.9.6.jar",
-        "/Users/anhvo/Downloads/org.json-chargebee-1.0.jar"
-    ]
+        "src/lib/usb4java-1.3.0/**/*.jar",
+        "src/lib/json_simple-1.1.jar",
+        "src/lib/javafx-sdk-17.0.11/**/*.jar",
+        "src/lib/jSerialComm-2.11.0 (1).jar",
+        "src/lib/org.json-chargebee-1.0.jar",
+        "src/lib/Medusa-8.0.jar"
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }
