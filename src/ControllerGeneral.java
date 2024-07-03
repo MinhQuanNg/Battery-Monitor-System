@@ -42,4 +42,8 @@ public class ControllerGeneral {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void thongtinchitiet(ActionEvent e) {
+
+    }
 }
