@@ -12,6 +12,7 @@ public class BMS extends Application {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+            stage.setTitle("Quản lý hệ thống pin");
         } catch (Exception e) {
             e.printStackTrace();
         }
