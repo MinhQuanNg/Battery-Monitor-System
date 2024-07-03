@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Test",
+            "request": "launch",
+            "mainClass": "Test",
+            "projectName": "BMS_28b66ba0"
+        },
+        {
+            "type": "java",
+            "name": "BMS",
+            "request": "launch",
+            "mainClass": "BMS",
+            "projectName": "BMS_28b66ba0",
+            "vmArgs": "--module-path /Users/quannguyen/Documents/Internship/BMS/lib/javafx-sdk-17.0.11/lib --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
