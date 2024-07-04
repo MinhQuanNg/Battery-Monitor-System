@@ -6,18 +6,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Test",
-            "request": "launch",
-            "mainClass": "Test",
-            "projectName": "BMS_28b66ba0"
-        },
-        {
-            "type": "java",
             "name": "BMS",
             "request": "launch",
             "mainClass": "BMS",
-            "projectName": "BMS_28b66ba0",
-            "vmArgs": "--module-path /Users/quannguyen/Documents/Internship/BMS/lib/javafx-sdk-17.0.11/lib --add-modules javafx.controls,javafx.fxml"
+            "projectName": "BMS_c99aa464",
+            "vmArgs": "--module-path /Users/anhvo/DCSELab/BMS/lib/javafx-sdk-17.0.11/lib --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }
