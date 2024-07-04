@@ -175,9 +175,10 @@
       </GridPane>
       <GridPane prefHeight="67.0" prefWidth="600.0" style="-fx-background-color: #FEBB58;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="59.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="450.5" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="59.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="465.5" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="37.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.0" minWidth="10.0" prefWidth="50.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -192,34 +193,23 @@
                   </ImageView>
                </graphic>
             </Button>
-            <ImageView fitHeight="20.0" fitWidth="20.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+            <ImageView accessibleRole="BUTTON" fitHeight="20.0" fitWidth="20.0" style="-fx-scale-x: 1.2; -fx-scale-y: 1.2;" GridPane.columnIndex="3" GridPane.halignment="LEFT">
                <image>
                   <Image url="@images/question.png" />
                </image>
                <GridPane.margin>
-                  <Insets right="15.0" />
+                  <Insets left="13.0" />
                </GridPane.margin>
                <cursor>
                   <Cursor fx:constant="V_RESIZE" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="18.0" fitWidth="18.0" style="-fx-opacity: 0.8;" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+            <ImageView accessibleRole="BUTTON" fitHeight="18.0" fitWidth="18.0" style="-fx-opacity: 0.8; -fx-scale-x: 1.2; -fx-scale-y: 1.2;" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                <image>
                   <Image url="@images/downloads.png" />
                </image>
                <GridPane.margin>
-                  <Insets right="13.0" />
-               </GridPane.margin>
-               <cursor>
-                  <Cursor fx:constant="V_RESIZE" />
-               </cursor>
-            </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="20.0" GridPane.columnIndex="2" GridPane.halignment="LEFT">
-               <image>
-                  <Image url="@images/locked-computer.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets left="5.0" />
+                  <Insets />
                </GridPane.margin>
                <cursor>
                   <Cursor fx:constant="V_RESIZE" />

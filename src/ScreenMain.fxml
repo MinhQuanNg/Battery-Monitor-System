@@ -5,29 +5,21 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fec571;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" style="-fx-opacity: 0.8;">
-         <image>
-            <Image url="@images/hinhnen.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="166.0" fitWidth="136.0" layoutX="232.0" layoutY="59.0">
-         <image>
-            <Image url="@images/logo4.png" />
-         </image>
-      </ImageView>
-      <Pane fx:id="batteryPane" layoutX="217.0" layoutY="78.0" prefHeight="106.0" prefWidth="166.0">
-      </Pane>
-      <VBox alignment="CENTER" layoutX="148.0" layoutY="249.0" prefHeight="85.0" prefWidth="307.0">
+      <VBox alignment="CENTER" layoutX="134.0" layoutY="86.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="332.0" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="134.0" AnchorPane.topAnchor="86.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="290.0" style="-fx-background-color: white;" text="CHỌN CHẾ ĐỘ HOẠT ĐỘNG" textAlignment="CENTER">
+            <ImageView fitHeight="166.0" fitWidth="126.0" preserveRatio="true">
+               <image>
+                  <Image url="@images/logo4.png" />
+               </image>
+            </ImageView>
+            <Button accessibleRole="IMAGE_VIEW" mnemonicParsing="false" prefHeight="26.0" prefWidth="290.0" style="-fx-background-color: white;" text="CHỌN CHẾ ĐỘ HOẠT ĐỘNG" textAlignment="CENTER">
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="13.0" />
