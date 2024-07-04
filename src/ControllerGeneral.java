@@ -17,6 +17,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -31,6 +33,9 @@ public class ControllerGeneral {
     @FXML private Label maxVLabel, minVLabel, delVLabel, sumVLabel, avgVLabel, maxTLabel, avgTLabel;
     @FXML private GridPane cellPane;
 
+    private double maxV = 0, minV = 0, sumV = 0, maxT = 0, sumT = 0;
+
+
     public void initialize() {
         gauge = GaugeBuilder.create()
         .skinType(SkinType.BATTERY)
@@ -43,6 +48,7 @@ public class ControllerGeneral {
 
         batteryBox.getChildren().add(gauge);
 
+        // TODO: get original USB
         DataReader reader = new DataReader(this, Controller.getUSB());
         Thread thread = new Thread(reader);
         thread.start();
@@ -72,7 +78,6 @@ public class ControllerGeneral {
 
     // TODO: Refactor
     private void dataScreenGeneral(JSONArray dataArray) throws JSONException {
-        double maxV = 0, minV = 0, sumV = 0, maxT = 0, sumT = 0;
         final double finaldelV, finalavgV, finalavgT;
         int noCells = dataArray.length();
 
@@ -132,19 +137,49 @@ public class ControllerGeneral {
         });
     }
 
+    // Update cell image and data
     private void dataScreenDetail(JSONArray dataArray) throws JSONException {
+        String url;
         int noCells = dataArray.length();
 
-        for (int i = 0; i < noCells; i++) {
-            JSONObject dataObject = dataArray.getJSONObject(i);
+        for (int i = 1; i <= noCells; i++) {
+            JSONObject dataObject = dataArray.getJSONObject(i-1);
 
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
-            // Label cellLabel = (Label) cellPane.lookup("#cell" + i + "Label");
-            // cellLabel.setText("Cell " + i);
+            
+            Label cellLabel = (Label) cellPane.lookup("#cell" + i + "Label");
+            cellLabel.setText("Cell " + i);
+
+            // Update cell image
+            for (Node image : findNodesByClass(cellPane, "generalImage")) {
+                if (temperature == maxT) {
+                    url = "file:images/hot.png";
+                } else {
+                    url = "file:images/normal.png";
+                }
+
+                if (voltage == maxV) {
+                    url = "file:images/max.png";
+                } else if (voltage == minV) {
+                    url = "file:images/min.png";
+                }
+                
+                ((ImageView) image).setImage(new Image(url));
+            }
+
+            // Update cell voltage and temperature
+            for (Node box : findNodesByClass(cellLabel, "generalDataBox")) {
+                List<Label> labels = findLabels((Parent) box);
+                
+                // Voltage label 2 decimal places
+                labels.get(0).setText(String.format("%.2f", voltage));
+
+                // Temperature label 1 decimal place
+                labels.get(1).setText(String.format("%.1f", temperature));
+            }
 
             System.out.println("! Cell " + i + ": " + "Voltage: " + voltage + ", Temperature: " + temperature);
-
         }
     }
 
@@ -160,4 +195,17 @@ public class ControllerGeneral {
         }
         return matchingNodes;
     }
+
+    private List<Label> findLabels(Parent root) {
+        List<Label> labels = new ArrayList<>();
+        for (Node node : root.getChildrenUnmodifiable()) {
+          if (node instanceof Label) {
+            labels.add((Label) node);
+          }
+          if (node instanceof Parent) {
+            labels.addAll(findLabels((Parent) node));
+          }
+        }
+        return labels;
+      }
 }

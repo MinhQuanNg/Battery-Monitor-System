@@ -6,7 +6,6 @@ public class PortChecker {
         SerialPort[] allAvailableComPorts = SerialPort.getCommPorts();
         SerialPort USB = null;
         for (SerialPort port : allAvailableComPorts) {
-            System.out.println("hi");
 
             if (port.getDescriptivePortName().toLowerCase().contains("usb")) {
                 USB = port;
