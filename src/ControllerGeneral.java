@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -21,14 +20,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class ControllerGeneral {
@@ -42,6 +43,8 @@ public class ControllerGeneral {
     @FXML private Label maxVLabel, minVLabel, delVLabel, sumVLabel, avgVLabel, maxTLabel, avgTLabel;
     @FXML private Pane errorPane;
     @FXML private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
+    @FXML private Label maxVPro, minVPro, difVPro, sumMaxVPro, sumMinVPro, maxTPro;
+    @FXML private TextField maxVProText, minVProText, difVProText, sumMaxVProText, sumMinVProText, maxTProText;
 
     final private String[] screen = {"General", "Detail", "Profile"};
     private String currentScreen;
@@ -76,7 +79,11 @@ public class ControllerGeneral {
         thread.start();
 
         // Create excel
-        file = new Excel();
+        try {
+            excel = new Excel();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void back(ActionEvent e) throws IOException {
@@ -138,7 +145,7 @@ public class ControllerGeneral {
 
         // Append to excel
         try {
-            file.write(dataArray, timestamp);
+            excel.write(dataArray, timestamp);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -343,7 +350,7 @@ public class ControllerGeneral {
 
     // TODO: make button
     private void save(ActionEvent e) {
-        excel.save();
+        // excel.save();
     }
 
     private void initCharacteristics() {
@@ -364,5 +371,73 @@ public class ControllerGeneral {
             drainLabel.setText(characteristics.get("drain"));
             capacityLabel.setText(characteristics.get("capacity"));
         });
+    }
+
+    public void popEdit(ActionEvent e) throws IOException {
+        Label label = (Label) e.getSource();
+        label.setVisible(false);
+        switch (label.getId()) {
+            case "maxVPro":
+                maxVProText.setVisible(true);
+                maxVProText.setText(maxVPro.getText());
+                break;
+            case "minVPro":
+                minVProText.setVisible(true);
+                minVProText.setText(minVPro.getText());
+                break;
+            case "difVPro":
+                difVProText.setVisible(true);
+                difVProText.setText(difVPro.getText());
+                break;
+            case "sumMaxVPro":
+                sumMaxVProText.setVisible(true);
+                sumMaxVProText.setText(sumMaxVPro.getText());
+                break;
+            case "sumMinVPro":
+                sumMinVProText.setVisible(true);
+                sumMinVProText.setText(sumMinVPro.getText());
+                break;
+            case "maxTPro":
+                maxTProText.setVisible(true);
+                maxTProText.setText(maxTPro.getText());
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void finishEdit(KeyEvent e) throws IOException {
+        TextField text = (TextField) e.getSource();
+            if (e.getCode() == KeyCode.ENTER) {
+            text.setVisible(false);
+            switch (text.getId()) {
+                case "maxVProText":
+                    maxVPro.setVisible(true);
+                    maxVPro.setText(text.getText());
+                    break;
+                case "minVProText":
+                    minVPro.setVisible(true);
+                    minVPro.setText(text.getText());
+                    break;
+                case "difVProText":
+                    difVPro.setVisible(true);
+                    difVPro.setText(text.getText());
+                    break;
+                case "sumMaxVProText":
+                    sumMaxVPro.setVisible(true);
+                    sumMaxVPro.setText(text.getText());
+                    break;
+                case "sumMinVProText":
+                    sumMinVPro.setVisible(true);
+                    sumMinVPro.setText(text.getText());
+                    break;
+                case "maxTProText":
+                    maxTPro.setVisible(true);
+                    maxTPro.setText(text.getText());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

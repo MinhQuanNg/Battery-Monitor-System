@@ -2,6 +2,8 @@ import com.fazecast.jSerialComm.SerialPort;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class DataReader implements Runnable {
@@ -31,7 +33,7 @@ public class DataReader implements Runnable {
                     JSONObject jsonObject = new JSONObject(jsonData);
                     JSONArray dataArray = jsonObject.getJSONArray("data");
 
-                    controller.processData(dataArray);
+                    controller.processData(dataArray, getCurrentTimeStamp());
                     Thread.sleep(1000); // Read every 1s
                 }
             }
@@ -51,5 +53,12 @@ public class DataReader implements Runnable {
         } else {
             System.out.println("No USB found.");
         }
+    }
+
+    private static String getCurrentTimeStamp() {
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+        Date now = new Date();
+        String strDate = sdfDate.format(now);
+        return strDate;
     }
 }

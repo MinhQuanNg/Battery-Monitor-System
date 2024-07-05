@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Excel",
+            "request": "launch",
+            "mainClass": "Excel",
+            "projectName": "BMS_c99aa464"
+        },
+        {
+            "type": "java",
             "name": "BMS",
             "request": "launch",
             "mainClass": "BMS",

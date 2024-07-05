@@ -11,7 +11,18 @@
         "src/lib/Medusa-8.0.jar",
         "lib/**/*.jar",
         "/Users/anhvo/Downloads/apache-poi-src-5.3.0-20240625/**/*.jar",
-        "/Users/anhvo/Downloads/poi-ooxml-5.3.0-javadoc.jar"
+        "/Users/anhvo/Downloads/poi-ooxml-5.3.0-javadoc.jar",
+        "/Users/anhvo/Downloads/commons-io-2.12.0.jar",
+        "/Users/anhvo/Downloads/commons-collections4-4.1.jar",
+        "/Users/anhvo/Downloads/log4j-api-2.9.1.jar",
+        "/Users/anhvo/Downloads/log4j-core-2.9.1.jar",
+        "/Users/anhvo/Downloads/commons-compress-1.18.jar",
+        "/Users/anhvo/Downloads/stax-api-1.0.1.jar",
+        "/Users/anhvo/Downloads/poi-ooxml-schemas-3.6.jar",
+        "/Users/anhvo/Downloads/geronimo-stax-api_1.0_spec-1.0.jar",
+        "/Users/anhvo/Downloads/xmlbeans-5.2.1 (1).jar",
+        "/Users/anhvo/Downloads/ooxml-schemas-1.4.jar",
+        "/Users/anhvo/Downloads/poi-ooxml-full-5.2.5.jar"
     ],
     "java.debug.settings.onBuildFailureProceed": true
 }
