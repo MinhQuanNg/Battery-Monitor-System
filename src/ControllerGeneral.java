@@ -19,11 +19,14 @@ import eu.hansolo.medusa.Section;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -34,8 +37,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class ControllerGeneral {
@@ -43,16 +51,24 @@ public class ControllerGeneral {
     private Scene scene;
     private Gauge gauge;
 
-    @FXML private AnchorPane generalPane;
-    @FXML private HBox batteryBox;
-    @FXML private GridPane cellPane, profilePane;
-    @FXML private Label maxVLabel, minVLabel, delVLabel, sumVLabel, avgVLabel, maxTLabel, avgTLabel;
-    @FXML private Pane errorPane;
-    @FXML private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
-    @FXML private Label maxVPro, minVPro, difVPro, sumMaxVPro, sumMinVPro, maxTPro;
-    @FXML private TextField maxVProText, minVProText, difVProText, sumMaxVProText, sumMinVProText, maxTProText;
+    @FXML
+    private AnchorPane generalPane;
+    @FXML
+    private HBox batteryBox;
+    @FXML
+    private GridPane cellPane, profilePane;
+    @FXML
+    private Label maxVLabel, minVLabel, delVLabel, sumVLabel, avgVLabel, maxTLabel, avgTLabel;
+    @FXML
+    private Pane errorPane;
+    @FXML
+    private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
+    @FXML
+    private Label maxVPro, minVPro, difVPro, sumMaxVPro, sumMinVPro, maxTPro;
+    @FXML
+    private TextField maxVProText, minVProText, difVProText, sumMaxVProText, sumMinVProText, maxTProText;
 
-    final private String[] screen = {"General", "Detail", "Profile"};
+    final private String[] screen = { "General", "Detail", "Profile" };
     private String currentScreen;
 
     private Excel excel;
@@ -68,13 +84,13 @@ public class ControllerGeneral {
 
         // Add SoC gauge on ScreenGeneral
         gauge = GaugeBuilder.create()
-        .skinType(SkinType.BATTERY)
-        .animated(true)
-        .sectionsVisible(true)
-        .sections(new Section(0, 10, Color.RED),
-                    new Section(10, 20, Color.rgb(255,235,59)), //YELLOW
-                    new Section(20, 100, Color.GREEN))
-        .build();
+                .skinType(SkinType.BATTERY)
+                .animated(true)
+                .sectionsVisible(true)
+                .sections(new Section(0, 10, Color.RED),
+                        new Section(10, 20, Color.rgb(255, 235, 59)), // YELLOW
+                        new Section(20, 100, Color.GREEN))
+                .build();
         batteryBox.getChildren().add(gauge);
 
         // TODO: get original USB
@@ -94,10 +110,57 @@ public class ControllerGeneral {
 
     public void back(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ScreenMain.fxml"));
-        stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void save(ActionEvent e) throws FileNotFoundException, IOException {
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showSaveDialog(null);
+
+        if (selectedFile != null) {
+            FileChooser.ExtensionFilter excelFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
+            fileChooser.getExtensionFilters().add(excelFilter);
+
+            // Restrict the dialog to only show the Excel filter
+            fileChooser.setSelectedExtensionFilter(excelFilter);
+
+            // Proceed with saving the Excel file to the selected path
+            XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(excel.fileName));
+
+            // Write the workbook to the chosen file
+            FileOutputStream outputStream = new FileOutputStream(selectedFile);
+            workbook.write(outputStream);
+            outputStream.close();
+            workbook.close();
+
+            System.out.println("Excel file saved successfully!");
+        } else {
+            // Handle case where user cancels the dialog
+            System.out.println("File saving cancelled.");
+        }
+    }
+
+    public void info(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Info.fxml"));
+        Parent infoContent = loader.load();
+
+        // Create a new Stage (window)
+        Stage infoStage = new Stage();
+        infoStage.setTitle("Hướng dẫn sử dụng"); // Set the title of the window
+
+        // Optional: Make the info window modal and block input to other windows
+        infoStage.initModality(Modality.APPLICATION_MODAL);
+        infoStage.initOwner(((Node) e.getSource()).getScene().getWindow());
+
+        // Set the scene of the new stage with the loaded FXML
+        Scene infoScene = new Scene(infoContent);
+        infoStage.setScene(infoScene);
+
+        // Show the new stage
+        infoStage.show();
     }
 
     public void general(ActionEvent e) {
@@ -118,7 +181,7 @@ public class ControllerGeneral {
         currentScreen = screen[1];
 
         for (Node node : findNodesByClass(generalPane, "general")) {
-            node.setVisible(false);  // Hide nodes on ScreenGeneral
+            node.setVisible(false); // Hide nodes on ScreenGeneral
         }
 
         cellPane.setVisible(true);
@@ -132,7 +195,7 @@ public class ControllerGeneral {
         currentScreen = screen[2];
 
         for (Node node : findNodesByClass(generalPane, "general")) {
-            node.setVisible(false);  // Hide nodes on ScreenGeneral
+            node.setVisible(false); // Hide nodes on ScreenGeneral
         }
 
         cellPane.setVisible(false);
@@ -142,7 +205,7 @@ public class ControllerGeneral {
         profilePane.setVisible(true);
     }
 
-    public void processData(JSONArray dataArray, String timestamp) {
+    public void processData(JSONArray dataArray, String timestamp) throws JSONException {
         numCell = dataArray.length();
         characteristics.put("numCell", String.valueOf(numCell));
 
@@ -194,7 +257,7 @@ public class ControllerGeneral {
             sumVLabel.setText(String.format("%.2f", sumV) + "V");
             avgVLabel.setText(String.format("%.2f", avgV) + "V");
             avgVLabel.setText(String.format("%.2f", avgV) + "V");
-            
+
             maxTLabel.setText(String.format("%.2f", maxT) + "°C");
             avgTLabel.setText(String.format("%.2f", avgT) + "°C");
         });
@@ -212,7 +275,7 @@ public class ControllerGeneral {
 
         // Find max min
         for (int i = 1; i <= numCell; i++) {
-            JSONObject dataObject = dataArray.getJSONObject(i-1);
+            JSONObject dataObject = dataArray.getJSONObject(i - 1);
 
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
@@ -231,7 +294,7 @@ public class ControllerGeneral {
         for (int i = 1; i <= numCell; i++) {
             String state = "normal";
 
-            JSONObject dataObject = dataArray.getJSONObject(i-1);
+            JSONObject dataObject = dataArray.getJSONObject(i - 1);
 
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
@@ -239,7 +302,7 @@ public class ControllerGeneral {
             int cellNo = i;
 
             // Update cell number label
-            Platform.runLater(() -> cellLabels.get(cellNo-1).setText("Cell " + cellNo));
+            Platform.runLater(() -> cellLabels.get(cellNo - 1).setText("Cell " + cellNo));
 
             if (temperature == maxT) {
                 state = "hot";
@@ -251,11 +314,12 @@ public class ControllerGeneral {
                 state = "min";
             }
 
-            updateCellImage((ImageView) imageViewNodes.get(cellNo-1), state);
+            updateCellImage((ImageView) imageViewNodes.get(cellNo - 1), state);
 
-            updateDataLabels((Parent) dataBoxes.get(cellNo-1), voltage, temperature, state);
+            updateDataLabels((Parent) dataBoxes.get(cellNo - 1), voltage, temperature, state);
 
-            // System.out.println("Cell " + i + ": " + "Voltage: " + voltage + ", Temperature: " + temperature);
+            // System.out.println("Cell " + i + ": " + "Voltage: " + voltage + ",
+            // Temperature: " + temperature);
         }
     }
 
@@ -276,7 +340,7 @@ public class ControllerGeneral {
 
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
-            
+
             if (i == 0) {
                 // Dung luong
                 int SOC = dataObject.optInt("SOC", 50);
@@ -305,7 +369,7 @@ public class ControllerGeneral {
         }
 
         Hashtable<String, Double> maxmin = new Hashtable<>();
-        
+
         maxmin.put("maxV", maxV);
         maxmin.put("minV", minV);
         maxmin.put("maxT", maxT);
@@ -314,15 +378,16 @@ public class ControllerGeneral {
 
         return maxmin;
     }
+
     private List<Node> findNodesByClass(Parent root, String className) {
         List<Node> matchingNodes = new ArrayList<>();
         for (Node node : root.getChildrenUnmodifiable()) {
-          if (node.getStyleClass().contains(className)) {
-            matchingNodes.add(node);
-          }
-          if (node instanceof Parent) {
-            matchingNodes.addAll(findNodesByClass((Parent) node, className));
-          }
+            if (node.getStyleClass().contains(className)) {
+                matchingNodes.add(node);
+            }
+            if (node instanceof Parent) {
+                matchingNodes.addAll(findNodesByClass((Parent) node, className));
+            }
         }
         return matchingNodes;
     }
@@ -331,9 +396,9 @@ public class ControllerGeneral {
     private List<Label> findLabels(Parent root) {
         List<Label> labels = new ArrayList<>();
         for (Node node : root.getChildrenUnmodifiable()) {
-          if (node instanceof Label) {
-            labels.add((Label) node);
-          }
+            if (node instanceof Label) {
+                labels.add((Label) node);
+            }
         }
         return labels;
     }
@@ -365,33 +430,6 @@ public class ControllerGeneral {
                 labels.get(1).setTextFill(Color.BLACK);
             }
         });
-    }
-
-    public void save(ActionEvent e) throws FileNotFoundException, IOException {
-        FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showSaveDialog(null);
-
-        if (selectedFile != null) {
-            FileChooser.ExtensionFilter excelFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
-            fileChooser.getExtensionFilters().add(excelFilter);
-            
-            // Restrict the dialog to only show the Excel filter
-            fileChooser.setSelectedExtensionFilter(excelFilter);
-
-            // Proceed with saving the Excel file to the selected path
-            XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(excel.fileName));
-  
-            // Write the workbook to the chosen file
-            FileOutputStream outputStream = new FileOutputStream(selectedFile);
-            workbook.write(outputStream);
-            outputStream.close();
-            workbook.close();
-            
-            System.out.println("Excel file saved successfully!");
-        } else {
-            // Handle case where user cancels the dialog
-            System.out.println("File saving cancelled.");
-        }
     }
 
     private void initCharacteristics() {
@@ -449,7 +487,7 @@ public class ControllerGeneral {
 
     public void finishEdit(KeyEvent e) throws IOException {
         TextField text = (TextField) e.getSource();
-            if (e.getCode() == KeyCode.ENTER) {
+        if (e.getCode() == KeyCode.ENTER) {
             text.setVisible(false);
             switch (text.getId()) {
                 case "maxVProText":
