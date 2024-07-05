@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fec571;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane id="background" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <VBox alignment="CENTER" layoutX="134.0" layoutY="86.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="332.0" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="134.0" AnchorPane.topAnchor="86.0">
          <children>
@@ -25,7 +25,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#thoigianthuc" prefHeight="26.0" prefWidth="290.0" style="-fx-background-color: white;" text="Quan sát dữ liệu thời gian thực" textAlignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#enter" prefHeight="26.0" prefWidth="290.0" style="-fx-background-color: white;" text="Quan sát dữ liệu thời gian thực" textAlignment="CENTER" />
          </children>
       </VBox>
    </children>

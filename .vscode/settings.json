@@ -9,7 +9,9 @@
         "src/lib/jSerialComm-2.11.0 (1).jar",
         "src/lib/org.json-chargebee-1.0.jar",
         "src/lib/Medusa-8.0.jar",
-        "lib/**/*.jar"
+        "lib/**/*.jar",
+        "/Users/anhvo/Downloads/apache-poi-src-5.3.0-20240625/**/*.jar",
+        "/Users/anhvo/Downloads/poi-ooxml-5.3.0-javadoc.jar"
     ],
     "java.debug.settings.onBuildFailureProceed": true
 }

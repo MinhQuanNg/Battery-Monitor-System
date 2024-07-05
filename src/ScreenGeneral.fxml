@@ -13,11 +13,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.Cursor?>
 
 <AnchorPane fx:id="generalPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerGeneral">
    <children>
-      <AnchorPane layoutX="54.0" layoutY="235.0" prefHeight="1.0" prefWidth="491.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="164.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="55.0" />
-   <GridPane fx:id="cellPane" layoutX="26.0" layoutY="77.0" prefHeight="215.0" prefWidth="549.0" style="-fx-background-color: black;" visible="false" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="77.0">
+      <AnchorPane layoutX="57.0" layoutY="236.0" prefHeight="1.0" prefWidth="491.0" style="-fx-background-color: black;" styleClass="general" AnchorPane.bottomAnchor="163.0" AnchorPane.leftAnchor="57.0" AnchorPane.rightAnchor="52.0" />
+   <GridPane fx:id="cellPane" layoutX="26.0" layoutY="77.0" prefHeight="215.0" prefWidth="549.0" visible="false" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="77.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -521,12 +522,12 @@
                </GridPane.margin></ImageView>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -541,12 +542,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="94.0" prefWidth="77.0" styleClass="detailDataBox" GridPane.columnIndex="1">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -561,12 +562,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="2">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -581,12 +582,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="3">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -601,12 +602,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="4">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -621,12 +622,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="5">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -641,12 +642,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="6">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -661,12 +662,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="7">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -681,12 +682,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="8">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -701,12 +702,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="9">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -721,12 +722,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.rowIndex="1">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -741,12 +742,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -761,12 +762,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -781,12 +782,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -801,12 +802,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -821,12 +822,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -841,12 +842,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="6" GridPane.rowIndex="1">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -861,12 +862,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="7" GridPane.rowIndex="1">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -881,12 +882,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="8" GridPane.rowIndex="1">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -901,12 +902,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="9" GridPane.rowIndex="1">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -921,12 +922,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.rowIndex="2">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -941,12 +942,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -961,12 +962,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -981,12 +982,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1001,12 +1002,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1021,12 +1022,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="5" GridPane.rowIndex="2">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1041,12 +1042,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="6" GridPane.rowIndex="2">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1061,12 +1062,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="7" GridPane.rowIndex="2">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1081,12 +1082,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="8" GridPane.rowIndex="2">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1101,12 +1102,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="9" GridPane.rowIndex="2">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1121,12 +1122,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.rowIndex="3">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1141,12 +1142,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1161,12 +1162,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1181,12 +1182,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1201,12 +1202,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1221,12 +1222,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="5" GridPane.rowIndex="3">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1241,12 +1242,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="6" GridPane.rowIndex="3">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1261,12 +1262,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="7" GridPane.rowIndex="3">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1281,12 +1282,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="8" GridPane.rowIndex="3">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1301,12 +1302,12 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="9" GridPane.rowIndex="3">
                <children>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
                   </Label>
-                  <Label textFill="WHITE">
+                  <Label style="-fx-font-weight: bold;">
                      <font>
                         <Font name="System Bold" size="9.0" />
                      </font>
@@ -1335,7 +1336,7 @@
                <padding>
                   <Insets top="15.0" />
                </padding></Button>
-            <Button mnemonicParsing="false" onAction="#thongtinchitiet" prefHeight="68.0" prefWidth="297.0" style="-fx-background-color: transparent;" styleClass="nav-button" text="Thông tin chi tiết" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#detail" prefHeight="68.0" prefWidth="297.0" style="-fx-background-color: transparent;" styleClass="nav-button" text="Thông tin chi tiết" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <padding>
                   <Insets top="15.0" />
                </padding></Button>
@@ -1367,15 +1368,32 @@
                   <Insets top="3.0" />
                </GridPane.margin>
             </ImageView>
+            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: transparent;" styleClass="nav-button" text="Thông tin chung">
+               <padding>
+                  <Insets top="15.0" />
+               </padding></Button>
+            <Button mnemonicParsing="false" onAction="#detail" prefHeight="68.0" prefWidth="297.0" style="-fx-background-color: transparent;" styleClass="nav-button" text="Thông tin chi tiết" GridPane.columnIndex="1">
+               <padding>
+                  <Insets top="15.0" />
+               </padding></Button>
+            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="284.0" style="-fx-background-color: transparent;" styleClass="nav-button" text="Hồ sơ thiết lập" GridPane.columnIndex="2">
+               <padding>
+                  <Insets top="15.0" />
+               </padding></Button>
          </children>
       </GridPane>
-      <Pane prefHeight="67.0" prefWidth="600.0" style="-fx-background-color: #FEBB58;">
+      <GridPane styleClass="nav" prefHeight="67.0" prefWidth="600.0" style="-fx-background-color: #FEBB58;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="59.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="465.5" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="37.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.0" minWidth="10.0" prefWidth="50.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Label layoutX="169.0" layoutY="19.0" text="HỆ THỐNG QUẢN LÝ PIN">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font></Label>
-            <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: transparent;">
+            <Button mnemonicParsing="false" onAction="#back" style="-fx-background-color: transparent;" GridPane.halignment="CENTER">
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="24.0" onMouseClicked="#back">
                      <image>
@@ -1384,27 +1402,44 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="509.0" layoutY="21.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="18.0" fitWidth="18.0" style="-fx-opacity: 0.8;">
-                     <image>
-                        <Image url="@images/downloads.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="472.0" layoutY="19.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
-            <Button layoutX="544.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0">
-                     <image>
-                        <Image url="@images/question.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+            <ImageView accessibleRole="BUTTON" fitHeight="20.0" fitWidth="20.0" style="-fx-scale-x: 1.2; -fx-scale-y: 1.2;" GridPane.columnIndex="3" GridPane.halignment="LEFT">
+               <image>
+                  <Image url="@images/question.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="13.0" />
+               </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="V_RESIZE" />
+               </cursor>
+            </ImageView>
+            <ImageView accessibleRole="BUTTON" fitHeight="18.0" fitWidth="18.0" style="-fx-opacity: 0.8; -fx-scale-x: 1.2; -fx-scale-y: 1.2;" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+               <image>
+                  <Image url="@images/downloads.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="V_RESIZE" />
+               </cursor>
+            </ImageView>
+            <Label text="HỆ THỐNG QUẢN LÝ PIN" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="45.0" />
+               </GridPane.margin>
+            </Label>
          </children>
-      </Pane>
+         <cursor>
+            <Cursor fx:constant="V_RESIZE" />
+         </cursor>
+         <opaqueInsets>
+            <Insets right="10.0" />
+         </opaqueInsets>
+      </GridPane>
       <GridPane alignment="CENTER" layoutX="52.0" layoutY="187.0" prefHeight="44.0" prefWidth="500.0" styleClass="general" AnchorPane.bottomAnchor="169.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="48.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
