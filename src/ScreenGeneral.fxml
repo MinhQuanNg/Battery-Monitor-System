@@ -1396,7 +1396,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: transparent;" styleClass="nav-button" text="Thông tin chung">
+            <Button mnemonicParsing="false" onAction="#general" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: transparent;" styleClass="nav-button" text="Thông tin chung">
                <padding>
                   <Insets top="15.0" />
                </padding></Button>
@@ -1404,7 +1404,7 @@
                <padding>
                   <Insets top="15.0" />
                </padding></Button>
-            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="284.0" style="-fx-background-color: transparent;" styleClass="nav-button" text="Hồ sơ thiết lập" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#profile" prefHeight="75.0" prefWidth="284.0" style="-fx-background-color: transparent;" styleClass="nav-button" text="Hồ sơ thiết lập" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <padding>
                   <Insets top="15.0" />
                </padding></Button>
