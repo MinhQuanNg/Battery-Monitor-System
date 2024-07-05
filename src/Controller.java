@@ -18,7 +18,7 @@ public class Controller {
     @FXML private GridPane cellPane;
     static SerialPort USB;
 
-    public void thoigianthuc(ActionEvent e) throws IOException {
+    public void enter(ActionEvent e) throws IOException {
         // Check for available USB ports
         USB = PortChecker.getPort();
 

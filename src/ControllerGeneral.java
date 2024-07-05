@@ -1,8 +1,13 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +35,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class ControllerGeneral {
@@ -60,7 +66,7 @@ public class ControllerGeneral {
         initCharacteristics();
         updateCharacteristics();
 
-        // Add SoC gauge on screenGeneral
+        // Add SoC gauge on ScreenGeneral
         gauge = GaugeBuilder.create()
         .skinType(SkinType.BATTERY)
         .animated(true)
@@ -112,7 +118,7 @@ public class ControllerGeneral {
         currentScreen = screen[1];
 
         for (Node node : findNodesByClass(generalPane, "general")) {
-            node.setVisible(false);  // Hide nodes on screenGeneral
+            node.setVisible(false);  // Hide nodes on ScreenGeneral
         }
 
         cellPane.setVisible(true);
@@ -126,7 +132,7 @@ public class ControllerGeneral {
         currentScreen = screen[2];
 
         for (Node node : findNodesByClass(generalPane, "general")) {
-            node.setVisible(false);  // Hide nodes on screenGeneral
+            node.setVisible(false);  // Hide nodes on ScreenGeneral
         }
 
         cellPane.setVisible(false);
@@ -137,15 +143,17 @@ public class ControllerGeneral {
     }
 
     public void processData(JSONArray dataArray, String timestamp) {
-        int numCell = dataArray.length();
+        numCell = dataArray.length();
         characteristics.put("numCell", String.valueOf(numCell));
 
         // TODO: get battery characteristics
         // characteristics.put(...);
 
+        Hashtable<String, Double> maxmin = calculateMaxMin(dataArray);
+
         // Append to excel
         try {
-            excel.write(dataArray, timestamp);
+            excel.write(dataArray, timestamp, maxmin);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -153,6 +161,7 @@ public class ControllerGeneral {
         try {
             // Only process data for current screen
             if (currentScreen == screen[0]) {
+                System.out.println("HERE");
                 dataScreenGeneral(dataArray);
             } else if (currentScreen == screen[1]) {
                 dataScreenDetail(dataArray);
@@ -164,71 +173,30 @@ public class ControllerGeneral {
         }
     }
 
-    // TODO: Refactor
-    // Update screenGeneral
+    // Update ScreenGeneral
     private void dataScreenGeneral(JSONArray dataArray) throws JSONException {
-        final double finaldelV, finalavgV, finalavgT;
-        
-        // Reinitialize data
-        double maxV = 0;
-        double minV = 0;
-        double sumV = 0;
-        double maxT = 0;
-        double sumT = 0;
+        Hashtable<String, Double> maxmin = calculateMaxMin(dataArray);
 
-        for (int i = 0; i < numCell; i++) {
-            JSONObject dataObject = dataArray.getJSONObject(i);
+        final double maxV = maxmin.get("maxV");
+        final double minV = maxmin.get("minV");
+        final double sumV = maxmin.get("sumV");
+        final double delV = maxV - minV;
+        final double avgV = sumV / numCell;
 
-            double voltage = dataObject.optDouble("voltage", Double.NaN);
-            double temperature = dataObject.optDouble("temperature", Double.NaN);
-            
-            if (i == 0) {
-                // Dung luong
-                int SOC = dataObject.optInt("SOC", 0);
-                // Display dung luong
-                Platform.runLater(() -> gauge.setValue(SOC));
-
-                // System.out.println("Battery Level: " + SOC + "%");
-
-                maxV = voltage;
-                minV = voltage;
-                maxT = temperature;
-            }
-
-            sumV += voltage;
-            sumT += temperature;
-
-            if (voltage > maxV) {
-                maxV = voltage;
-            } else if (voltage < minV) {
-                minV = voltage;
-            }
-
-            if (temperature > maxT) {
-                maxT = temperature;
-            }
-        }
-
-        final double finalmaxV = maxV;
-        final double finalminV = minV;
-        final double finalsumV = sumV;
-        finaldelV = maxV - minV;
-        finalavgV = sumV / numCell;
-
-        final double finalmaxT = maxT;
-        finalavgT = sumT / numCell;
+        final double maxT = maxmin.get("maxT");
+        final double avgT = maxmin.get("sumT") / numCell;
 
         // Display voltage and temperature data in ScreenGeneral
         Platform.runLater(() -> {
-            maxVLabel.setText(String.format("%.2f", finalmaxV) + "V");
-            minVLabel.setText(String.format("%.2f", finalminV) + "V");
-            delVLabel.setText(String.format("%.2f", finaldelV) + "V");
-            sumVLabel.setText(String.format("%.2f", finalsumV) + "V");
-            avgVLabel.setText(String.format("%.2f", finalavgV) + "V");
-            avgVLabel.setText(String.format("%.2f", finalavgV) + "V");
+            maxVLabel.setText(String.format("%.2f", maxV) + "V");
+            minVLabel.setText(String.format("%.2f", minV) + "V");
+            delVLabel.setText(String.format("%.2f", delV) + "V");
+            sumVLabel.setText(String.format("%.2f", sumV) + "V");
+            avgVLabel.setText(String.format("%.2f", avgV) + "V");
+            avgVLabel.setText(String.format("%.2f", avgV) + "V");
             
-            maxTLabel.setText(String.format("%.2f", finalmaxT) + "°C");
-            avgTLabel.setText(String.format("%.2f", finalavgT) + "°C");
+            maxTLabel.setText(String.format("%.2f", maxT) + "°C");
+            avgTLabel.setText(String.format("%.2f", avgT) + "°C");
         });
     }
 
@@ -295,6 +263,57 @@ public class ControllerGeneral {
         Platform.runLater(() -> numCellLabel.setText(characteristics.get("numCell")));
     }
 
+    private Hashtable<String, Double> calculateMaxMin(JSONArray dataArray) throws JSONException {
+        // Reinitialize data
+        double maxV = 0;
+        double minV = 0;
+        double sumV = 0;
+        double maxT = 0;
+        double sumT = 0;
+
+        for (int i = 0; i < numCell; i++) {
+            JSONObject dataObject = dataArray.getJSONObject(i);
+
+            double voltage = dataObject.optDouble("voltage", Double.NaN);
+            double temperature = dataObject.optDouble("temperature", Double.NaN);
+            
+            if (i == 0) {
+                // Dung luong
+                int SOC = dataObject.optInt("SOC", 50);
+                // Display dung luong
+                Platform.runLater(() -> gauge.setValue(SOC));
+
+                // System.out.println("Battery Level: " + SOC + "%");
+
+                maxV = voltage;
+                minV = voltage;
+                maxT = temperature;
+            }
+
+            sumV += voltage;
+            sumT += temperature;
+
+            if (voltage > maxV) {
+                maxV = voltage;
+            } else if (voltage < minV) {
+                minV = voltage;
+            }
+
+            if (temperature > maxT) {
+                maxT = temperature;
+            }
+        }
+
+        Hashtable<String, Double> maxmin = new Hashtable<>();
+        
+        maxmin.put("maxV", maxV);
+        maxmin.put("minV", minV);
+        maxmin.put("maxT", maxT);
+        maxmin.put("sumV", sumV);
+        maxmin.put("sumT", sumT);
+
+        return maxmin;
+    }
     private List<Node> findNodesByClass(Parent root, String className) {
         List<Node> matchingNodes = new ArrayList<>();
         for (Node node : root.getChildrenUnmodifiable()) {
@@ -348,9 +367,31 @@ public class ControllerGeneral {
         });
     }
 
-    // TODO: make button
-    private void save(ActionEvent e) {
-        // excel.save();
+    public void save(ActionEvent e) throws FileNotFoundException, IOException {
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showSaveDialog(null);
+
+        if (selectedFile != null) {
+            FileChooser.ExtensionFilter excelFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
+            fileChooser.getExtensionFilters().add(excelFilter);
+            
+            // Restrict the dialog to only show the Excel filter
+            fileChooser.setSelectedExtensionFilter(excelFilter);
+
+            // Proceed with saving the Excel file to the selected path
+            XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(excel.fileName));
+  
+            // Write the workbook to the chosen file
+            FileOutputStream outputStream = new FileOutputStream(selectedFile);
+            workbook.write(outputStream);
+            outputStream.close();
+            workbook.close();
+            
+            System.out.println("Excel file saved successfully!");
+        } else {
+            // Handle case where user cancels the dialog
+            System.out.println("File saving cancelled.");
+        }
     }
 
     private void initCharacteristics() {

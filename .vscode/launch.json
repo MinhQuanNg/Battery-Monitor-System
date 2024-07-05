@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Test",
+            "request": "launch",
+            "mainClass": "Test",
+            "projectName": "BMS_c99aa464"
+        },
+        {
+            "type": "java",
+            "name": "ExcelTest",
+            "request": "launch",
+            "mainClass": "ExcelTest",
+            "projectName": "BMS_c99aa464"
+        },
+        {
+            "type": "java",
+            "name": "JExcelHelper",
+            "request": "launch",
+            "mainClass": "JExcelHelper",
+            "projectName": "BMS_c99aa464"
+        },
+        {
+            "type": "java",
+            "name": "GFG",
+            "request": "launch",
+            "mainClass": "GFG",
+            "projectName": "BMS_c99aa464"
+        },
+        {
+            "type": "java",
             "name": "Excel",
             "request": "launch",
             "mainClass": "Excel",

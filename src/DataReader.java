@@ -1,4 +1,9 @@
 import com.fazecast.jSerialComm.SerialPort;
+
+import javafx.application.Platform;
+import javafx.scene.Parent;
+import javafx.scene.image.ImageView;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,54 +12,121 @@ import javax.json.Json;
 import javax.json.JsonObject;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javafx.stage.FileChooser;
-
 public class Excel {
-    File file;
+    File fileName;
+    String sheetName;
 
     public Excel() throws IOException {
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet("Data");
+        fileName = new File("src/data.xlsx");
+        sheetName = "Data";
 
-        String[] headers = {"Timestamp", "Cell", "Voltage", "Temperature"};
-        Row row = sheet.createRow(0);
-        int cellNum = 0;
-        for (String header : headers) {
-            Cell cell = row.createCell(cellNum++);
-            cell.setCellValue(header);
-        }
+        XSSFWorkbook workbook = new XSSFWorkbook();
 
         // Save the workbook
-        FileOutputStream outputStream = new FileOutputStream("data.xlsx");
+        FileOutputStream outputStream = new FileOutputStream(fileName);
         workbook.write(outputStream);
         outputStream.close();
         workbook.close();
         System.out.println("XLSX file created successfully.");
     }
 
-    public void write(JSONArray recordsToWrite, String timestamp) throws FileNotFoundException, IOException, JSONException {
-        XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
-        Sheet sheet = workbook.getSheetAt(0);
-        int rowNum = sheet.getLastRowNum() + 1;
+    public void write(JSONArray recordsToWrite, String timestamp, Hashtable<String, Double> maxmin) throws FileNotFoundException, IOException, JSONException {
+        XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(fileName));
+        XSSFSheet sheet = workbook.getSheet(sheetName);
+        int lastRow = sheet.getLastRowNum();
 
-        Map<Integer, Object[]> data = prepareData(rowNum, recordsToWrite, timestamp);
+        // If not row 0, then jump 2 rows (leaving 1 row space)
+        int rowNum = lastRow == 0 ? 0 : lastRow + 2;
+
+        int currRowNum = rowNum;
+
+        // Set headers in column 0
+        // TODO: pull headers from dictionary
+        Row row = sheet.createRow(currRowNum++);
+        Cell cell = row.createCell(0);
+        cell.setCellValue(timestamp);
+
+        row = sheet.createRow(currRowNum++);
+        cell = row.createCell(0);
+        cell.setCellValue("Voltage (V)");
+
+        row = sheet.createRow(currRowNum);
+        cell = row.createCell(0);
+        cell.setCellValue("Temperature (C)");
+
+        Map<Integer, Object[]> data = prepareData(rowNum, recordsToWrite);
 
         Set<Integer> keySet = data.keySet();
+
+        // Cell / row
+        // for (Integer key : keySet) {
+        //     row = sheet.createRow(rowNum++);
+        //     Object[] objArr = data.get(key);
+        //     int cellNum = 0;
+        //     for (Object obj : objArr) {
+        //         cell = row.createCell(cellNum++);
+        //         if (obj instanceof String) {
+        //             cell.setCellValue((String) obj);
+        //         } else if (obj instanceof Integer) {
+        //             cell.setCellValue((Integer) obj);
+        //         } else if (obj instanceof Double) {
+        //             cell.setCellValue((Double) obj);
+        //         }
+        //     }
+        // }
+
+        // Cell / column
         for (Integer key : keySet) {
-            Row row = sheet.createRow(rowNum++);
+            int cellNum = 1;
+            currRowNum = rowNum;
+
             Object[] objArr = data.get(key);
-            int cellNum = 0;
             for (Object obj : objArr) {
-                Cell cell = row.createCell(cellNum++);
+                row = sheet.getRow(currRowNum);
+                cell = row.createCell(cellNum);
+
+                XSSFCellStyle style = workbook.createCellStyle();
+                style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+                if (currRowNum == rowNum + 1) {
+                    // highlight maxV
+                    if ((Double) obj == maxmin.get("maxV")) {
+                        style.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+                        cell.setCellStyle(style);
+                    }
+                    
+                    // highlight minV
+                    else if ((Double) obj == maxmin.get("minV")) {
+                        style.setFillForegroundColor(IndexedColors.BLUE.getIndex());
+                        cell.setCellStyle(style);
+                    }
+
+                    // add sumV after last column
+                    if (cellNum == objArr.length) {
+                        cell = row.createCell(cellNum++);
+                        cell.setCellValue((Double) maxmin.get("sumV"));
+                    }
+                }
+
+                else if (currRowNum == rowNum + 2) {
+                    // highlight maxT
+                    if ((Double) obj == maxmin.get("maxT")) {
+                        style.setFillForegroundColor(IndexedColors.RED.getIndex());
+                        cell.setCellStyle(style);
+                    }
+                }
+
                 if (obj instanceof String) {
                     cell.setCellValue((String) obj);
                 } else if (obj instanceof Integer) {
@@ -66,11 +134,16 @@ public class Excel {
                 } else if (obj instanceof Double) {
                     cell.setCellValue((Double) obj);
                 }
+                currRowNum++;
             }
+            
+            cellNum++;
         }
+
+
         
         try {
-            FileOutputStream out = new FileOutputStream(file);
+            FileOutputStream out = new FileOutputStream(fileName);
             workbook.write(out);
 
             out.close();
@@ -81,82 +154,36 @@ public class Excel {
     }
 
     private static Map<Integer, Object[]> prepareData(int rowNum,
-                                                    JSONArray dataArray, String timestamp) throws JSONException {
+                                                    JSONArray dataArray) throws JSONException {
         Map<Integer, Object[]> data = new HashMap<>();
-        for (int i = 0; i < dataArray.length(); i++) {
-            JSONObject dataObject = dataArray.getJSONObject(i);
+        for (int i = 1; i <= dataArray.length(); i++) {
+            JSONObject dataObject = dataArray.getJSONObject(i-1);
 
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
 
             rowNum++;
-            data.put(rowNum, new Object[]{timestamp, i, voltage, temperature});
+            data.put(rowNum, new Object[]{i, voltage, temperature});
         }
         return data;
     }
 
-    public void save() throws FileNotFoundException, IOException {
-        FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showSaveDialog(null);
-
-        if (selectedFile != null) {
-            // Proceed with saving the Excel file to the selected path
-            XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
-  
-            // Write the workbook to the chosen file
-            FileOutputStream outputStream = new FileOutputStream(selectedFile);
-            workbook.write(outputStream);
-            outputStream.close();
-            workbook.close();
-            
-            System.out.println("Excel file saved successfully!");
-          } else {
-            // Handle case where user cancels the dialog
-            System.out.println("File saving cancelled.");
-          }
-    }
-
     public static void main(String[] args) {
-        // try {
-        // Excel excel = new Excel();
-        // JSONArray dataArray = new JSONArray();
+        try {
+            Excel excel = new Excel();
+            JSONArray dataArray = new JSONArray();
 
-        // // Using javax.json
-        // JsonObject jsonObject1 = Json.createObjectBuilder()
-        //     .add("voltage", 3.35)
-        //     .add("temperature", 29.1)
-        //     .build();
+            // Using javax.json
+            JsonObject jsonObject1 = Json.createObjectBuilder()
+                .add("voltage", 3.35)
+                .add("temperature", 29.1)
+                .build();
 
-        // dataArray.put(jsonObject1); // org.json
+            dataArray.put(jsonObject1);
 
-        // excel.write(dataArray, "10:42");
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
-
-        //create a workbook
-Workbook workbook = new XSSFWorkbook();
-
-//create a sheet in the workbook(you can give it a name)
-Sheet sheet = workbook.createSheet("excel-sheet");
-
-//create a row in the sheet
-Row row = sheet.createRow(0);
-
-//add cells in the sheet
-Cell cell = row.createCell(0);
-
-//set a value to the cell
-cell.setCellValue("something");
-
-//save the Excel file
-try {
-    FileOutputStream out = new FileOutputStream(
-            new File("excel.xlsx"));
-    workbook.write(out);
-    out.close();
-} catch (Exception e) {
-    e.printStackTrace();
-}
+            excel.write(dataArray, "10:42");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
