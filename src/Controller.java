@@ -23,16 +23,16 @@ public class Controller {
         USB = PortChecker.getPort();
 
         // Run if port available
-        if (USB != null) {
+        // if (USB != null) {
             root = FXMLLoader.load(getClass().getResource("ScreenGeneral.fxml"));            
             stage = (Stage)((Node) e.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Quản lý hệ thống pin");
             stage.show();
-        } else {
-            System.out.println("No USB Serial Ports found.");
-        }
+        // } else {
+        //     System.out.println("No USB Serial Ports found.");
+        // }
     }
 
     public static SerialPort getUSB() {

@@ -1358,7 +1358,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" GridPane.columnIndex="3">
+            <Button mnemonicParsing="false" onAction="#manual" style="-fx-background-color: transparent; -fx-cursor: hand;" GridPane.columnIndex="3">
                <graphic>
                   <ImageView accessibleRole="BUTTON" fitHeight="20.0" fitWidth="20.0" style="-fx-scale-x: 1.2; -fx-scale-y: 1.2;">
                      <image>

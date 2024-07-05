@@ -143,24 +143,23 @@ public class ControllerGeneral {
         }
     }
 
-    public void info(ActionEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Info.fxml"));
-        Parent infoContent = loader.load();
+    public void manual(ActionEvent e) throws IOException {
+        Parent manual = FXMLLoader.load(getClass().getResource("Manual.fxml"));
 
         // Create a new Stage (window)
-        Stage infoStage = new Stage();
-        infoStage.setTitle("Hướng dẫn sử dụng"); // Set the title of the window
+        Stage mStage = new Stage();
+        mStage.setTitle("Hướng dẫn sử dụng"); // Set the title of the window
 
         // Optional: Make the info window modal and block input to other windows
-        infoStage.initModality(Modality.APPLICATION_MODAL);
-        infoStage.initOwner(((Node) e.getSource()).getScene().getWindow());
+        mStage.initModality(Modality.APPLICATION_MODAL);
+        mStage.initOwner(((Node) e.getSource()).getScene().getWindow());
 
         // Set the scene of the new stage with the loaded FXML
-        Scene infoScene = new Scene(infoContent);
-        infoStage.setScene(infoScene);
+        Scene infoScene = new Scene(manual);
+        mStage.setScene(infoScene);
 
         // Show the new stage
-        infoStage.show();
+        mStage.show();
     }
 
     public void general(ActionEvent e) {
