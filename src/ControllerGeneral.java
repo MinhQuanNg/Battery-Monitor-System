@@ -19,14 +19,11 @@ import eu.hansolo.medusa.Section;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -37,13 +34,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class ControllerGeneral {
@@ -51,24 +43,23 @@ public class ControllerGeneral {
     private Scene scene;
     private Gauge gauge;
 
-    @FXML
-    private AnchorPane generalPane;
-    @FXML
-    private HBox batteryBox;
-    @FXML
-    private GridPane cellPane, profilePane;
-    @FXML
-    private Label maxVLabel, minVLabel, delVLabel, sumVLabel, avgVLabel, maxTLabel, avgTLabel;
-    @FXML
-    private Pane errorPane;
-    @FXML
-    private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
-    @FXML
-    private Label maxVPro, minVPro, difVPro, sumMaxVPro, sumMinVPro, maxTPro;
-    @FXML
-    private TextField maxVProText, minVProText, difVProText, sumMaxVProText, sumMinVProText, maxTProText;
+    // ScreenGeneral
+    @FXML private AnchorPane generalPane;
+    @FXML private HBox batteryBox;
+    @FXML private Pane errorPane;
+    @FXML private Label maxVLabel, minVLabel, delVLabel, sumVLabel, avgVLabel, maxTLabel, avgTLabel;
+    @FXML private Label numFaultLabel, faultLabel;
 
-    final private String[] screen = { "General", "Detail", "Profile" };
+    // ScreenDetail
+    @FXML private GridPane cellPane;
+
+    // ScreenProfile
+    @FXML private GridPane profilePane;
+    @FXML private Label maxVPro, minVPro, difVPro, sumMaxVPro, sumMinVPro, maxTPro;
+    @FXML private TextField maxVProText, minVProText, difVProText, sumMaxVProText, sumMinVProText, maxTProText;
+    @FXML private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
+
+    final private String[] screen = {"General", "Detail", "Profile"};
     private String currentScreen;
 
     private Excel excel;
@@ -76,21 +67,21 @@ public class ControllerGeneral {
     int numCell;
     private Hashtable<String, String> characteristics;
 
+    // Note: JavaFX optimization doesn't rerender old properties
     public void initialize() {
         currentScreen = screen[0];
 
         initCharacteristics();
-        updateCharacteristics();
 
         // Add SoC gauge on ScreenGeneral
         gauge = GaugeBuilder.create()
-                .skinType(SkinType.BATTERY)
-                .animated(true)
-                .sectionsVisible(true)
-                .sections(new Section(0, 10, Color.RED),
-                        new Section(10, 20, Color.rgb(255, 235, 59)), // YELLOW
-                        new Section(20, 100, Color.GREEN))
-                .build();
+        .skinType(SkinType.BATTERY)
+        .animated(true)
+        .sectionsVisible(true)
+        .sections(new Section(0, 10, Color.RED),
+                    new Section(10, 20, Color.rgb(255,235,59)), //YELLOW
+                    new Section(20, 100, Color.GREEN))
+        .build();
         batteryBox.getChildren().add(gauge);
 
         // TODO: get original USB
@@ -110,56 +101,10 @@ public class ControllerGeneral {
 
     public void back(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ScreenMain.fxml"));
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage = (Stage)((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    public void save(ActionEvent e) throws FileNotFoundException, IOException {
-        FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showSaveDialog(null);
-
-        if (selectedFile != null) {
-            FileChooser.ExtensionFilter excelFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
-            fileChooser.getExtensionFilters().add(excelFilter);
-
-            // Restrict the dialog to only show the Excel filter
-            fileChooser.setSelectedExtensionFilter(excelFilter);
-
-            // Proceed with saving the Excel file to the selected path
-            XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(excel.fileName));
-
-            // Write the workbook to the chosen file
-            FileOutputStream outputStream = new FileOutputStream(selectedFile);
-            workbook.write(outputStream);
-            outputStream.close();
-            workbook.close();
-
-            System.out.println("Excel file saved successfully!");
-        } else {
-            // Handle case where user cancels the dialog
-            System.out.println("File saving cancelled.");
-        }
-    }
-
-    public void manual(ActionEvent e) throws IOException {
-        Parent manual = FXMLLoader.load(getClass().getResource("Manual.fxml"));
-
-        // Create a new Stage (window)
-        Stage mStage = new Stage();
-        mStage.setTitle("Hướng dẫn sử dụng"); // Set the title of the window
-
-        // Optional: Make the info window modal and block input to other windows
-        mStage.initModality(Modality.APPLICATION_MODAL);
-        mStage.initOwner(((Node) e.getSource()).getScene().getWindow());
-
-        // Set the scene of the new stage with the loaded FXML
-        Scene infoScene = new Scene(manual);
-        mStage.setScene(infoScene);
-
-        // Show the new stage
-        mStage.show();
     }
 
     public void general(ActionEvent e) {
@@ -180,7 +125,7 @@ public class ControllerGeneral {
         currentScreen = screen[1];
 
         for (Node node : findNodesByClass(generalPane, "general")) {
-            node.setVisible(false); // Hide nodes on ScreenGeneral
+            node.setVisible(false);  // Hide nodes on ScreenGeneral
         }
 
         cellPane.setVisible(true);
@@ -194,7 +139,7 @@ public class ControllerGeneral {
         currentScreen = screen[2];
 
         for (Node node : findNodesByClass(generalPane, "general")) {
-            node.setVisible(false); // Hide nodes on ScreenGeneral
+            node.setVisible(false);  // Hide nodes on ScreenGeneral
         }
 
         cellPane.setVisible(false);
@@ -204,33 +149,29 @@ public class ControllerGeneral {
         profilePane.setVisible(true);
     }
 
-    public void processData(JSONArray dataArray, String timestamp) throws JSONException {
+    public void processData(JSONArray dataArray, String timestamp) {
         numCell = dataArray.length();
         characteristics.put("numCell", String.valueOf(numCell));
 
         // TODO: get battery characteristics
         // characteristics.put(...);
-
-        Hashtable<String, Double> maxmin = calculateMaxMin(dataArray);
-
-        // Append to excel
+        updateCharacteristics();
+        
         try {
+            Hashtable<String, Double> maxmin = calculateMaxMin(dataArray);
+
+            // Append to excel
             excel.write(dataArray, timestamp, maxmin);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        try {
             // Only process data for current screen
             if (currentScreen == screen[0]) {
-                System.out.println("HERE");
                 dataScreenGeneral(dataArray);
             } else if (currentScreen == screen[1]) {
                 dataScreenDetail(dataArray);
             } else {
                 dataScreenProfile(dataArray);
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -248,7 +189,7 @@ public class ControllerGeneral {
         final double maxT = maxmin.get("maxT");
         final double avgT = maxmin.get("sumT") / numCell;
 
-        // Display voltage and temperature data in ScreenGeneral
+        // Display voltage and temperature data
         Platform.runLater(() -> {
             maxVLabel.setText(String.format("%.2f", maxV) + "V");
             minVLabel.setText(String.format("%.2f", minV) + "V");
@@ -256,44 +197,26 @@ public class ControllerGeneral {
             sumVLabel.setText(String.format("%.2f", sumV) + "V");
             avgVLabel.setText(String.format("%.2f", avgV) + "V");
             avgVLabel.setText(String.format("%.2f", avgV) + "V");
-
+            
             maxTLabel.setText(String.format("%.2f", maxT) + "°C");
             avgTLabel.setText(String.format("%.2f", avgT) + "°C");
         });
+
+        // updateFault(maxmin);
     }
 
-    // Update screenDetail
+    // Update ScreenDetail
     private void dataScreenDetail(JSONArray dataArray) throws JSONException {
-        double maxV = 0;
-        double minV = 0;
-        double maxT = 0;
-
         List<Label> cellLabels = findLabels((Parent) cellPane);
         List<Node> imageViewNodes = findNodesByClass(cellPane, "detailImage");
         List<Node> dataBoxes = findNodesByClass(cellPane, "detailDataBox");
 
-        // Find max min
-        for (int i = 1; i <= numCell; i++) {
-            JSONObject dataObject = dataArray.getJSONObject(i - 1);
-
-            double voltage = dataObject.optDouble("voltage", Double.NaN);
-            double temperature = dataObject.optDouble("temperature", Double.NaN);
-
-            if (voltage > maxV) {
-                maxV = voltage;
-            } else if (voltage < minV) {
-                minV = voltage;
-            }
-
-            if (temperature > maxT) {
-                maxT = temperature;
-            }
-        }
+        Hashtable<String, Double> maxmin = calculateMaxMin(dataArray);
 
         for (int i = 1; i <= numCell; i++) {
             String state = "normal";
 
-            JSONObject dataObject = dataArray.getJSONObject(i - 1);
+            JSONObject dataObject = dataArray.getJSONObject(i-1);
 
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
@@ -301,25 +224,26 @@ public class ControllerGeneral {
             int cellNo = i;
 
             // Update cell number label
-            Platform.runLater(() -> cellLabels.get(cellNo - 1).setText("Cell " + cellNo));
+            Platform.runLater(() -> cellLabels.get(cellNo-1).setText("Cell " + cellNo));
 
-            if (temperature == maxT) {
+            if (temperature == maxmin.get("maxT")) {
                 state = "hot";
             }
 
-            if (voltage == maxV) {
+            if (voltage == maxmin.get("maxV")) {
                 state = "max";
-            } else if (voltage == minV) {
+            } else if (voltage == maxmin.get("minV")) {
                 state = "min";
             }
 
-            updateCellImage((ImageView) imageViewNodes.get(cellNo - 1), state);
+            updateCellImage((ImageView) imageViewNodes.get(cellNo-1), state);
 
-            updateDataLabels((Parent) dataBoxes.get(cellNo - 1), voltage, temperature, state);
+            updateDataLabels((Parent) dataBoxes.get(cellNo-1), voltage, temperature, state);
 
-            // System.out.println("Cell " + i + ": " + "Voltage: " + voltage + ",
-            // Temperature: " + temperature);
+            // System.out.println("Cell " + i + ": " + "Voltage: " + voltage + ", Temperature: " + temperature);
         }
+
+        // updateFault(maxmin);
     }
 
     private void dataScreenProfile(JSONArray dataArray) {
@@ -339,11 +263,11 @@ public class ControllerGeneral {
 
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
-
+            
             if (i == 0) {
-                // Dung luong
-                int SOC = dataObject.optInt("SOC", 50);
-                // Display dung luong
+                int SOC = dataObject.optInt("SOC", 0);
+
+                // Display SOC
                 Platform.runLater(() -> gauge.setValue(SOC));
 
                 // System.out.println("Battery Level: " + SOC + "%");
@@ -368,7 +292,7 @@ public class ControllerGeneral {
         }
 
         Hashtable<String, Double> maxmin = new Hashtable<>();
-
+        
         maxmin.put("maxV", maxV);
         maxmin.put("minV", minV);
         maxmin.put("maxT", maxT);
@@ -377,16 +301,15 @@ public class ControllerGeneral {
 
         return maxmin;
     }
-
     private List<Node> findNodesByClass(Parent root, String className) {
         List<Node> matchingNodes = new ArrayList<>();
         for (Node node : root.getChildrenUnmodifiable()) {
-            if (node.getStyleClass().contains(className)) {
-                matchingNodes.add(node);
-            }
-            if (node instanceof Parent) {
-                matchingNodes.addAll(findNodesByClass((Parent) node, className));
-            }
+          if (node.getStyleClass().contains(className)) {
+            matchingNodes.add(node);
+          }
+          if (node instanceof Parent) {
+            matchingNodes.addAll(findNodesByClass((Parent) node, className));
+          }
         }
         return matchingNodes;
     }
@@ -395,9 +318,9 @@ public class ControllerGeneral {
     private List<Label> findLabels(Parent root) {
         List<Label> labels = new ArrayList<>();
         for (Node node : root.getChildrenUnmodifiable()) {
-            if (node instanceof Label) {
-                labels.add((Label) node);
-            }
+          if (node instanceof Label) {
+            labels.add((Label) node);
+          }
         }
         return labels;
     }
@@ -429,6 +352,33 @@ public class ControllerGeneral {
                 labels.get(1).setTextFill(Color.BLACK);
             }
         });
+    }
+
+    public void save(ActionEvent e) throws FileNotFoundException, IOException {
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showSaveDialog(null);
+
+        if (selectedFile != null) {
+            FileChooser.ExtensionFilter excelFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
+            fileChooser.getExtensionFilters().add(excelFilter);
+            
+            // Restrict the dialog to only show the Excel filter
+            fileChooser.setSelectedExtensionFilter(excelFilter);
+
+            // Proceed with saving the Excel file to the selected path
+            XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(excel.fileName));
+  
+            // Write the workbook to the chosen file
+            FileOutputStream outputStream = new FileOutputStream(selectedFile);
+            workbook.write(outputStream);
+            outputStream.close();
+            workbook.close();
+            
+            System.out.println("Excel file saved successfully!");
+        } else {
+            // Handle case where user cancels the dialog
+            System.out.println("File saving cancelled.");
+        }
     }
 
     private void initCharacteristics() {
@@ -486,7 +436,7 @@ public class ControllerGeneral {
 
     public void finishEdit(KeyEvent e) throws IOException {
         TextField text = (TextField) e.getSource();
-        if (e.getCode() == KeyCode.ENTER) {
+            if (e.getCode() == KeyCode.ENTER) {
             text.setVisible(false);
             switch (text.getId()) {
                 case "maxVProText":
@@ -517,5 +467,64 @@ public class ControllerGeneral {
                     break;
             }
         }
+    }
+
+    private void updateFault(Hashtable<String, Double> maxmin) {
+        int numFault = 0;
+        String fault = "";
+
+        double cellHigh = Double.parseDouble(maxVPro.textProperty().getValue());
+        double cellLow = Double.parseDouble(minVPro.textProperty().getValue());
+        double sumHigh = Double.parseDouble(sumMaxVPro.textProperty().getValue());
+        double sumLow = Double.parseDouble(sumMinVPro.textProperty().getValue());
+        double diffVolt = Double.parseDouble(difVPro.textProperty().getValue());
+        double tempP = Double.parseDouble(maxTPro.textProperty().getValue());
+
+        if (maxmin.get("maxV") >= cellHigh) {
+            numFault++;
+            fault += "Bảo vệ điện áp cao";
+        }
+
+        if (maxmin.get("minV") <= cellLow) {
+            numFault++;
+            fault += "\nBảo vệ điện áp thấp";
+        }
+
+        if (maxmin.get("sumV") >= sumHigh) {
+            numFault++;
+            fault += "\nBảo vệ tổng điện áp cao";
+        }
+    
+        if (maxmin.get("sumV") <= sumLow) {
+            numFault++;
+            fault += "\nBảo vệ tổng điện áp thấp";
+        }
+    
+        if (maxmin.get("delV") > diffVolt) {
+            numFault++;
+            fault += "\nBảo vệ chênh lệch áp";
+        }
+    
+        if (maxmin.get("maxT") >= tempP) {
+            numFault++;
+            fault += "\nBảo vệ nhiệt độ cao";
+        }
+
+        numFaultLabel.setText(String.valueOf(numFault));
+        faultLabel.setText(fault);
+    }
+
+    public void manual(ActionEvent e) throws IOException {
+        Parent manual = FXMLLoader.load(getClass().getResource("Manual.fxml"));
+
+        Stage mStage = new Stage();
+        mStage.setTitle("Hướng dẫn sử dụng");
+
+        mStage.initOwner(((Node) e.getSource()).getScene().getWindow());
+
+        Scene infoScene = new Scene(manual);
+        mStage.setScene(infoScene);
+
+        mStage.show();
     }
 }

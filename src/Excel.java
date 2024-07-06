@@ -16,7 +16,6 @@ import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
@@ -32,6 +31,7 @@ public class Excel {
         sheetName = "Data";
 
         XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet(sheetName);
 
         // Save the workbook
         FileOutputStream outputStream = new FileOutputStream(fileName);
@@ -181,7 +181,7 @@ public class Excel {
 
             dataArray.put(jsonObject1);
 
-            excel.write(dataArray, "10:42", null);
+            excel.write(dataArray, "10:42", new Hashtable<>());
         } catch (Exception e) {
             e.printStackTrace();
         }
