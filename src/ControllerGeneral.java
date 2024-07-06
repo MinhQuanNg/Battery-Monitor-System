@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
@@ -55,7 +56,7 @@ public class ControllerGeneral {
 
     // ScreenProfile
     @FXML private GridPane profilePane;
-    @FXML private Label maxVPro, minVPro, difVPro, sumMaxVPro, sumMinVPro, maxTPro;
+    @FXML private Label maxVPro, minVPro, sumMaxVPro, sumMinVPro, difVPro, maxTPro;
     @FXML private TextField maxVProText, minVProText, difVProText, sumMaxVProText, sumMinVProText, maxTProText;
     @FXML private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
 
@@ -246,7 +247,26 @@ public class ControllerGeneral {
         // updateFault(maxmin);
     }
 
-    private void dataScreenProfile(JSONArray dataArray) {
+    private void dataScreenProfile(JSONArray dataArray) throws JSONException {
+        for (int i = 1; i <= numCell; i++) {
+            JSONObject dataObject = dataArray.getJSONObject(i-1);
+            Double ov = dataObject.optDouble("ov", Double.NaN);
+            Double uv = dataObject.optDouble("uv", Double.NaN);
+
+            Double os = ov * numCell;
+            Double us = uv * numCell;
+
+            Double ot = dataObject.optDouble("ot", Double.NaN);
+            Double dv = dataObject.optDouble("dv", Double.NaN);
+
+            maxVPro.setText(String.valueOf(ov));
+            minVPro.setText(String.valueOf(uv));
+            sumMaxVPro.setText(String.valueOf(os));
+            sumMinVPro.setText(String.valueOf(us));
+            maxTPro.setText(String.valueOf(ot));
+            difVPro.setText(String.valueOf(dv));
+        }
+
         Platform.runLater(() -> numCellLabel.setText(characteristics.get("numCell")));
     }
 
@@ -470,8 +490,7 @@ public class ControllerGeneral {
     }
 
     private void updateFault(Hashtable<String, Double> maxmin) {
-        int numFault = 0;
-        String fault = "";
+        ArrayList<String> fault = new ArrayList<>();
 
         double cellHigh = Double.parseDouble(maxVPro.textProperty().getValue());
         double cellLow = Double.parseDouble(minVPro.textProperty().getValue());
@@ -481,37 +500,31 @@ public class ControllerGeneral {
         double tempP = Double.parseDouble(maxTPro.textProperty().getValue());
 
         if (maxmin.get("maxV") >= cellHigh) {
-            numFault++;
-            fault += "Bảo vệ điện áp cao";
+            fault.add("Bảo vệ điện áp cao");
         }
 
         if (maxmin.get("minV") <= cellLow) {
-            numFault++;
-            fault += "\nBảo vệ điện áp thấp";
+            fault.add("Bảo vệ điện áp thấp");
         }
 
         if (maxmin.get("sumV") >= sumHigh) {
-            numFault++;
-            fault += "\nBảo vệ tổng điện áp cao";
+            fault.add("Bảo vệ tổng điện áp cao");
         }
     
         if (maxmin.get("sumV") <= sumLow) {
-            numFault++;
-            fault += "\nBảo vệ tổng điện áp thấp";
+            fault.add("Bảo vệ tổng điện áp thấp");
         }
     
         if (maxmin.get("delV") > diffVolt) {
-            numFault++;
-            fault += "\nBảo vệ chênh lệch áp";
+            fault.add("Bảo vệ chênh lệch áp");
         }
     
         if (maxmin.get("maxT") >= tempP) {
-            numFault++;
-            fault += "\nBảo vệ nhiệt độ cao";
+            fault.add("Bảo vệ nhiệt độ cao");
         }
 
-        numFaultLabel.setText(String.valueOf(numFault));
-        faultLabel.setText(fault);
+        numFaultLabel.setText(String.valueOf(fault.size()));
+        faultLabel.setText(fault.stream().collect(Collectors.joining("\n")));
     }
 
     public void manual(ActionEvent e) throws IOException {
