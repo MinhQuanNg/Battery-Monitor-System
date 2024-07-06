@@ -56,7 +56,7 @@ public class ControllerGeneral {
 
     // ScreenProfile
     @FXML private GridPane profilePane;
-    @FXML private Label maxVPro, minVPro, sumMaxVPro, sumMinVPro, difVPro, maxTPro;
+    @FXML private Label maxVProLabel, minVProLabel, sumMaxVProLabel, sumMinVProLabel, difVProLabel, maxTProLabel;
     @FXML private TextField maxVProText, minVProText, difVProText, sumMaxVProText, sumMinVProText, maxTProText;
     @FXML private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
 
@@ -67,6 +67,13 @@ public class ControllerGeneral {
 
     int numCell;
     private Hashtable<String, String> characteristics;
+    double maxVPro, minVPro, sumMaxVPro, sumMinVPro, difVPro, maxTPro;
+
+    private Controller controller;
+
+    public ControllerGeneral(Controller controller) {
+        this.controller = controller;
+    }
 
     // Note: JavaFX optimization doesn't rerender old properties
     public void initialize() {
@@ -85,11 +92,12 @@ public class ControllerGeneral {
         .build();
         batteryBox.getChildren().add(gauge);
 
-        // TODO: get original USB
-        DataReader reader = new DataReader(this, Controller.getUSB());
+        DataReader reader = new DataReader(this, controller.getUSB());
 
         // Start reading data in separate thread
         Thread thread = new Thread(reader);
+        controller.setThread(thread);
+
         thread.start();
 
         // Create excel
@@ -153,6 +161,8 @@ public class ControllerGeneral {
     public void processData(JSONArray dataArray, String timestamp) {
         numCell = dataArray.length();
         characteristics.put("numCell", String.valueOf(numCell));
+
+        Platform.runLater(() -> numCellLabel.setText(characteristics.get("numCell")));
 
         // TODO: get battery characteristics
         // characteristics.put(...);
@@ -266,8 +276,6 @@ public class ControllerGeneral {
             maxTPro.setText(String.valueOf(ot));
             difVPro.setText(String.valueOf(dv));
         }
-
-        Platform.runLater(() -> numCellLabel.setText(characteristics.get("numCell")));
     }
 
     private Hashtable<String, Double> calculateMaxMin(JSONArray dataArray) throws JSONException {
@@ -427,27 +435,27 @@ public class ControllerGeneral {
         switch (label.getId()) {
             case "maxVPro":
                 maxVProText.setVisible(true);
-                maxVProText.setText(maxVPro.getText());
+                maxVProText.setText(maxVProLabel.getText());
                 break;
             case "minVPro":
                 minVProText.setVisible(true);
-                minVProText.setText(minVPro.getText());
+                minVProText.setText(minVProLabel.getText());
                 break;
             case "difVPro":
                 difVProText.setVisible(true);
-                difVProText.setText(difVPro.getText());
+                difVProText.setText(difVProLabel.getText());
                 break;
             case "sumMaxVPro":
                 sumMaxVProText.setVisible(true);
-                sumMaxVProText.setText(sumMaxVPro.getText());
+                sumMaxVProText.setText(sumMaxVProLabel.getText());
                 break;
             case "sumMinVPro":
                 sumMinVProText.setVisible(true);
-                sumMinVProText.setText(sumMinVPro.getText());
+                sumMinVProText.setText(sumMinVProLabel.getText());
                 break;
             case "maxTPro":
                 maxTProText.setVisible(true);
-                maxTProText.setText(maxTPro.getText());
+                maxTProText.setText(maxTProLabel.getText());
                 break;
             default:
                 break;
@@ -492,34 +500,27 @@ public class ControllerGeneral {
     private void updateFault(Hashtable<String, Double> maxmin) {
         ArrayList<String> fault = new ArrayList<>();
 
-        double cellHigh = Double.parseDouble(maxVPro.textProperty().getValue());
-        double cellLow = Double.parseDouble(minVPro.textProperty().getValue());
-        double sumHigh = Double.parseDouble(sumMaxVPro.textProperty().getValue());
-        double sumLow = Double.parseDouble(sumMinVPro.textProperty().getValue());
-        double diffVolt = Double.parseDouble(difVPro.textProperty().getValue());
-        double tempP = Double.parseDouble(maxTPro.textProperty().getValue());
-
-        if (maxmin.get("maxV") >= cellHigh) {
+        if (maxmin.get("maxV") >= maxVPro) {
             fault.add("Bảo vệ điện áp cao");
         }
 
-        if (maxmin.get("minV") <= cellLow) {
+        if (maxmin.get("minV") <= minVPro) {
             fault.add("Bảo vệ điện áp thấp");
         }
 
-        if (maxmin.get("sumV") >= sumHigh) {
+        if (maxmin.get("sumV") >= sumMaxVPro) {
             fault.add("Bảo vệ tổng điện áp cao");
         }
     
-        if (maxmin.get("sumV") <= sumLow) {
+        if (maxmin.get("sumV") <= sumMinVPro) {
             fault.add("Bảo vệ tổng điện áp thấp");
         }
     
-        if (maxmin.get("delV") > diffVolt) {
+        if (maxmin.get("delV") > difVPro) {
             fault.add("Bảo vệ chênh lệch áp");
         }
     
-        if (maxmin.get("maxT") >= tempP) {
+        if (maxmin.get("maxT") >= maxTPro) {
             fault.add("Bảo vệ nhiệt độ cao");
         }
 

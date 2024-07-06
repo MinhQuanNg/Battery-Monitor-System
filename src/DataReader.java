@@ -1,6 +1,7 @@
 import com.fazecast.jSerialComm.SerialPort;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -13,7 +14,6 @@ public class DataReader implements Runnable {
 
     public DataReader(ControllerGeneral controller, SerialPort USB) {
         this.USB = USB;
-        this.controller = controller;
     }
 
     @Override
@@ -38,7 +38,9 @@ public class DataReader implements Runnable {
                     Thread.sleep(1000); // Read every 1s
                 }
             }
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
+            System.exit(0);
+        } catch (JSONException e) {
             e.printStackTrace();
         }          
     }
@@ -48,7 +50,7 @@ public class DataReader implements Runnable {
 
         // Run if port available
         if (USB != null) {
-            DataReader reader = new DataReader(new ControllerGeneral(), USB);
+            DataReader reader = new DataReader(new ControllerGeneral(new Controller()), USB);
             Thread thread = new Thread(reader);
             thread.start();
         } else {
@@ -57,7 +59,7 @@ public class DataReader implements Runnable {
     }
 
     private static String getCurrentTimeStamp() {
-        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date now = new Date();
         String strDate = sdfDate.format(now);
         return strDate;

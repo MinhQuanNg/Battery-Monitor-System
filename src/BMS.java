@@ -11,8 +11,8 @@ public class BMS extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("ScreenMain.fxml"));            
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.show();
             stage.setTitle("Quản lý hệ thống pin");
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

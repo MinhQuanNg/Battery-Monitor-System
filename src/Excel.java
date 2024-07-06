@@ -46,8 +46,11 @@ public class Excel {
         XSSFSheet sheet = workbook.getSheet(sheetName);
         int lastRow = sheet.getLastRowNum();
 
+        // TODO: interrupt thread
+        System.out.println("hi");
+
         // If not row 0, then jump 2 rows (leaving 1 row space)
-        int rowNum = lastRow == 0 ? 0 : lastRow + 2;
+        int rowNum = lastRow == -1 ? 0 : lastRow + 2;
 
         int currRowNum = rowNum;
 
@@ -87,8 +90,8 @@ public class Excel {
         // }
 
         // Cell / column
+        int cellNum = 1;
         for (Integer key : keySet) {
-            int cellNum = 1;
             currRowNum = rowNum;
 
             Object[] objArr = data.get(key);
@@ -100,29 +103,29 @@ public class Excel {
                 style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
                 if (currRowNum == rowNum + 1) {
-                    // highlight maxV
-                    if ((Double) obj == maxmin.get("maxV")) {
-                        style.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+                    // highlight maxV green
+                    if (obj.equals(maxmin.get("maxV"))) {
+                        style.setFillForegroundColor(IndexedColors.LIGHT_GREEN.getIndex());
                         cell.setCellStyle(style);
                     }
                     
-                    // highlight minV
-                    else if ((Double) obj == maxmin.get("minV")) {
-                        style.setFillForegroundColor(IndexedColors.BLUE.getIndex());
+                    // highlight minV blue
+                    else if (obj.equals(maxmin.get("minV"))) {
+                        style.setFillForegroundColor(IndexedColors.CORNFLOWER_BLUE.getIndex());
                         cell.setCellStyle(style);
                     }
 
                     // add sumV after last column
-                    if (cellNum == objArr.length) {
-                        cell = row.createCell(cellNum++);
-                        cell.setCellValue((Double) maxmin.get("sumV"));
+                    if (cellNum == keySet.size()) {
+                        Cell cellSum = row.createCell(cellNum + 1);
+                        cellSum.setCellValue((Double) maxmin.get("sumV"));
                     }
                 }
 
                 else if (currRowNum == rowNum + 2) {
-                    // highlight maxT
-                    if ((Double) obj == maxmin.get("maxT")) {
-                        style.setFillForegroundColor(IndexedColors.RED.getIndex());
+                    // highlight maxT red
+                    if (obj.equals(maxmin.get("maxT"))) {
+                        style.setFillForegroundColor(IndexedColors.CORAL.getIndex());
                         cell.setCellStyle(style);
                     }
                 }
@@ -134,6 +137,7 @@ public class Excel {
                 } else if (obj instanceof Double) {
                     cell.setCellValue((Double) obj);
                 }
+
                 currRowNum++;
             }
             
@@ -162,6 +166,9 @@ public class Excel {
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
 
+            System.out.println(voltage);
+            System.out.println(temperature);
+
             rowNum++;
             data.put(rowNum, new Object[]{i, voltage, temperature});
         }
@@ -173,15 +180,24 @@ public class Excel {
             Excel excel = new Excel();
             JSONArray dataArray = new JSONArray();
 
+            double v = 3.35;
+            double t = 29.1;
+
             // Using javax.json
             JsonObject jsonObject1 = Json.createObjectBuilder()
-                .add("voltage", 3.35)
-                .add("temperature", 29.1)
+                .add("voltage", v)
+                .add("temperature", t)
                 .build();
 
             dataArray.put(jsonObject1);
 
-            excel.write(dataArray, "10:42", new Hashtable<>());
+            Hashtable<String, Double> maxmin = new Hashtable<>();
+            maxmin.put("maxV", v);
+            maxmin.put("minV", v-1);
+            maxmin.put("sumV", 2*v);
+            maxmin.put("maxT", t);
+
+            excel.write(dataArray, "10:42", maxmin);
         } catch (Exception e) {
             e.printStackTrace();
         }
