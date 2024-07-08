@@ -84,7 +84,7 @@ public class ControllerGeneral {
     private String currentScreen;
 
     private Excel excel;
-    List<TextField> textFields = Arrays.asList(minVProText, difVProText, maxTProText);
+
     private int numCell;
     List<TextField> textFields = Arrays.asList(minVProText, difVProText, maxTProText);
     private Hashtable<String, String> characteristics;
@@ -151,6 +151,24 @@ public class ControllerGeneral {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    
+    public void manual(ActionEvent e) throws IOException {
+        // Load the manual scene only once and reuse if already loaded
+        if (manualScene == null) {
+            Parent manual = FXMLLoader.load(getClass().getResource("Manual.fxml"));
+            manualScene = new Scene(manual);
+        }
+
+        // Use a single instance of the manual stage if it's already been created
+        if (manualStage == null) {
+            manualStage = new Stage();
+            manualStage.setTitle("Hướng dẫn sử dụng");
+            manualStage.initOwner(((Node) e.getSource()).getScene().getWindow());
+            manualStage.setScene(manualScene);
+        }
+
+        manualStage.show();
     }
 
     public void general(ActionEvent e) {
@@ -264,7 +282,7 @@ public class ControllerGeneral {
             avgTLabel.setText(String.format("%.2f", avgT) + "°C");
         });
 
-        updateFault(maxmin);
+        // updateFault(maxmin);
     }
 
     // Update ScreenDetail
@@ -311,7 +329,7 @@ public class ControllerGeneral {
             // System.out.println("Cell " + i + ": " + "Voltage: " + voltage + ", Temperature: " + temperature);
         }
 
-        updateFault(maxmin);
+        // updateFault(maxmin);
     }
 
     private void dataScreenProfile(JSONArray dataArray) throws JSONException {
@@ -675,11 +693,11 @@ public class ControllerGeneral {
             fault.add("Bảo vệ điện áp thấp");
         }
 
-        if (maxmin.get("sumV") * numCell >= os) {
+        if (maxmin.get("sumV") >= ov * numCell) {
             fault.add("Bảo vệ tổng điện áp cao");
         }
     
-        if (maxmin.get("sumV") * numCell <= us) {
+        if (maxmin.get("sumV") <= uv * numCell) {
             fault.add("Bảo vệ tổng điện áp thấp");
         }
     
@@ -695,24 +713,6 @@ public class ControllerGeneral {
 
         numFaultLabel.setText(String.valueOf(fault.size()));
         faultLabel.setText(fault.stream().collect(Collectors.joining("\n")));
-    }
-
-    public void manual(ActionEvent e) throws IOException {
-        // Load the manual scene only once and reuse if already loaded
-        if (manualScene == null) {
-            Parent manual = FXMLLoader.load(getClass().getResource("Manual.fxml"));
-            manualScene = new Scene(manual);
-        }
-
-        // Use a single instance of the manual stage if it's already been created
-        if (manualStage == null) {
-            manualStage = new Stage();
-            manualStage.setTitle("Hướng dẫn sử dụng");
-            manualStage.initOwner(((Node) e.getSource()).getScene().getWindow());
-            manualStage.setScene(manualScene);
-        }
-
-        manualStage.show();
     }
 
     private String formatAndWriteValue(TextField textField, String inputValue) {
