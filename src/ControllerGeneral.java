@@ -675,11 +675,11 @@ public class ControllerGeneral {
             fault.add("Bảo vệ điện áp thấp");
         }
 
-        if (maxmin.get("sumV") >= ov * numCell) {
+        if (maxmin.get("sumV") * numCell >= os) {
             fault.add("Bảo vệ tổng điện áp cao");
         }
     
-        if (maxmin.get("sumV") <= uv * numCell) {
+        if (maxmin.get("sumV") * numCell <= us) {
             fault.add("Bảo vệ tổng điện áp thấp");
         }
     
