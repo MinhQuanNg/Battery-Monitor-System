@@ -219,7 +219,7 @@ public class ControllerGeneral {
             avgTLabel.setText(String.format("%.2f", avgT) + "°C");
         });
 
-        // updateFault(maxmin);
+        updateFault(maxmin);
     }
 
     // Update ScreenDetail
@@ -258,7 +258,7 @@ public class ControllerGeneral {
             // System.out.println("Cell " + i + ": " + "Voltage: " + voltage + ", Temperature: " + temperature);
         }
 
-        // updateFault(maxmin);
+        updateFault(maxmin);
     }
 
     private void dataScreenProfile(JSONArray dataArray) throws JSONException {
@@ -562,11 +562,11 @@ public class ControllerGeneral {
             fault.add("Bảo vệ điện áp thấp");
         }
 
-        if (maxmin.get("sumV") >= ov * numCell) {
+        if (maxmin.get("sumV") * numCell >= os) {
             fault.add("Bảo vệ tổng điện áp cao");
         }
     
-        if (maxmin.get("sumV") <= uv * numCell) {
+        if (maxmin.get("sumV") * numCell <= us) {
             fault.add("Bảo vệ tổng điện áp thấp");
         }
     
