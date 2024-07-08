@@ -93,8 +93,12 @@ public class ControllerGeneral {
     private SerialPort USB;
 
     public void startThread(Controller controller) {
+<<<<<<< HEAD
         USB = controller.getUSB();
         DataReader reader = new DataReader(this, USB);
+=======
+        DataReader reader = new DataReader(this, controller.getUSB());
+>>>>>>> 5c8d7a7 (debug thread)
 
         // Start thread to read data
         Thread thread = new Thread(reader);
