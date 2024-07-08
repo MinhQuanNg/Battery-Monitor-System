@@ -9,7 +9,7 @@ public class BMS extends Application {
     public void start(Stage stage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("ScreenMain.fxml"));            
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 800, 600);
             stage.setScene(scene);
             stage.setTitle("Quản lý hệ thống pin");
             stage.show();

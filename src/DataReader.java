@@ -50,7 +50,7 @@ public class DataReader implements Runnable {
 
         // Run if port available
         if (USB != null) {
-            DataReader reader = new DataReader(new ControllerGeneral(new Controller()), USB);
+            DataReader reader = new DataReader(new ControllerGeneral(), USB);
             Thread thread = new Thread(reader);
             thread.start();
         } else {

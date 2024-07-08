@@ -28,9 +28,11 @@ public class Controller {
         // debug
         // if (USB != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ScreenGeneral.fxml"));
-            loader.setControllerFactory(param -> new ControllerGeneral(this)); // Pass this controller
-            Parent root = loader.load();   
-                   
+            Parent root = loader.load();
+            
+            ControllerGeneral ctrlGen = loader.getController();
+            ctrlGen.startThread(this);
+
             stage = (Stage)((Node) e.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

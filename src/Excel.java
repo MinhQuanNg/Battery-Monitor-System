@@ -7,10 +7,13 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import javax.json.Json;
 import javax.json.JsonObject;
 
+import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -23,11 +26,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Excel {
-    File fileName;
-    String sheetName;
+    private File fileName;
+    private String sheetName;
 
     public Excel() throws IOException {
-        fileName = new File("src/data.xlsx");
+        fileName = new File("data/data.xlsx");
         sheetName = "Data";
 
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -38,16 +41,15 @@ public class Excel {
         workbook.write(outputStream);
         outputStream.close();
         workbook.close();
-        System.out.println("XLSX file created successfully.");
+        System.out.println("Temp data file created successfully.");
     }
 
     public void write(JSONArray recordsToWrite, String timestamp, Hashtable<String, Double> maxmin) throws FileNotFoundException, IOException, JSONException {
+        ZipSecureFile.setMinInflateRatio(0);
+        
         XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(fileName));
         XSSFSheet sheet = workbook.getSheet(sheetName);
         int lastRow = sheet.getLastRowNum();
-
-        // TODO: interrupt thread
-        System.out.println("hi");
 
         // If not row 0, then jump 2 rows (leaving 1 row space)
         int rowNum = lastRow == -1 ? 0 : lastRow + 2;
@@ -68,9 +70,13 @@ public class Excel {
         cell = row.createCell(0);
         cell.setCellValue("Temperature (C)");
 
+        sheet.autoSizeColumn(0);
+
         Map<Integer, Object[]> data = prepareData(rowNum, recordsToWrite);
 
-        Set<Integer> keySet = data.keySet();
+        // Sorted so that cells are in ascending order
+        Set<Integer> keySet = data.keySet().stream()
+                              .collect(Collectors.toCollection(TreeSet::new));
 
         // Cell / row
         // for (Integer key : keySet) {
@@ -143,8 +149,6 @@ public class Excel {
             
             cellNum++;
         }
-
-
         
         try {
             FileOutputStream out = new FileOutputStream(fileName);
@@ -165,9 +169,6 @@ public class Excel {
 
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
-
-            System.out.println(voltage);
-            System.out.println(temperature);
 
             rowNum++;
             data.put(rowNum, new Object[]{i, voltage, temperature});
@@ -201,5 +202,9 @@ public class Excel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public File getFileName() {
+        return fileName;
     }
 }
