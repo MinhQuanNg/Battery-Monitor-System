@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +26,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -44,25 +47,40 @@ public class ControllerGeneral {
     private Stage stage;
     private Scene scene;
     private Gauge gauge;
+    private Scene manualScene = null;
+    private Stage manualStage = null;
 
     // ScreenGeneral
-    @FXML private AnchorPane generalPane;
-    @FXML private HBox batteryBox;
-    @FXML private Pane errorPane;
-    @FXML private Label maxVLabel, minVLabel, delVLabel, sumVLabel, avgVLabel, maxTLabel, avgTLabel;
-    @FXML private Label numFaultLabel, faultLabel;
+    @FXML
+    private AnchorPane generalPane;
+    @FXML
+    private HBox batteryBox;
+    @FXML
+    private Pane errorPane;
+    @FXML
+    private Label maxVLabel, minVLabel, delVLabel, sumVLabel, avgVLabel, maxTLabel, avgTLabel;
+    @FXML
+    private Label numFaultLabel, faultLabel;
 
     // ScreenDetail
-    @FXML private GridPane cellPane;
+    @FXML
+    private GridPane cellPane;
 
     // ScreenProfile
-    @FXML private GridPane profilePane;
-    @FXML private Label maxVPro, minVPro, sumMaxVPro, sumMinVPro, difVPro, maxTPro;
-    @FXML private Button set1, set2, set3, set4, set5, set6, save;
-    @FXML private TextField maxVProText, minVProText, difVProText, sumMaxVProText, sumMinVProText, maxTProText;
-    @FXML private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
+    @FXML
+    private GridPane profilePane;
+    @FXML
+    private Label setting1, setting2, setting3, setting4, setting5, setting6;
+    @FXML
+    private Label maxVPro, minVPro, sumMaxVPro, sumMinVPro, difVPro, maxTPro;
+    @FXML
+    private Button set1, set2, set3, set4, set5, set6, save;
+    @FXML
+    private TextField maxVProText, minVProText, difVProText, sumMaxVProText, sumMinVProText, maxTProText;
+    @FXML
+    private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
 
-    final private String[] screen = {"General", "Detail", "Profile"};
+    final private String[] screen = { "General", "Detail", "Profile" };
     private String currentScreen;
 
     private Excel excel;
@@ -84,13 +102,13 @@ public class ControllerGeneral {
 
         // Add SoC gauge on ScreenGeneral
         gauge = GaugeBuilder.create()
-        .skinType(SkinType.BATTERY)
-        .animated(true)
-        .sectionsVisible(true)
-        .sections(new Section(0, 10, Color.RED),
-                    new Section(10, 20, Color.rgb(255,235,59)), //YELLOW
-                    new Section(20, 100, Color.GREEN))
-        .build();
+                .skinType(SkinType.BATTERY)
+                .animated(true)
+                .sectionsVisible(true)
+                .sections(new Section(0, 10, Color.RED),
+                        new Section(10, 20, Color.rgb(255, 235, 59)), // YELLOW
+                        new Section(20, 100, Color.GREEN))
+                .build();
         batteryBox.getChildren().add(gauge);
 
         DataReader reader = new DataReader(this, controller.getUSB());
@@ -108,30 +126,33 @@ public class ControllerGeneral {
             e.printStackTrace();
         }
     }
-    
 
     public void back(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ScreenMain.fxml"));
-        stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
     public void manual(ActionEvent e) throws IOException {
-        Parent manual = FXMLLoader.load(getClass().getResource("Manual.fxml"));
+        // Load the manual scene only once and reuse if already loaded
+        if (manualScene == null) {
+            Parent manual = FXMLLoader.load(getClass().getResource("Manual.fxml"));
+            manualScene = new Scene(manual);
+        }
 
-        Stage mStage = new Stage();
-        mStage.setTitle("Hướng dẫn sử dụng");
+        // Use a single instance of the manual stage if it's already been created
+        if (manualStage == null) {
+            manualStage = new Stage();
+            manualStage.setTitle("Hướng dẫn sử dụng");
+            manualStage.initOwner(((Node) e.getSource()).getScene().getWindow());
+            manualStage.setScene(manualScene);
+        }
 
-        mStage.initOwner(((Node) e.getSource()).getScene().getWindow());
-
-        Scene infoScene = new Scene(manual);
-        mStage.setScene(infoScene);
-
-        mStage.show();
+        manualStage.show();
     }
-    
+
     public void general(ActionEvent e) {
         currentScreen = screen[0];
 
@@ -150,7 +171,7 @@ public class ControllerGeneral {
         currentScreen = screen[1];
 
         for (Node node : findNodesByClass(generalPane, "general")) {
-            node.setVisible(false);  // Hide nodes on ScreenGeneral
+            node.setVisible(false); // Hide nodes on ScreenGeneral
         }
 
         cellPane.setVisible(true);
@@ -164,7 +185,7 @@ public class ControllerGeneral {
         currentScreen = screen[2];
 
         for (Node node : findNodesByClass(generalPane, "general")) {
-            node.setVisible(false);  // Hide nodes on ScreenGeneral
+            node.setVisible(false); // Hide nodes on ScreenGeneral
         }
 
         cellPane.setVisible(false);
@@ -183,7 +204,7 @@ public class ControllerGeneral {
         // TODO: get battery characteristics
         // characteristics.put(...);
         updateCharacteristics();
-        
+
         try {
             Hashtable<String, Double> maxmin = calculateMaxMin(dataArray);
 
@@ -224,7 +245,7 @@ public class ControllerGeneral {
             sumVLabel.setText(String.format("%.2f", sumV) + "V");
             avgVLabel.setText(String.format("%.2f", avgV) + "V");
             avgVLabel.setText(String.format("%.2f", avgV) + "V");
-            
+
             maxTLabel.setText(String.format("%.2f", maxT) + "°C");
             avgTLabel.setText(String.format("%.2f", avgT) + "°C");
         });
@@ -243,7 +264,7 @@ public class ControllerGeneral {
         for (int i = 1; i <= numCell; i++) {
             String state = "normal";
 
-            JSONObject dataObject = dataArray.getJSONObject(i-1);
+            JSONObject dataObject = dataArray.getJSONObject(i - 1);
 
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
@@ -251,7 +272,7 @@ public class ControllerGeneral {
             int cellNo = i;
 
             // Update cell number label
-            Platform.runLater(() -> cellLabels.get(cellNo-1).setText("Cell " + cellNo));
+            Platform.runLater(() -> cellLabels.get(cellNo - 1).setText("Cell " + cellNo));
 
             if (temperature == maxmin.get("maxT")) {
                 state = "hot";
@@ -263,11 +284,12 @@ public class ControllerGeneral {
                 state = "min";
             }
 
-            updateCellImage((ImageView) imageViewNodes.get(cellNo-1), state);
+            updateCellImage((ImageView) imageViewNodes.get(cellNo - 1), state);
 
-            updateDataLabels((Parent) dataBoxes.get(cellNo-1), voltage, temperature, state);
+            updateDataLabels((Parent) dataBoxes.get(cellNo - 1), voltage, temperature, state);
 
-            // System.out.println("Cell " + i + ": " + "Voltage: " + voltage + ", Temperature: " + temperature);
+            // System.out.println("Cell " + i + ": " + "Voltage: " + voltage + ",
+            // Temperature: " + temperature);
         }
 
         // updateFault(maxmin);
@@ -275,7 +297,7 @@ public class ControllerGeneral {
 
     private void dataScreenProfile(JSONArray dataArray) throws JSONException {
         for (int i = 1; i <= numCell; i++) {
-            JSONObject dataObject = dataArray.getJSONObject(i-1);
+            JSONObject dataObject = dataArray.getJSONObject(i - 1);
             ov = dataObject.optDouble("ov", 3.6);
             uv = dataObject.optDouble("uv", 2.5);
 
@@ -307,7 +329,7 @@ public class ControllerGeneral {
 
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
-            
+
             if (i == 0) {
                 int SOC = dataObject.optInt("SOC", 0);
 
@@ -336,7 +358,7 @@ public class ControllerGeneral {
         }
 
         Hashtable<String, Double> maxmin = new Hashtable<>();
-        
+
         maxmin.put("maxV", maxV);
         maxmin.put("minV", minV);
         maxmin.put("maxT", maxT);
@@ -345,15 +367,16 @@ public class ControllerGeneral {
 
         return maxmin;
     }
+
     private List<Node> findNodesByClass(Parent root, String className) {
         List<Node> matchingNodes = new ArrayList<>();
         for (Node node : root.getChildrenUnmodifiable()) {
-          if (node.getStyleClass().contains(className)) {
-            matchingNodes.add(node);
-          }
-          if (node instanceof Parent) {
-            matchingNodes.addAll(findNodesByClass((Parent) node, className));
-          }
+            if (node.getStyleClass().contains(className)) {
+                matchingNodes.add(node);
+            }
+            if (node instanceof Parent) {
+                matchingNodes.addAll(findNodesByClass((Parent) node, className));
+            }
         }
         return matchingNodes;
     }
@@ -362,9 +385,9 @@ public class ControllerGeneral {
     private List<Label> findLabels(Parent root) {
         List<Label> labels = new ArrayList<>();
         for (Node node : root.getChildrenUnmodifiable()) {
-          if (node instanceof Label) {
-            labels.add((Label) node);
-          }
+            if (node instanceof Label) {
+                labels.add((Label) node);
+            }
         }
         return labels;
     }
@@ -405,19 +428,19 @@ public class ControllerGeneral {
         if (selectedFile != null) {
             FileChooser.ExtensionFilter excelFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
             fileChooser.getExtensionFilters().add(excelFilter);
-            
+
             // Restrict the dialog to only show the Excel filter
             fileChooser.setSelectedExtensionFilter(excelFilter);
 
             // Proceed with saving the Excel file to the selected path
             XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(excel.fileName));
-  
+
             // Write the workbook to the chosen file
             FileOutputStream outputStream = new FileOutputStream(selectedFile);
             workbook.write(outputStream);
             outputStream.close();
             workbook.close();
-            
+
             System.out.println("Excel file saved successfully!");
         } else {
             // Handle case where user cancels the dialog
@@ -447,87 +470,150 @@ public class ControllerGeneral {
 
     public void popEdit(ActionEvent e) throws IOException {
         Button btn = (Button) e.getSource();
+        TextField targetTextField = null;
+        Label sourceLabel = null;
+
         switch (btn.getId()) {
             case "set1":
-                btn.setVisible(false);
-                save.setVisible(true);
-                maxVProText.setVisible(true);
-                maxVProText.setText(maxVPro.getText());
-                maxVProText.requestFocus(); // Request focus
+                targetTextField = maxVProText;
+                sourceLabel = maxVPro;
                 break;
             case "set2":
-                btn.setVisible(false);
-                save.setVisible(true);
-                minVProText.setVisible(true);
-                minVProText.setText(minVPro.getText());
-                minVProText.requestFocus(); // Request focus
+                targetTextField = minVProText;
+                sourceLabel = minVPro;
                 break;
             case "set3":
-                btn.setVisible(false);
-                save.setVisible(true);
-                sumMaxVProText.setVisible(true);
-                sumMaxVProText.setText(sumMaxVPro.getText());
-                sumMaxVProText.requestFocus(); // Request focus
+                targetTextField = sumMaxVProText;
+                sourceLabel = sumMaxVPro;
                 break;
             case "set4":
-                btn.setVisible(false);
-                save.setVisible(true);
-                sumMinVProText.setVisible(true);
-                sumMinVProText.setText(sumMinVPro.getText());
-                sumMinVProText.requestFocus(); // Request focus
+                targetTextField = sumMinVProText;
+                sourceLabel = sumMinVPro;
                 break;
             case "set5":
-                btn.setVisible(false);
-                save.setVisible(true);
-                difVProText.setVisible(true);
-                difVProText.setText(difVPro.getText());
-                difVProText.requestFocus(); // Request focus
+                targetTextField = difVProText;
+                sourceLabel = difVPro;
                 break;
             case "set6":
-                btn.setVisible(false);
-                save.setVisible(true);
-                maxTProText.setVisible(true);
-                maxTProText.setText(maxTPro.getText());
-                maxTProText.requestFocus(); // Request focus
+                targetTextField = maxTProText;
+                sourceLabel = maxTPro;
                 break;
-            default:
-                    break;
+        }
+
+        if (targetTextField != null && sourceLabel != null) {
+            updateVisibilityAndFocus(btn, targetTextField, sourceLabel);
         }
     }
 
-    public void finishEdit(KeyEvent e) throws IOException {
-        // TextField text = (TextField) e.getSource();
-        //     if (text.getCode() == KeyCode.ENTER) {
-        //     text.setVisible(false);
-        //     switch (text.getId()) {
-        //         case "maxVProText":
-        //             maxVPro.setVisible(true);
-        //             maxVPro.setText(text.getText());
-        //             break;
-        //         case "minVProText":
-        //             minVPro.setVisible(true);
-        //             minVPro.setText(text.getText());
-        //             break;
-        //         case "difVProText":
-        //             difVPro.setVisible(true);
-        //             difVPro.setText(text.getText());
-        //             break;
-        //         case "sumMaxVProText":
-        //             sumMaxVPro.setVisible(true);
-        //             sumMaxVPro.setText(text.getText());
-        //             break;
-        //         case "sumMinVProText":
-        //             sumMinVPro.setVisible(true);
-        //             sumMinVPro.setText(text.getText());
-        //             break;
-        //         case "maxTProText":
-        //             maxTPro.setVisible(true);
-        //             maxTPro.setText(text.getText());
-        //             break;
-        //         default:
-        //             break;
-        //     }
+    private void updateVisibilityAndFocus(Button btn, TextField textField, Label label) {
+        btn.setVisible(false);
+        save.setVisible(true);
+        textField.setVisible(true);
+        textField.setText(label.getText());
+        textField.requestFocus();
+    }
+
+    public void finishEdit(KeyEvent e) {
+        if (e.getCode() == KeyCode.ENTER) {
+            TextField text = (TextField) e.getSource();
+            showSaveConfirmationPopup(text);
+        }
+    }
+
+    public void onSaveAllChangesAction() {
+        // StringBuilder allData = new StringBuilder();
+        // // Assuming you have TextField instances for each of your inputs
+        // TextField[] textFields = {maxVProText, minVProText, difVProText, maxTProText,
+        // sumMaxVProText, sumMinVProText};
+        // for (TextField textField : textFields) {
+        // String formattedData = formatData(textField.getText(), textField); //
+        // Assuming formatData method takes the text value and the TextField itself
+        // allData.append(formattedData).append("\n"); // Append a newline or other
+        // delimiter as needed
         // }
+        // writeBoard(allData.toString());
+    }
+
+    private String getCorrespondingLabel(String textFieldId) {
+        // Example mapping, replace with actual logic
+        switch (textFieldId) {
+            case "maxVProText":
+                return setting1.getText();
+            case "minVProText":
+                return setting2.getText();
+            case "sumMaxVProText":
+                return setting3.getText();
+            case "sumMinVProText":
+                return setting4.getText();
+            case "difVProText":
+                return setting5.getText();
+            case "maxTProText":
+                return setting6.getText();
+            default:
+                return null;
+        }
+    }
+
+    private boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?"); // Match a number with optional '-' and decimal.
+    }
+
+    private void showSaveConfirmationPopup(TextField textField) {
+        // IDs that require numeric input
+        List<String> numericFields = Arrays.asList("maxVProText");
+        if (numericFields.contains(textField.getId()) && !isNumeric(textField.getText())) {
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Invalid Input");
+            errorAlert.setHeaderText("Invalid Number Format");
+            errorAlert.setContentText(
+                    "Please enter a valid number for \"" + getCorrespondingLabel(textField.getId()) + "\"" + ".");
+            errorAlert.showAndWait();
+            return; // Exit the method early
+        }
+
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Confirm Changes");
+        confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu thay đổi");
+        confirmationAlert
+                .setContentText(getCorrespondingLabel(textField.getId()) + "  " + "\"" + textField.getText() + "\"");
+
+        confirmationAlert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                writeBoard(formatAndWriteValue(textField, textField.getText()));
+                updateLabel(textField);
+            }
+        });
+    }
+
+    private void updateLabel(TextField textField) {
+        Label targetLabel = null;
+        switch (textField.getId()) {
+            case "maxVProText":
+                targetLabel = maxVPro;
+                break;
+            case "minVProText":
+                targetLabel = minVPro;
+                break;
+            case "sumMaxVProText":
+                targetLabel = sumMaxVPro;
+                break;
+            case "sumMinVProText":
+                targetLabel = sumMinVPro;
+                break;
+            case "difVProText":
+                targetLabel = difVPro;
+                break;
+            case "maxTProText":
+                targetLabel = maxTPro;
+                break;
+        }
+
+        if (targetLabel != null) {
+            targetLabel.setText(textField.getText());
+            targetLabel.setVisible(true);
+            textField.setVisible(false); // Optionally hide the TextField
+            // Optionally, hide the save button if it's no longer needed
+        }
     }
 
     private void updateFault(Hashtable<String, Double> maxmin) {
@@ -544,15 +630,15 @@ public class ControllerGeneral {
         if (maxmin.get("sumV") >= os) {
             fault.add("Bảo vệ tổng điện áp cao");
         }
-    
+
         if (maxmin.get("sumV") <= us) {
             fault.add("Bảo vệ tổng điện áp thấp");
         }
-    
+
         if (maxmin.get("delV") > dv) {
             fault.add("Bảo vệ chênh lệch áp");
         }
-    
+
         if (maxmin.get("maxT") >= ot) {
             fault.add("Bảo vệ nhiệt độ cao");
         }
@@ -561,34 +647,32 @@ public class ControllerGeneral {
         faultLabel.setText(fault.stream().collect(Collectors.joining("\n")));
     }
 
-    private void writeBoard(Label label, TextField text) {     
-    //     String Output = "";
-    //     double setValue;
-    //     try {
-    //         byte[] bytes;
-    //         switch (label.getId()) {
-    //             case "maxVPro":
-    //                 setValue = Double.parseDouble(maxVPro.getText());
-    //                 Output = String.format("%d.o", (int) (setValue * 100));
-    //                 break;
-    //             case "minVPro":
-    //                 setValue = Double.parseDouble(minVPro.getText());
-    //                 Output = String.format("%d.u", (int) (setValue * 100));
-    //                 break;
-    //             case "diffVPro":
-    //                 setValue = Double.parseDouble(difVPro.getText());
-    //                 Output = String.format("%d.d", (int) (setValue * 100));
-    //                 break;
-    //             case "maxTPro":
-    //                 setValue = Double.parseDouble(maxTPro.getText());
-    //                 Output = String.format("%d.t", (int) (setValue * 10));
-    //                 break;
-    //         }
-    //         bytes = Output.getBytes();
-    //         controller.getUSB().writeBytes(bytes, bytes.length);
-    //     } catch (Exception a) {
-    //         a.printStackTrace();
-    //     }
-    // }
+    private String formatAndWriteValue(TextField textField, String inputValue) {
+        String output = "";
+        double setValue = Double.parseDouble(inputValue);
+        switch (textField.getId()) {
+            case "maxVPro":
+                output = String.format("%d.o", (int) (setValue * 100));
+                break;
+            case "minVPro":
+                output = String.format("%d.u", (int) (setValue * 100));
+                break;
+            case "diffVPro":
+                output = String.format("%d.d", (int) (setValue * 100));
+                break;
+            case "maxTPro":
+                output = String.format("%d.t", (int) (setValue * 10));
+                break;
+        }
+        return output;
+    }
+
+    public void writeBoard(String data) {
+        try {
+            byte[] bytes = data.getBytes();
+            controller.getUSB().writeBytes(bytes, bytes.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1814,32 +1814,32 @@
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </Button>
-                        <Label prefHeight="20.0" prefWidth="160.0" text="Bảo vệ điện áp cao cell pin">
+                        <Label fx:id="setting1" prefHeight="20.0" prefWidth="160.0" text="Bảo vệ điện áp cao cell pin">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="18.0" prefWidth="161.0" text="Bảo vệ điện áp thấp cell pin" GridPane.rowIndex="2">
+                        <Label fx:id="setting2" prefHeight="18.0" prefWidth="161.0" text="Bảo vệ điện áp thấp cell pin" GridPane.rowIndex="2">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="18.0" prefWidth="169.0" text="Bảo vệ tổng điện áp cao" GridPane.rowIndex="4">
+                        <Label fx:id="setting3" prefHeight="18.0" prefWidth="169.0" text="Bảo vệ tổng điện áp cao" GridPane.rowIndex="4">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="18.0" prefWidth="158.0" text="Bảo vệ tổng điện áp thấp" GridPane.rowIndex="6">
+                        <Label fx:id="setting4" prefHeight="18.0" prefWidth="158.0" text="Bảo vệ tổng điện áp thấp" GridPane.rowIndex="6">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="15.0" prefWidth="127.0" text="Bảo vệ chênh lệch áp" GridPane.rowIndex="8">
+                        <Label fx:id="setting5" prefHeight="15.0" prefWidth="127.0" text="Bảo vệ chênh lệch áp" GridPane.rowIndex="8">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="15.0" prefWidth="127.0" text="Bảo vệ nhiệt độ cao" GridPane.rowIndex="10">
+                        <Label fx:id="setting6" prefHeight="15.0" prefWidth="127.0" text="Bảo vệ nhiệt độ cao" GridPane.rowIndex="10">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
