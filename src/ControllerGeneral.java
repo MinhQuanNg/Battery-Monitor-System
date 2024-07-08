@@ -664,35 +664,4 @@ public class ControllerGeneral {
             e.printStackTrace();
         }
     }
-
-    private void updateLabel(TextField textField) {
-        Label targetLabel = null;
-        switch (textField.getId()) {
-            case "maxVProText":
-                targetLabel = maxVPro;
-                break;
-            case "minVProText":
-                targetLabel = minVPro;
-                break;
-            case "sumMaxVProText":
-                targetLabel = sumMaxVPro;
-                break;
-            case "sumMinVProText":
-                targetLabel = sumMinVPro;
-                break;
-            case "difVProText":
-                targetLabel = difVPro;
-                break;
-            case "maxTProText":
-                targetLabel = maxTPro;
-                break;
-        }
-
-        if (targetLabel != null) {
-            targetLabel.setText(textField.getText());
-            targetLabel.setVisible(true);
-            textField.setVisible(false); // Optionally hide the TextField
-            // Optionally, hide the save button if it's no longer needed
-        }
-    }
 }

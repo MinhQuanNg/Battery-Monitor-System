@@ -6,6 +6,15 @@
     "configurations": [
         {
             "type": "java",
+            "name": "BMS",
+            "request": "launch",
+            "mainClass": "BMS",
+            "projectName": "BMS_28b66ba0",
+            "vmArgs": "--module-path /Users/quannguyen/Documents/Internship/BMS/lib/javafx-sdk-17.0.11/lib --add-modules javafx.controls,javafx.fxml"
+
+        },
+        {
+            "type": "java",
             "name": "Test",
             "request": "launch",
             "mainClass": "Test",
