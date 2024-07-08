@@ -30,6 +30,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -74,19 +75,15 @@ public class ControllerGeneral {
     private String currentScreen;
 
     private Excel excel;
-
+    List<TextField> textFields = Arrays.asList(minVProText, difVProText, maxTProText);
     private int numCell;
     private Hashtable<String, String> characteristics;
     private double ov, uv, os, us, ot, dv;
     private SerialPort USB;
 
     public void startThread(Controller controller) {
-<<<<<<< HEAD
         USB = controller.getUSB();
         DataReader reader = new DataReader(this, USB);
-=======
-        DataReader reader = new DataReader(this, controller.getUSB());
->>>>>>> 5c8d7a7 (debug thread)
 
         // Start thread to read data
         Thread thread = new Thread(reader);
@@ -452,14 +449,6 @@ public class ControllerGeneral {
                 targetTextField = minVProText;
                 sourceLabel = minVPro;
                 break;
-            case "set3":
-                targetTextField = sumMaxVProText;
-                sourceLabel = sumMaxVPro;
-                break;
-            case "set4":
-                targetTextField = sumMinVProText;
-                sourceLabel = sumMinVPro;
-                break;
             case "set5":
                 targetTextField = difVProText;
                 sourceLabel = difVPro;
@@ -490,6 +479,7 @@ public class ControllerGeneral {
         }
     }
 
+    
     public void onSaveAllChangesAction() {
         // StringBuilder allData = new StringBuilder();
         // // Assuming you have TextField instances for each of your inputs
@@ -511,10 +501,6 @@ public class ControllerGeneral {
                 return setting1.getText();
             case "minVProText":
                 return setting2.getText();
-            case "sumMaxVProText":
-                return setting3.getText();
-            case "sumMinVProText":
-                return setting4.getText();
             case "difVProText":
                 return setting5.getText();
             case "maxTProText":
@@ -529,30 +515,76 @@ public class ControllerGeneral {
     }
 
     private void showSaveConfirmationPopup(TextField textField) {
-        // IDs that require numeric input
-        List<String> numericFields = Arrays.asList("maxVProText");
-        if (numericFields.contains(textField.getId()) && !isNumeric(textField.getText())) {
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setTitle("Invalid Input");
-            errorAlert.setHeaderText("Invalid Number Format");
-            errorAlert.setContentText(
-                    "Please enter a valid number for \"" + getCorrespondingLabel(textField.getId()) + "\"" + ".");
-            errorAlert.showAndWait();
-            return; // Exit the method early
+    // IDs that require numeric input
+    List<String> numericFields = Arrays.asList("maxVProText");
+    if (numericFields.contains(textField.getId()) && !isNumeric(textField.getText())) {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("Invalid Input");
+        errorAlert.setHeaderText("Invalid Number Format");
+        errorAlert.setContentText(
+                "Please enter a valid number for \"" + getCorrespondingLabel(textField.getId()) + "\"" + ".");
+        errorAlert.showAndWait();
+        return; // Exit the method early
+    }
+
+    // Create a custom ButtonType for "Save"
+    ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+    Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "", saveButtonType, ButtonType.CANCEL);
+    confirmationAlert.setTitle("Confirm Changes");
+    confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu thay đổi");
+    confirmationAlert.setContentText(getCorrespondingLabel(textField.getId()) + "  " + "\"" + textField.getText() + "\"");
+
+    // Show the alert and wait for response
+    confirmationAlert.showAndWait().ifPresent(response -> {
+        if (response == saveButtonType) {
+            writeBoard(formatAndWriteValue(textField, textField.getText()));
+            updateLabel(textField);
+            save.setVisible(false);
+        } else {
+            textField.setVisible(false); // Hide the text field if not saved
+            save.setVisible(false);
         }
+    });
+}
 
-        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmationAlert.setTitle("Confirm Changes");
-        confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu thay đổi");
-        confirmationAlert
-                .setContentText(getCorrespondingLabel(textField.getId()) + "  " + "\"" + textField.getText() + "\"");
-
-        confirmationAlert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                writeBoard(formatAndWriteValue(textField, textField.getText()));
-                updateLabel(textField);
-            }
-        });
+    private void updateLabel(TextField textField) {
+        Label targetLabel = null;
+        switch (textField.getId()) {
+            case "maxVProText":
+                targetLabel = maxVPro;
+                // Assuming numCell is already defined and converted to a numeric value
+                try {
+                    double maxVProValue = Double.parseDouble(textField.getText());
+                    sumMaxVPro.setText(String.format("%.2f", maxVProValue * numCell)); // Corrected this line
+                } catch (NumberFormatException e) {
+                    // Handle invalid input
+                    sumMaxVPro.setText("Invalid input");
+                }
+                break;
+            case "minVProText":
+                targetLabel = minVPro;
+                try {
+                    double minVProValue = Double.parseDouble(textField.getText());
+                    sumMinVPro.setText(String.format("%.2f", minVProValue * numCell)); // Added this line
+                } catch (NumberFormatException e) {
+                    // Handle invalid input
+                    sumMinVPro.setText("Invalid input");
+                }
+                break;
+            case "difVProText":
+                targetLabel = difVPro;
+                break;
+            case "maxTProText":
+                targetLabel = maxTPro;
+                break;
+        }
+    
+        if (targetLabel != null) {
+            targetLabel.setText(textField.getText());
+            targetLabel.setVisible(true);
+            textField.setVisible(false); // Optionally hide the TextField
+            // Optionally, hide the save button if it's no longer needed
+        }
     }
 
     private void updateFault(Hashtable<String, Double> maxmin) {

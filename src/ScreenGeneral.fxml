@@ -1794,16 +1794,6 @@
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </Button>
-                        <Button fx:id="set3" mnemonicParsing="false" onAction="#popEdit" prefWidth="20.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </Button>
-                        <Button fx:id="set4" mnemonicParsing="false" onAction="#popEdit" prefWidth="20.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </Button>
                         <Button fx:id="set5" mnemonicParsing="false" onAction="#popEdit" prefWidth="20.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
@@ -1849,40 +1839,7 @@
                         <VBox prefHeight="2.0" prefWidth="201.0" style="-fx-background-color: #000000;" GridPane.rowIndex="5" />
                         <VBox prefHeight="2.0" prefWidth="201.0" style="-fx-background-color: #000000;" GridPane.rowIndex="7" />
                         <VBox prefHeight="2.0" prefWidth="201.0" style="-fx-background-color: #000000;" GridPane.rowIndex="9" />
-                        <TextField fx:id="maxVProText" alignment="CENTER_RIGHT" mouseTransparent="true" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets left="169.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </TextField>
                         <TextField fx:id="minVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="42.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="169.0" />
-                           </GridPane.margin>
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </TextField>
-                        <TextField fx:id="sumMaxVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10000.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.rowIndex="4">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="169.0" />
-                           </GridPane.margin>
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </TextField>
-                        <TextField fx:id="sumMinVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10000.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.rowIndex="6">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -1915,6 +1872,17 @@
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </TextField>
+                        <TextField fx:id="maxVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10000.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.halignment="RIGHT">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                           <GridPane.margin>
+                              <Insets left="169.0" />
+                           </GridPane.margin>
+                        </TextField>
                      </children>
                      <padding>
                         <Insets bottom="10.0" top="5.0" />
@@ -1925,7 +1893,7 @@
                         <Font name="System Bold" size="19.0" />
                      </font>
                   </Label>
-                  <Button fx:id="save" layoutX="195.0" layoutY="20.0" mnemonicParsing="false" onAction="#finishEdit" style="-fx-background-color: transparent;" visible="false">
+                  <Button fx:id="save" layoutX="195.0" layoutY="20.0" mnemonicParsing="false" onAction="#onSaveAllChangesAction" style="-fx-background-color: transparent;" visible="false">
                      <graphic>
                         <ImageView fitHeight="11.0" fitWidth="19.0" preserveRatio="true" scaleX="1.5" scaleY="1.5" scaleZ="1.5">
                            <image>
