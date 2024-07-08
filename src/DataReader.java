@@ -14,6 +14,7 @@ public class DataReader implements Runnable {
 
     public DataReader(ControllerGeneral controller, SerialPort USB) {
         this.USB = USB;
+        this.controller = controller;
     }
 
     @Override

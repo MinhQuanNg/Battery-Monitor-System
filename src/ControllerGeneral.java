@@ -65,10 +65,10 @@ public class ControllerGeneral {
 
     // ScreenProfile
     @FXML private GridPane profilePane;
-    @FXML private Label setting1, setting2, setting3, setting4, setting5, setting6;
+    @FXML private Label setting1, setting2, setting5, setting6;
     @FXML private Label maxVPro, minVPro, sumMaxVPro, sumMinVPro, difVPro, maxTPro;
-    @FXML private Button set1, set2, set3, set4, set5, set6, save;
-    @FXML private TextField maxVProText, minVProText, difVProText, sumMaxVProText, sumMinVProText, maxTProText;
+    @FXML private Button set1, set2, set5, set6, save;
+    @FXML private TextField maxVProText, minVProText, difVProText, maxTProText;
     @FXML private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
 
     final private String[] screen = {"General", "Detail", "Profile"};
@@ -180,6 +180,15 @@ public class ControllerGeneral {
         try {
             Hashtable<String, Double> maxmin = calculateMaxMin(dataArray);
 
+            // Get protect params
+            JSONObject dataObject = dataArray.getJSONObject(0);
+            ov = dataObject.optDouble("ov", Double.NaN);
+            uv = dataObject.optDouble("uv", Double.NaN);
+            os = ov * numCell;
+            us = uv * numCell;
+            ot = dataObject.optDouble("ot", Double.NaN);
+            dv = dataObject.optDouble("dv", Double.NaN);
+
             // Append to excel
             excel.write(dataArray, timestamp, maxmin);
 
@@ -201,7 +210,7 @@ public class ControllerGeneral {
         final double maxV = maxmin.get("maxV");
         final double minV = maxmin.get("minV");
         final double sumV = maxmin.get("sumV");
-        final double delV = maxV - minV;
+        final double delV = maxmin.get("delV");
         final double avgV = sumV / numCell;
 
         final double maxT = maxmin.get("maxT");
@@ -263,24 +272,14 @@ public class ControllerGeneral {
     }
 
     private void dataScreenProfile(JSONArray dataArray) throws JSONException {
-        for (int i = 0; i < numCell; i++) {
-            JSONObject dataObject = dataArray.getJSONObject(i);
-            double ov = dataObject.optDouble("ov", Double.NaN);
-            double uv = dataObject.optDouble("uv", Double.NaN);
-
-            double os = ov * numCell;
-            double us = uv * numCell;
-
-            double ot = dataObject.optDouble("ot", Double.NaN);
-            double dv = dataObject.optDouble("dv", Double.NaN);
-
+        Platform.runLater(() -> {
             maxVPro.setText(String.valueOf(ov));
             minVPro.setText(String.valueOf(uv));
             sumMaxVPro.setText(String.valueOf(os));
             sumMinVPro.setText(String.valueOf(us));
             maxTPro.setText(String.valueOf(ot));
             difVPro.setText(String.valueOf(dv));
-        }
+        });
     }
 
     private Hashtable<String, Double> calculateMaxMin(JSONArray dataArray) throws JSONException {
@@ -290,6 +289,7 @@ public class ControllerGeneral {
         double sumV = 0;
         double maxT = 0;
         double sumT = 0;
+        double delV;
 
         for (int i = 0; i < numCell; i++) {
             JSONObject dataObject = dataArray.getJSONObject(i);
@@ -324,11 +324,14 @@ public class ControllerGeneral {
             }
         }
 
+        delV = maxV - minV;
+
         Hashtable<String, Double> maxmin = new Hashtable<>();
         
         maxmin.put("maxV", maxV);
         maxmin.put("minV", minV);
         maxmin.put("maxT", maxT);
+        maxmin.put("delV", delV);
         maxmin.put("sumV", sumV);
         maxmin.put("sumT", sumT);
 
@@ -553,23 +556,23 @@ public class ControllerGeneral {
             case "maxVProText":
                 targetLabel = maxVPro;
                 // Assuming numCell is already defined and converted to a numeric value
-                try {
-                    double maxVProValue = Double.parseDouble(textField.getText());
-                    sumMaxVPro.setText(String.format("%.2f", maxVProValue * numCell)); // Corrected this line
-                } catch (NumberFormatException e) {
-                    // Handle invalid input
-                    sumMaxVPro.setText("Invalid input");
-                }
+                // try {
+                //     double maxVProValue = Double.parseDouble(textField.getText());
+                //     sumMaxVPro.setText(String.format("%.2f", maxVProValue * numCell)); // Corrected this line
+                // } catch (NumberFormatException e) {
+                //     // Handle invalid input
+                //     sumMaxVPro.setText("Invalid input");
+                // }
                 break;
             case "minVProText":
                 targetLabel = minVPro;
-                try {
-                    double minVProValue = Double.parseDouble(textField.getText());
-                    sumMinVPro.setText(String.format("%.2f", minVProValue * numCell)); // Added this line
-                } catch (NumberFormatException e) {
-                    // Handle invalid input
-                    sumMinVPro.setText("Invalid input");
-                }
+                // try {
+                //     double minVProValue = Double.parseDouble(textField.getText());
+                //     sumMinVPro.setText(String.format("%.2f", minVProValue * numCell)); // Added this line
+                // } catch (NumberFormatException e) {
+                //     // Handle invalid input
+                //     sumMinVPro.setText("Invalid input");
+                // }
                 break;
             case "difVProText":
                 targetLabel = difVPro;
@@ -598,11 +601,11 @@ public class ControllerGeneral {
             fault.add("Bảo vệ điện áp thấp");
         }
 
-        if (maxmin.get("sumV") * numCell >= os) {
+        if (maxmin.get("sumV") >= os) {
             fault.add("Bảo vệ tổng điện áp cao");
         }
     
-        if (maxmin.get("sumV") * numCell <= us) {
+        if (maxmin.get("sumV") <= us) {
             fault.add("Bảo vệ tổng điện áp thấp");
         }
     
@@ -614,8 +617,10 @@ public class ControllerGeneral {
             fault.add("Bảo vệ nhiệt độ cao");
         }
 
-        numFaultLabel.setText(String.valueOf(fault.size()));
-        faultLabel.setText(fault.stream().collect(Collectors.joining("\n")));
+        Platform.runLater(() -> {
+            numFaultLabel.setText(String.valueOf(fault.size()));
+            faultLabel.setText(fault.stream().collect(Collectors.joining("\n")));
+        });
     }
 
     public void manual(ActionEvent e) throws IOException {
@@ -639,20 +644,22 @@ public class ControllerGeneral {
     private String formatAndWriteValue(TextField textField, String inputValue) {
         String output = "";
         double setValue = Double.parseDouble(inputValue);
+
         switch (textField.getId()) {
-            case "maxVPro":
+            case "maxVProText":
                 output = String.format("%d.o", (int) (setValue * 100));
                 break;
-            case "minVPro":
+            case "minVProText":
                 output = String.format("%d.u", (int) (setValue * 100));
                 break;
-            case "diffVPro":
+            case "diffVProText":
                 output = String.format("%d.d", (int) (setValue * 100));
                 break;
-            case "maxTPro":
+            case "maxTProText":
                 output = String.format("%d.t", (int) (setValue * 10));
                 break;
         }
+
         return output;
     }
 
