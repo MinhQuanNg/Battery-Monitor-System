@@ -1,32 +1,49 @@
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
 import com.fazecast.jSerialComm.SerialPort;
 
 public class Controller {
     private Stage stage;
     private Scene scene;
-    @FXML private Label maxTempLabel;
     @FXML private GridPane cellPane;
-    private SerialPort USB;
-    Thread thread;
+    @FXML private ComboBox portBox;
+    private SerialPort port;
+    private Thread thread;
+    private List<SerialPort> availablePorts;
+
+    @SuppressWarnings("unchecked")
+    public void initialize() {
+        availablePorts = PortChecker.getPorts();
+        portBox.setItems(FXCollections.observableArrayList(availablePorts.stream()
+            .map(SerialPort::getDescriptivePortName)
+            .toArray()));
+        portBox.getStyleClass().add("combo-box");
+            // portBox.setPromptText(availablePorts.get(0).getDescriptivePortName());
+    }
+
+    public void selectPort(ActionEvent e) {
+        int i = portBox.getSelectionModel().getSelectedIndex();
+        port = availablePorts.get(i);
+    }
 
     public void enter(ActionEvent e) throws IOException {
-        // Check for available USB ports
-        USB = PortChecker.getPort();
-
         // Run if port available
-
         // debug
-        // if (USB != null) {
+        if (PortChecker.preparePort(port)) {
+            System.out.println("Port is ready.");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ScreenGeneral.fxml"));
             Parent root = loader.load();
             
@@ -46,6 +63,7 @@ public class Controller {
 
             stage.setTitle("Hệ thống quản lý pin");
             stage.show();
+            }
 
             
         // } else {
@@ -57,7 +75,7 @@ public class Controller {
         this.thread = thread;
     }
 
-    public SerialPort getUSB() {
-        return USB;
+    public SerialPort getPort() {
+        return port;
     }
 }

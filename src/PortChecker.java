@@ -1,27 +1,31 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fazecast.jSerialComm.SerialPort;
 
 public class PortChecker {
-    public static SerialPort getPort() {
+    public static List<SerialPort> getPorts() {
         SerialPort[] allAvailableComPorts = SerialPort.getCommPorts();
-        SerialPort USB = null;
+        List<SerialPort> filteredPorts = new ArrayList<>();
         for (SerialPort port : allAvailableComPorts) {
-
-            if (port.getDescriptivePortName().toLowerCase().contains("usb")) {
-                USB = port;
-                USB.openPort();
-                USB.setBaudRate(115200); // Set baud rate to 115200
-                USB.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
-                System.out.println("Opened the USB serial port: " + USB.getDescriptivePortName());
-
-                try (Scanner scanner = new Scanner(USB.getInputStream())) {
-                    if (scanner.hasNextLine()) {
-                        break;
-                    }
-                }
+            if (!port.getDescriptivePortName().toLowerCase().contains("dial-in")) {
+            filteredPorts.add(port);
             }
         }
+        return filteredPorts;
+    }
 
-        return USB;
+    public static boolean preparePort(SerialPort port) {
+        if (port.getDescriptivePortName().toLowerCase().contains("bms")) {
+            port.openPort();
+            port.setBaudRate(115200); // Set baud rate to 115200
+            port.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
+            System.out.println("Opened the serial port: " + port.getDescriptivePortName() + " at 115200 baud.");
+            return true;
+        } else if (port.getDescriptivePortName().toLowerCase().contains("usb")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

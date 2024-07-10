@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,22 +13,34 @@
 
 <AnchorPane id="background" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <VBox alignment="CENTER" layoutX="134.0" layoutY="86.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="332.0" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="134.0" AnchorPane.topAnchor="86.0">
+      <VBox alignment="CENTER" fillWidth="false" layoutX="134.0" layoutY="86.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="332.0" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="134.0" AnchorPane.topAnchor="86.0">
          <children>
             <ImageView fitHeight="166.0" fitWidth="126.0" preserveRatio="true">
                <image>
                   <Image url="@images/logo4.png" />
                </image>
             </ImageView>
-            <Button accessibleRole="IMAGE_VIEW" mnemonicParsing="false" prefHeight="26.0" prefWidth="290.0" style="-fx-background-color: white;" text="CHỌN CHẾ ĐỘ HOẠT ĐỘNG" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="300.0" text="ĐANG TÌM THIẾT BỊ…">
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
+                  <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#enter" prefHeight="26.0" prefWidth="290.0" style="-fx-background-color: white;" text="Quan sát dữ liệu thời gian thực" textAlignment="CENTER" />
+            </Label>
+            <VBox>
+               <children>
+                  <ComboBox fx:id="portBox" cache="true" onAction="#selectPort" prefWidth="300.0" promptText="          CHỌN CỔNG KẾT NỐI" stylesheets="@style.css">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <Button accessibleRole="IMAGE_VIEW" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#enter" prefWidth="300.0" style="-fx-background-color: white;" text="Quan sát dữ liệu thời gian thực" textAlignment="CENTER" />
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>
