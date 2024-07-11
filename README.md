@@ -1,18 +1,35 @@
-## Getting Started
+### Battery Management System UI
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+1. **Device Connection**
+   - Displays connection status with the battery monitoring device.
+   - Activates monitoring and tracking functions once connected.
 
-## Folder Structure
+2. **Real-Time Monitoring**
+   - Provides detailed information about the monitored battery pack.
+   - Displays alerts for any alarms triggered.
 
-The workspace contains two folders by default, where:
+   **General Information:**
+   - Battery capacity (SoC percentage) with color indicators (Red, Yellow, Green).
+   - Maximum and Minimum Voltage of the cells.
+   - Voltage Difference, Total Voltage, and Average Voltage.
+   - Maximum and Average Temperature.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+   **Error Alerts:**
+   - Notifies when parameters exceed thresholds.
+   - Activates corresponding protection measures.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+   **Detailed Information:**
+   - Voltage and temperature of each cell.
+   - Visual status with color indicators (Blue, Green, Red).
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+3. **Configuration Profiles**
+   - Customize voltage and temperature thresholds for alerts and protection measures.
+   - Provides battery properties (type, number of cells, maximum discharge/charge current, capacity).
 
-## Dependency Management
+4. **Error Alert Details**
+   - Detailed alerts for low/high cell voltage, low/high total voltage, high temperature, and cell voltage imbalance.
+   - Requires a password to change protection parameters.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+5. **Access Saved Data**
+   - Records and displays key battery parameters (Total Voltage, Maximum/Minimum Voltage, Maximum/Minimum Temperature) at different times.
+   - Sorted from most recent to oldest data.
