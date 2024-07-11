@@ -11,26 +11,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="background" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <VBox alignment="CENTER" fillWidth="false" layoutX="134.0" layoutY="86.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="332.0" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="134.0" AnchorPane.topAnchor="86.0">
+      <VBox alignment="CENTER" fillWidth="false" layoutX="99.0" layoutY="46.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="688.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
          <children>
-            <ImageView fitHeight="122.0" fitWidth="90.0" preserveRatio="true">
+            <ImageView fitHeight="229.0" fitWidth="186.0" preserveRatio="true">
                <image>
                   <Image url="@images/logo4.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="300.0" text="ĐANG TÌM THIẾT BỊ….">
+            <Label fx:id="stat" alignment="CENTER" contentDisplay="CENTER" prefWidth="300.0" text="ĐANG TÌM THIẾT BỊ….">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
             <VBox>
                <children>
-                  <ComboBox fx:id="portBox" cache="true" onAction="#selectPort" prefWidth="300.0" promptText="          CHỌN CỔNG KẾT NỐI" styleClass="round" stylesheets="@style.css">
+                  <ComboBox fx:id="portBox" cache="true" onAction="#selectPort" prefHeight="30.0" prefWidth="360.0" promptText="          CHỌN CỔNG KẾT NỐI" styleClass="round" stylesheets="@style.css">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -38,7 +38,10 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <Button accessibleRole="IMAGE_VIEW" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#enter" prefWidth="300.0" style="-fx-background-color: white;" styleClass="round" text="Quan sát dữ liệu thời gian thực" textAlignment="CENTER" />
+                  <Button accessibleRole="IMAGE_VIEW" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#enter" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: white;" styleClass="round" text="Quan sát dữ liệu thời gian thực" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font></Button>
                </children>
             </VBox>
          </children>

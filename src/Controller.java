@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import java.io.IOException;
 import java.io.InputStream;
+import javafx.scene.control.Label;
 import java.util.List;
 
 import com.fazecast.jSerialComm.SerialPort;
@@ -24,6 +25,7 @@ public class Controller {
     private Scene scene;
     @FXML private GridPane cellPane;
     @FXML private ComboBox portBox;
+    @FXML private Label stat;
     private SerialPort port;
     private List<SerialPort> availablePorts;
 
@@ -33,16 +35,36 @@ public class Controller {
         portBox.setItems(FXCollections.observableArrayList(availablePorts.stream()
             .map(SerialPort::getDescriptivePortName)
             .toArray()));
-        portBox.getStyleClass().add("combo-box");
-            // portBox.setPromptText(availablePorts.get(0).getDescriptivePortName());
+            portBox.getStyleClass().add("combo-box");
+            if (!availablePorts.isEmpty()) {
+                portBox.setPromptText("Chọn cổng kết nối");
+                portBox.getSelectionModel().select(0); // Select the first port by default
+                stat.setText("ĐANG KẾT NỐI " + portBox.getSelectionModel().getSelectedItem().toString());
+                port = availablePorts.get(0); // Set the default port
+            } else {
+                portBox.setPromptText("Không có cổng kết nối");
+            }
     }
 
     public void selectPort(ActionEvent e) {
         int i = portBox.getSelectionModel().getSelectedIndex();
-        port = availablePorts.get(i);
+            port = availablePorts.get(i);
+            stat.setText("ĐANG KẾT NỐI " + port.getDescriptivePortName());
     }
 
     public void enter(ActionEvent e) throws IOException {
+        try {
+            System.out.println(port.getDescriptivePortName());
+        } catch (NullPointerException e1) {
+            Platform.runLater(() -> {
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Cảnh báo");
+                alert.setHeaderText("Không tìm thấy cổng");
+                alert.setContentText("Vui lòng chọn cổng và thử lại.");
+                alert.getButtonTypes().setAll(new ButtonType("Thử Lại", ButtonData.CANCEL_CLOSE));
+                alert.showAndWait();
+            });
+        }
         // Run if port available
         // debug
         try (InputStream inputStream = PortChecker.preparePort(port)) {
@@ -75,8 +97,15 @@ public class Controller {
             stage.show();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            // TODO: modal
-        }
+            Platform.runLater(() -> {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Lỗi kết nối");
+                alert.setHeaderText("Vui lòng kiểm tra kết nối và thử lại.");
+                alert.setContentText("Không thể kết nối với " + port.getDescriptivePortName());
+                alert.getButtonTypes().setAll(new ButtonType("Thử Lại", ButtonData.CANCEL_CLOSE));
+                alert.showAndWait();
+            });
+        } 
     }
 
     public SerialPort getPort() {
