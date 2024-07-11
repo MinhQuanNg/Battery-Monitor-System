@@ -1,6 +1,5 @@
 import java.util.Hashtable;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;

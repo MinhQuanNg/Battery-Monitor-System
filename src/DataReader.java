@@ -1,56 +1,40 @@
 import com.fazecast.jSerialComm.SerialPort;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class DataReader implements Runnable {
-    private SerialPort port;
     private ControllerGeneral controller;
+    private InputStream input;
 
-    public DataReader(ControllerGeneral controller, SerialPort port) {
-        this.port = port;
+    public DataReader(ControllerGeneral controller, InputStream input) {
         this.controller = controller;
+        this.input = input;
     }
 
     @Override
     public void run() {
-        try (InputStream inputStream = port.getInputStream()) {
-            if (inputStream.available() == 0) {
-                System.out.println("No data to read.");
-                System.exit(0); // TODO: modal
-            }
+        try (Scanner scanner = new Scanner(input)) {
+            scanner.nextLine(); // Skip first line
 
-            try (Scanner scanner = new Scanner(inputStream)) {
-                // Infinite loop to continuously read data from port
-                while (!scanner.nextLine().equals("END")) {
-                    String jsonData = scanner.nextLine();
-                    if (jsonData == null || jsonData.isEmpty()) {
-                        System.out.println("No data received. Exiting program.");
-                        System.exit(0);
-                    } else {
-                        JSONObject jsonObject = new JSONObject(jsonData);
-                        JSONArray dataArray = jsonObject.getJSONArray("data");
+            // Infinite loop to continuously read data from port
+            while (true) {
+                String jsonData = scanner.nextLine();
+                try {
+                    JSONObject jsonObject = new JSONObject(jsonData);
+                    JSONArray dataArray = jsonObject.getJSONArray("data");
 
-                        controller.processData(dataArray, new Date());
-                        Thread.sleep(1000); // Read every 1s
-                    }
-                }
+                    controller.processData(dataArray, new Date());
+                } catch (JSONException e) {
+                    e.printStackTrace(); // TODO: modal data not formatted as JSON
+                } 
             }
-        } catch (InterruptedException e) {
-            System.exit(0);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (NoSuchElementException e) {
-            e.printStackTrace();
             System.out.println("No more data.");
             System.exit(0);
         }

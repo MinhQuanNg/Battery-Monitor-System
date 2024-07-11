@@ -4,6 +4,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class SerialTest {
     public static void main(String[] args) {
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
@@ -26,17 +29,20 @@ public class SerialTest {
                 System.out.println("Opened the USB serial port: " + firstAvailableComPort.getDescriptivePortName() + " at 115200 baud.");
             }
             try (Scanner scanner = new Scanner(firstAvailableComPort.getInputStream())) {
-                while (scanner.hasNextLine()) {
+                while (true) {
                     try {
                         String jsonData = scanner.nextLine(); // Read data from USB
-                        System.out.println(jsonData);
+                        // System.out.println("HI" + jsonData);
+                        JSONObject jsonObject = new JSONObject(jsonData);
+                        JSONArray dataArray = jsonObject.getJSONArray("data");
+                        System.out.println(dataArray);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
 
-                System.out.println("No data to read.");
-                System.exit(0);
+                // System.out.println("No data to read.");
+                // System.exit(0);
             }
         };
         executor.scheduleAtFixedRate(task, 0, 2, TimeUnit.SECONDS);

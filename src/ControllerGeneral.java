@@ -30,8 +30,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -87,10 +85,9 @@ public class ControllerGeneral {
     private double ov, uv, os, us, ot, dv;
 
     private boolean run = false;
-    private Date startChart;
-
     private SerialPort port;
     private ChartController ctrl;
+    private boolean first;
 
     // Note: JavaFX optimization doesn't rerender old properties
     public void initialize() {
@@ -223,7 +220,13 @@ public class ControllerGeneral {
 
             // Update chart
             if (run) {
-                ctrl.dataToSeries(maxmin, now);
+                if (first) {
+                    first = false;
+                    ctrl.initSeries(maxmin);
+                    ctrl.setNumCell(numCell);
+                }
+
+                ctrl.updateSeries(maxmin, now);
             }
 
         } catch (Exception e) {
@@ -681,6 +684,7 @@ public class ControllerGeneral {
     }
 
     private void writeBoard(String data) {
+        System.out.println(data);
         try {
             byte[] bytes = data.getBytes();
             port.writeBytes(bytes, bytes.length);
@@ -698,7 +702,7 @@ public class ControllerGeneral {
 
         // Load the manual scene only once and reuse if already loaded
         if (chartScene == null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("LineChart.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Charts.fxml"));
             loader.setController(ctrl);
             Parent root = loader.load();
             chartScene = new Scene(root, 600, 400);

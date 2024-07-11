@@ -5,11 +5,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import com.fazecast.jSerialComm.SerialPort;
@@ -40,13 +45,13 @@ public class Controller {
     public void enter(ActionEvent e) throws IOException {
         // Run if port available
         // debug
-        if (PortChecker.preparePort(port)) {
+        try (InputStream inputStream = PortChecker.preparePort(port)) {
             System.out.println("Port is ready.");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ScreenGeneral.fxml"));
             Parent root = loader.load();
             
             ControllerGeneral ctrlGen = loader.getController();
-            DataReader reader = new DataReader(ctrlGen, port);
+            DataReader reader = new DataReader(ctrlGen, inputStream);
 
             // Start thread to read data
             Thread thread = new Thread(reader);
@@ -60,15 +65,17 @@ public class Controller {
 
             // Set on close request handler to exit the application
             stage.setOnCloseRequest(event -> {
+                port.closePort();
                 System.out.println("Exiting application...");
-                thread.interrupt();
+                // thread.interrupt();
                 Platform.exit();
             });
 
             stage.setTitle("Hệ thống quản lý pin");
             stage.show();
-        } else {
-            System.out.println("No Serial Ports found.");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            // TODO: modal
         }
     }
 
