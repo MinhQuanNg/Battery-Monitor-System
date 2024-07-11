@@ -27,3 +27,8 @@
 .combo-box .list-cell {
     -fx-alignment: CENTER;
 }
+
+.chart-line-symbol {
+    -fx-background-radius: 0px;
+    -fx-padding: 2px;
+  }

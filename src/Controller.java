@@ -10,7 +10,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import com.fazecast.jSerialComm.SerialPort;

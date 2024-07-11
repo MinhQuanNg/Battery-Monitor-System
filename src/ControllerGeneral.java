@@ -469,7 +469,6 @@ public class ControllerGeneral {
 
     public void popEdit(ActionEvent e) throws IOException {
         Platform.runLater(() -> {
-            System.out.println("hi");
             Button btn = (Button) e.getSource();
             TextField targetTextField = null;
             Label sourceLabel = null;

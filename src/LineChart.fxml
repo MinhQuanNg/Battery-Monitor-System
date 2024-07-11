@@ -3,7 +3,7 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 
-<LineChart fx:id="chart" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<LineChart fx:id="chart" animated="false" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <xAxis>
     <NumberAxis side="BOTTOM" fx:id="xAxis" />
   </xAxis>
