@@ -3,8 +3,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +30,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -56,12 +60,14 @@ public class ControllerGeneral {
     // ScreenGeneral
     @FXML private AnchorPane generalPane;
     @FXML private HBox batteryBox;
-    @FXML private Pane errorPane;
     @FXML private Label maxVLabel, minVLabel, delVLabel, sumVLabel, avgVLabel, maxTLabel, avgTLabel;
     @FXML private Label numFaultLabel, faultLabel;
 
     // ScreenDetail
     @FXML private GridPane cellPane;
+
+    // Shared
+    @FXML private Pane errorPane;
 
     // ScreenProfile
     @FXML private GridPane profilePane;
@@ -79,18 +85,12 @@ public class ControllerGeneral {
     private int numCell;
     private Hashtable<String, String> characteristics;
     private double ov, uv, os, us, ot, dv;
-    private SerialPort USB;
 
-    public void startThread(Controller controller) {
-        USB = controller.getUSB();
-        DataReader reader = new DataReader(this, USB);
+    private boolean run = false;
+    private Date startChart;
 
-        // Start thread to read data
-        Thread thread = new Thread(reader);
-        controller.setThread(thread);
-
-        thread.start();
-    }
+    private SerialPort port;
+    private ChartController ctrl;
 
     // Note: JavaFX optimization doesn't rerender old properties
     public void initialize() {
@@ -120,7 +120,7 @@ public class ControllerGeneral {
     public void back(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ScreenMain.fxml"));
         stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root, 800, 600);
         stage.setScene(scene);
         stage.show();
     }
@@ -129,7 +129,7 @@ public class ControllerGeneral {
         // Load the manual scene only once and reuse if already loaded
         if (manualScene == null) {
             Parent manual = FXMLLoader.load(getClass().getResource("Manual.fxml"));
-            manualScene = new Scene(manual);
+            manualScene = new Scene(manual, 600, 400);
         }
 
         // Use a single instance of the manual stage if it's already been created
@@ -150,9 +150,9 @@ public class ControllerGeneral {
             node.setVisible(true);
         }
 
-        cellPane.setVisible(false);
-
         errorPane.setVisible(true);
+
+        cellPane.setVisible(false);
 
         profilePane.setVisible(false);
     }
@@ -164,9 +164,9 @@ public class ControllerGeneral {
             node.setVisible(false);  // Hide nodes on ScreenGeneral
         }
 
-        cellPane.setVisible(true);
-
         errorPane.setVisible(true);
+
+        cellPane.setVisible(true);
 
         profilePane.setVisible(false);
     }
@@ -178,14 +178,16 @@ public class ControllerGeneral {
             node.setVisible(false);  // Hide nodes on ScreenGeneral
         }
 
-        cellPane.setVisible(false);
-
         errorPane.setVisible(false);
+
+        cellPane.setVisible(false);
 
         profilePane.setVisible(true);
     }
 
-    public void processData(JSONArray dataArray, String timestamp) {
+    public void processData(JSONArray dataArray, Date now) {
+        String timestamp = getCurrentTimeStamp(now);
+
         numCell = dataArray.length();
         characteristics.put("numCell", String.valueOf(numCell));
 
@@ -218,11 +220,22 @@ public class ControllerGeneral {
             } else {
                 dataScreenProfile(dataArray);
             }
+
+            // Update chart
+            if (run) {
+                ctrl.dataToSeries(maxmin, now);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private static String getCurrentTimeStamp(Date now) {
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String strDate = sdfDate.format(now);
+        return strDate;
+    }
     // Update ScreenGeneral
     private void dataScreenGeneral(JSONArray dataArray, Hashtable<String, Double> maxmin) throws JSONException {
         final double maxV = maxmin.get("maxV");
@@ -264,10 +277,10 @@ public class ControllerGeneral {
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
 
-            int cellNo = i + 1;
+            int cellNo = i;
 
             // Update cell number label
-            Platform.runLater(() -> cellLabels.get(cellNo).setText("Cell " + cellNo));
+            Platform.runLater(() -> cellLabels.get(cellNo).setText("Cell " + (cellNo + 1)));
 
             if (temperature == maxmin.get("maxT")) {
                 state = "hot";
@@ -379,7 +392,6 @@ public class ControllerGeneral {
         return labels;
     }
 
-    // TODO: test
     private void updateCellImage(ImageView node, String state) {
         String url = "images/" + state + ".png";
 
@@ -398,7 +410,7 @@ public class ControllerGeneral {
             labels.get(1).setText(String.format("%.1f", T) + "°C");
 
             // If cell is blue, make labels white
-            if (state == "min") {
+            if (state.equals("min")) {
                 labels.get(0).setTextFill(Color.WHITE);
                 labels.get(1).setTextFill(Color.WHITE);
             } else {
@@ -455,35 +467,34 @@ public class ControllerGeneral {
         });
     }
 
-
     public void popEdit(ActionEvent e) throws IOException {
         Platform.runLater(() -> {
             System.out.println("hi");
-        Button btn = (Button) e.getSource();
-        TextField targetTextField = null;
-        Label sourceLabel = null;
+            Button btn = (Button) e.getSource();
+            TextField targetTextField = null;
+            Label sourceLabel = null;
 
-        switch (btn.getId()) {
-            case "set1":
-                targetTextField = maxVProText;
-                sourceLabel = maxVPro;
-                break;
-            case "set2":
-                targetTextField = minVProText;
-                sourceLabel = minVPro;
-                break;
-            case "set5":
-                targetTextField = difVProText;
-                sourceLabel = difVPro;
-                break;
-            case "set6":
-                targetTextField = maxTProText;
-                sourceLabel = maxTPro;
-                break;
-        }
+            switch (btn.getId()) {
+                case "set1":
+                    targetTextField = maxVProText;
+                    sourceLabel = maxVPro;
+                    break;
+                case "set2":
+                    targetTextField = minVProText;
+                    sourceLabel = minVPro;
+                    break;
+                case "set5":
+                    targetTextField = difVProText;
+                    sourceLabel = difVPro;
+                    break;
+                case "set6":
+                    targetTextField = maxTProText;
+                    sourceLabel = maxTPro;
+                    break;
+            }
 
-        if (targetTextField != null && sourceLabel != null) {
-            updateVisibilityAndFocus(btn, targetTextField, sourceLabel);
+            if (targetTextField != null && sourceLabel != null) {
+                updateVisibilityAndFocus(btn, targetTextField, sourceLabel);
             }
         });
     }
@@ -550,25 +561,26 @@ public class ControllerGeneral {
             errorAlert.showAndWait();
             return; // Exit the method early
         }
-    
+
         // Create a custom ButtonType for "Save"
         ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "", saveButtonType, ButtonType.CANCEL);
         confirmationAlert.setTitle("Confirm Changes");
         confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu thay đổi");
         confirmationAlert.setContentText(getCorrespondingLabel(textField.getId()) + "  " + "\"" + textField.getText() + "\"");
-    
+
         // Show the alert and wait for response
         confirmationAlert.showAndWait().ifPresent(response -> {
             if (response == saveButtonType) {
                 writeBoard(formatAndWriteValue(textField, textField.getText()));
                 updateLabel(textField);
+                save.setVisible(false);
             } else {
-            textField.setVisible(false); // Hide the text field if not saved
-            save.setVisible(false);
-        }
-    });
-}
+                textField.setVisible(false); // Hide the text field if not saved
+                save.setVisible(false);
+            }
+        });
+    }
 
     private void updateLabel(TextField textField) {
         Label targetLabel = null;
@@ -665,16 +677,48 @@ public class ControllerGeneral {
         return output;
     }
 
-    public void writeBoard(String data) {
+    public void setPort(SerialPort port) {
+        this.port = port;
+    }
+
+    private void writeBoard(String data) {
         try {
-            if (USB == null) {
-                System.out.println("No USB found.");
-                return;
-            }else{            
-                byte[] bytes = data.getBytes();
-                USB.writeBytes(bytes, bytes.length);}
+            byte[] bytes = data.getBytes();
+            port.writeBytes(bytes, bytes.length);
+        } catch( NullPointerException e) {
+            System.out.println("No port.");  // debug
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void chart(ActionEvent e) throws IOException {
+        Scene chartScene = null;
+        Stage chartStage = null;
+        ctrl = new ChartController();
+
+        // Load the manual scene only once and reuse if already loaded
+        if (chartScene == null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LineChart.fxml"));
+            loader.setController(ctrl);
+            Parent root = loader.load();
+            chartScene = new Scene(root, 600, 400);
+        }
+
+        // Use a single instance of the manual stage if it's already been created
+        if (chartStage == null) {
+            chartStage = new Stage();
+            chartStage.setTitle("Đồ thị trạng thái pin");
+            chartStage.initOwner(((Node) e.getSource()).getScene().getWindow());
+            chartStage.setScene(chartScene);
+        }
+
+        chartStage.setOnCloseRequest(event -> {
+            run = false;
+        });
+
+        run = true;
+
+        chartStage.show();
     }
 }

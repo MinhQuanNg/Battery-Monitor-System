@@ -9,20 +9,25 @@ public class PortChecker {
         List<SerialPort> filteredPorts = new ArrayList<>();
         for (SerialPort port : allAvailableComPorts) {
             if (!port.getDescriptivePortName().toLowerCase().contains("dial-in")) {
-            filteredPorts.add(port);
+                filteredPorts.add(port);
             }
         }
         return filteredPorts;
     }
 
     public static boolean preparePort(SerialPort port) {
-        if (port.getDescriptivePortName().toLowerCase().contains("bms")) {
+        int baud = 115200;
+
+        if (port == null) {
+            return false;
+        }
+
+        if (port.getDescriptivePortName().toLowerCase().contains("usb")
+        || port.getDescriptivePortName().toLowerCase().contains("bms")) {
             port.openPort();
-            port.setBaudRate(115200); // Set baud rate to 115200
+            port.setBaudRate(baud);
             port.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
-            System.out.println("Opened the serial port: " + port.getDescriptivePortName() + " at 115200 baud.");
-            return true;
-        } else if (port.getDescriptivePortName().toLowerCase().contains("usb")) {
+            System.out.println("Opened the port " + port.getDescriptivePortName() + " at " + baud + " baud.");
             return true;
         } else {
             return false;

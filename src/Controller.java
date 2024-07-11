@@ -21,7 +21,6 @@ public class Controller {
     @FXML private GridPane cellPane;
     @FXML private ComboBox portBox;
     private SerialPort port;
-    private Thread thread;
     private List<SerialPort> availablePorts;
 
     @SuppressWarnings("unchecked")
@@ -48,10 +47,16 @@ public class Controller {
             Parent root = loader.load();
             
             ControllerGeneral ctrlGen = loader.getController();
-            ctrlGen.startThread(this);
+            DataReader reader = new DataReader(ctrlGen, port);
+
+            // Start thread to read data
+            Thread thread = new Thread(reader);
+            thread.start();
+
+            ctrlGen.setPort(port);
 
             stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            scene = new Scene(root, 800, 600);
             stage.setScene(scene);
 
             // Set on close request handler to exit the application
@@ -63,16 +68,9 @@ public class Controller {
 
             stage.setTitle("Hệ thống quản lý pin");
             stage.show();
-            }
-
-            
-        // } else {
-        //     System.out.println("No USB Serial Ports found.");
-        // }
-    }
-
-    public void setThread(Thread thread) {
-        this.thread = thread;
+        } else {
+            System.out.println("No Serial Ports found.");
+        }
     }
 
     public SerialPort getPort() {
