@@ -39,8 +39,8 @@ public class PortChecker {
             return inputStream;
         } catch (SerialPortIOException e) {
             throw new SerialPortIOException("SerialPortIOException handled.");
-        } catch (IOException e) {
-            throw new IOException("IOException handled.");
+        } catch (NullPointerException e) {
+            throw new NullPointerException("NullPointerException handled.");
         }
     }
 }

@@ -40,7 +40,7 @@
                   </ComboBox>
                   <Button accessibleRole="IMAGE_VIEW" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#enter" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: white;" styleClass="round" text="Quan sát dữ liệu thời gian thực" textAlignment="CENTER">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font size="16.0" />
                      </font></Button>
                </children>
             </VBox>

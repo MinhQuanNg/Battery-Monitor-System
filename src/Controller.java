@@ -23,9 +23,13 @@ import com.fazecast.jSerialComm.SerialPort;
 public class Controller {
     private Stage stage;
     private Scene scene;
-    @FXML private GridPane cellPane;
-    @FXML private ComboBox portBox;
-    @FXML private Label stat;
+    @FXML
+    private GridPane cellPane;
+    @SuppressWarnings("rawtypes")
+    @FXML
+    private ComboBox portBox;
+    @FXML
+    private Label stat;
     private SerialPort port;
     private List<SerialPort> availablePorts;
 
@@ -33,45 +37,42 @@ public class Controller {
     public void initialize() {
         availablePorts = PortChecker.getPorts();
         portBox.setItems(FXCollections.observableArrayList(availablePorts.stream()
-            .map(SerialPort::getDescriptivePortName)
-            .toArray()));
-            portBox.getStyleClass().add("combo-box");
-            if (!availablePorts.isEmpty()) {
-                portBox.setPromptText("Chọn cổng kết nối");
-                portBox.getSelectionModel().select(0); // Select the first port by default
-                stat.setText("ĐANG KẾT NỐI " + portBox.getSelectionModel().getSelectedItem().toString());
-                port = availablePorts.get(0); // Set the default port
-            } else {
-                portBox.setPromptText("Không có cổng kết nối");
-            }
+                .map(SerialPort::getDescriptivePortName)
+                .toArray()));
+        portBox.getStyleClass().add("combo-box");
+        if (!availablePorts.isEmpty()) {
+            portBox.setPromptText("Chọn cổng kết nối");
+            portBox.getSelectionModel().select(0); // Select the first port by default
+            stat.setText("ĐANG KẾT NỐI " + portBox.getSelectionModel().getSelectedItem().toString());
+            port = availablePorts.get(0); // Set the default port
+        } else {
+            portBox.setPromptText("Không có cổng kết nối");
+        }
     }
 
     public void selectPort(ActionEvent e) {
         int i = portBox.getSelectionModel().getSelectedIndex();
+        if (i >= 0 && i < availablePorts.size()) { // Ensure the index is valid
             port = availablePorts.get(i);
-            stat.setText("ĐANG KẾT NỐI " + port.getDescriptivePortName());
+            if (port != null) { // Check if port is not null
+                stat.setText("ĐANG KẾT NỐI " + port.getDescriptivePortName());
+            } else {
+                // Handle the case where port is null, e.g., show an error message
+                stat.setText("Port is not available.");
+            }
+        } else {
+            // Handle the case where the selected index is invalid
+            stat.setText("No port selected.");
+        }
     }
 
     public void enter(ActionEvent e) throws IOException {
-        try {
-            System.out.println(port.getDescriptivePortName());
-        } catch (NullPointerException e1) {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Cảnh báo");
-                alert.setHeaderText("Không tìm thấy cổng");
-                alert.setContentText("Vui lòng chọn cổng và thử lại.");
-                alert.getButtonTypes().setAll(new ButtonType("Thử Lại", ButtonData.CANCEL_CLOSE));
-                alert.showAndWait();
-            });
-        }
         // Run if port available
-        // debug
         try (InputStream inputStream = PortChecker.preparePort(port)) {
             System.out.println("Port is ready.");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ScreenGeneral.fxml"));
             Parent root = loader.load();
-            
+
             ControllerGeneral ctrlGen = loader.getController();
             DataReader reader = new DataReader(ctrlGen, inputStream);
 
@@ -81,7 +82,7 @@ public class Controller {
 
             ctrlGen.setPort(port);
 
-            stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             scene = new Scene(root, 800, 600);
             stage.setScene(scene);
 
@@ -97,20 +98,26 @@ public class Controller {
             stage.show();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-<<<<<<< HEAD
-            Platform.runLater(() -> {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Lỗi kết nối");
-                alert.setHeaderText("Vui lòng kiểm tra kết nối và thử lại.");
-                alert.setContentText("Không thể kết nối với " + port.getDescriptivePortName());
-                alert.getButtonTypes().setAll(new ButtonType("Thử Lại", ButtonData.CANCEL_CLOSE));
-                alert.showAndWait();
-            });
-        } 
-=======
-            // TODO: modal error message
+            if (ex.getMessage().contains("Port is null")) {
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.setTitle("Cảnh báo");
+                    alert.setHeaderText("Không tìm thấy cổng");
+                    alert.setContentText("Vui lòng chọn cổng và thử lại.");
+                    alert.getButtonTypes().setAll(new ButtonType("Thử Lại", ButtonData.CANCEL_CLOSE));
+                    alert.showAndWait();
+                });
+            } else {
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Lỗi kết nối");
+                    alert.setHeaderText("Vui lòng kiểm tra kết nối và thử lại.");
+                    alert.setContentText("Không thể kết nối ");
+                    alert.getButtonTypes().setAll(new ButtonType("Thử Lại", ButtonData.CANCEL_CLOSE));
+                    alert.showAndWait();
+                });
+            }
         }
->>>>>>> c3f20a7 (add eng support)
     }
 
     public SerialPort getPort() {
