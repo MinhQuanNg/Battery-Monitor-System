@@ -1,3 +1,6 @@
+package controllers;
+import constants.Style;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -12,6 +15,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import utilities.DataReader;
+import utilities.PortChecker;
 import javafx.scene.Node;
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,13 +73,14 @@ public class Controller {
 
     public void enter(ActionEvent e) throws IOException {
         // Run if port available
-        try (InputStream inputStream = PortChecker.preparePort(port)) {
+        // try (InputStream inputStream = PortChecker.preparePort(port)) {
             System.out.println("Port is ready.");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ScreenGeneral.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/ScreenGeneral.fxml"));
             Parent root = loader.load();
 
             ControllerGeneral ctrlGen = loader.getController();
-            DataReader reader = new DataReader(ctrlGen, inputStream);
+            // DataReader reader = new DataReader(ctrlGen, port.getInputStream());
+            DataReader reader = new DataReader(ctrlGen, null);
 
             // Start thread to read data
             Thread thread = new Thread(reader);
@@ -83,7 +89,7 @@ public class Controller {
             ctrlGen.setPort(port);
 
             stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            scene = new Scene(root, 800, 600);
+            scene = new Scene(root, Style.WIDTH, Style.HEIGHT);
             stage.setScene(scene);
 
             // Set on close request handler to exit the application
@@ -96,28 +102,28 @@ public class Controller {
 
             stage.setTitle("Hệ thống quản lý pin");
             stage.show();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            if (ex.getMessage().contains("Port is null")) {
-                Platform.runLater(() -> {
-                    Alert alert = new Alert(AlertType.WARNING);
-                    alert.setTitle("Cảnh báo");
-                    alert.setHeaderText("Không tìm thấy cổng");
-                    alert.setContentText("Vui lòng chọn cổng và thử lại.");
-                    alert.getButtonTypes().setAll(new ButtonType("Thử Lại", ButtonData.CANCEL_CLOSE));
-                    alert.showAndWait();
-                });
-            } else {
-                Platform.runLater(() -> {
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Lỗi kết nối");
-                    alert.setHeaderText("Vui lòng kiểm tra kết nối và thử lại.");
-                    alert.setContentText("Không thể kết nối ");
-                    alert.getButtonTypes().setAll(new ButtonType("Thử Lại", ButtonData.CANCEL_CLOSE));
-                    alert.showAndWait();
-                });
-            }
-        }
+    //     } catch (Exception ex) {
+    //         System.out.println(ex.getMessage());
+    //         Platform.runLater(() -> {
+    //             Alert alert;
+
+    //             if (ex.getMessage().contains("Port is null")) {
+    //                     alert = new Alert(AlertType.WARNING);
+    //                     alert.setTitle("Cảnh báo");
+    //                     alert.setHeaderText("Không tìm thấy cổng");
+    //                     alert.setContentText("Vui lòng chọn cổng và thử lại.");
+
+    //             } else {
+    //                     alert = new Alert(AlertType.ERROR);
+    //                     alert.setTitle("Lỗi kết nối");
+    //                     alert.setHeaderText("Vui lòng kiểm tra kết nối và thử lại.");
+    //                     alert.setContentText("Không thể kết nối ");
+    //             }
+                
+    //             alert.getButtonTypes().setAll(new ButtonType("OK", ButtonData.CANCEL_CLOSE));
+    //             alert.showAndWait();
+    //         });
+    //     }
     }
 
     public SerialPort getPort() {

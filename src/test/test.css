@@ -1,0 +1,17 @@
+.chart-line-symbol.series1 { 
+    -fx-background-color: blue;
+}
+
+.series1.chart-series-line {
+    -fx-stroke: rgb(56, 242, 47);
+    -fx-stroke-width: 2px;
+}
+
+.default-color0.chart-line-symbol{ 
+    -fx-background-color: rgb(255, 39, 168);
+}
+
+.default-color0.chart-series-line {
+    -fx-stroke: rgb(252, 255, 48);
+    -fx-stroke-width: 2px;
+}

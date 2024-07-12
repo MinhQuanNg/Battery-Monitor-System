@@ -1,4 +1,4 @@
 # Vscode
 .vscode/*
 
-# DS.store
+.DS_Store

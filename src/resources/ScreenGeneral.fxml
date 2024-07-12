@@ -1,0 +1,1981 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="generalPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerGeneral">
+   <children>
+   <AnchorPane layoutX="52.0" layoutY="398.0" prefHeight="1.0" prefWidth="797.0" style="-fx-background-color: black;" styleClass="general" AnchorPane.bottomAnchor="201.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="51.0" />
+   <GridPane fx:id="cellPane" layoutX="26.0" layoutY="77.0" prefHeight="215.0" prefWidth="549.0" visible="false" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="77.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="cell1Label" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell2Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell3Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell4Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell5Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell6Label" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell7Label" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell8Label" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell9Label" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell10Label" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell11Label" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell12Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell13Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell14Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell15Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell16Label" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell17Label" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell18Label" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell19Label" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell20Label" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell21Label" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell22Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell23Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell24Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell25Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell26Label" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell27Label" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell28Label" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell29Label" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell30Label" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell31Label" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell32Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell33Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell34Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell35Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell36Label" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell37Label" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell38Label" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell39Label" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="cell40Label" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+            </Label>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin></ImageView>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="94.0" prefWidth="77.0" styleClass="detailDataBox" GridPane.columnIndex="1">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="2">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="3">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="4">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="5">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="6">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="7">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="8">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="9">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.rowIndex="1">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="6" GridPane.rowIndex="1">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="7" GridPane.rowIndex="1">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="8" GridPane.rowIndex="1">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="9" GridPane.rowIndex="1">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.rowIndex="2">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="4" GridPane.rowIndex="2">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="5" GridPane.rowIndex="2">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="6" GridPane.rowIndex="2">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="7" GridPane.rowIndex="2">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="8" GridPane.rowIndex="2">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="9" GridPane.rowIndex="2">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.rowIndex="3">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="5" GridPane.rowIndex="3">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="6" GridPane.rowIndex="3">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="7" GridPane.rowIndex="3">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="8" GridPane.rowIndex="3">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="56.0" styleClass="detailDataBox" GridPane.columnIndex="9" GridPane.rowIndex="3">
+               <children>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="7.0" right="3.0" />
+               </padding>
+            </VBox>
+         </children>
+      </GridPane>
+      <GridPane prefHeight="67.0" prefWidth="900.0" style="-fx-background-color: #FEBB58;" styleClass="nav" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="59.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="465.5" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="37.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.0" minWidth="10.0" prefWidth="50.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" onAction="#back" style="-fx-background-color: transparent; -fx-cursor: hand;" GridPane.halignment="RIGHT">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#back" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/arrow.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#save" style="-fx-background-color: transparent; -fx-cursor: hand;" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+               <graphic>
+                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" preserveRatio="true" style="-fx-opacity: 0.8; -fx-scale-x: 1.2; -fx-scale-y: 1.2;">
+                     <image>
+                        <Image url="@../images/downloads.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#manual" style="-fx-background-color: transparent; -fx-cursor: hand;" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+               <graphic>
+                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" preserveRatio="true" style="-fx-scale-x: 1.2; -fx-scale-y: 1.2;">
+                     <image>
+                        <Image url="@../images/question.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label text="HỆ THỐNG QUẢN LÝ PIN" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="80.0" />
+               </GridPane.margin>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <opaqueInsets>
+            <Insets right="10.0" />
+         </opaqueInsets>
+      </GridPane>
+      <GridPane layoutY="356.0" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #FEBB58;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ToggleButton fx:id="nav1" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#general" prefHeight="156.0" prefWidth="600.0" text="Thông tin chung" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <toggleGroup>
+                  <ToggleGroup fx:id="nav" />
+               </toggleGroup>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="nav2" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#detail" prefHeight="340.0" prefWidth="600.0" text="Thông tin chi tiết" textAlignment="CENTER" toggleGroup="$nav" GridPane.columnIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font></ToggleButton>
+            <ToggleButton fx:id="nav3" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#profile" prefHeight="223.0" prefWidth="600.0" text="Hồ sơ thiết lập" textAlignment="CENTER" toggleGroup="$nav" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font></ToggleButton>
+            <ImageView fitHeight="18.0" fitWidth="20.0" nodeOrientation="INHERIT" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../images/battery.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets top="4.0" />
+               </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="29.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../images/ellipsis.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="19.0" fitWidth="19.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../images/info.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets top="3.0" />
+               </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </GridPane>
+      <GridPane alignment="CENTER" layoutX="50.0" layoutY="325.0" prefHeight="71.0" prefWidth="800.0" styleClass="general" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER" text="Điện áp tối đa" textAlignment="CENTER" GridPane.halignment="CENTER">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Điện áp tối thiểu" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Delta V" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Tổng áp" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Trung bình" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="maxVLabel" text="-" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="minVLabel" text="-" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="delVLabel" text="-" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="sumVLabel" text="-" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="avgVLabel" text="-" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="27.0" fitWidth="30.0" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../images/batterymin.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="30.0" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../images/battery.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="30.0" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../images/tamgiac.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="30.0" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../images/average.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="30.0" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../images/letter-v.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </ImageView>
+         </children>
+      </GridPane>
+      <Pane layoutX="50.0" layoutY="407.0" prefHeight="56.0" prefWidth="800.0" style="-fx-background-color: #FEBB58;" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+         <children>
+            <GridPane alignment="CENTER" layoutX="103.0" layoutY="1.0" prefHeight="56.0" prefWidth="208.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="22.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="21.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="136.0" text="Nhiệt độ trung bình:" textAlignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="105.0" text="Nhiệt độ tối đa:" textAlignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="maxTLabel" text="-" GridPane.halignment="RIGHT">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="avgTLabel" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="5.0" />
+               </padding>
+            </GridPane>
+            <ImageView fitHeight="45.0" fitWidth="35.0" layoutX="51.0" layoutY="5.0" preserveRatio="true">
+               <image>
+                  <Image url="@../images/temper.png" />
+               </image>
+            </ImageView>
+         </children>
+         <styleClass>
+            <String fx:value="round" />
+            <String fx:value="general" />
+         </styleClass>
+      </Pane>
+      <Pane fx:id="errorPane" layoutX="50.0" layoutY="473.0" prefHeight="56.0" prefWidth="800.0" style="-fx-background-color: #FEBB58;" styleClass="round" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+         <children>
+            <GridPane layoutX="103.0" layoutY="11.0" prefHeight="15.0" prefWidth="147.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Label layoutX="110.0" layoutY="3.0" prefHeight="17.0" prefWidth="113.0" text="Cảnh báo lỗi:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="numFaultLabel" layoutX="305.0" layoutY="3.0" text="-">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+            <ImageView fitHeight="45.0" fitWidth="35.0" layoutX="46.0" layoutY="10.0" preserveRatio="true">
+               <image>
+                  <Image url="@../images/danger.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="faultLabel" alignment="TOP_LEFT" layoutX="103.0" layoutY="18.0" prefHeight="36.0" prefWidth="262.0">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <VBox alignment="CENTER" layoutX="199.0" layoutY="50.0" prefHeight="120.0" prefWidth="200.0" styleClass="general" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <HBox fx:id="batteryBox" alignment="CENTER" prefHeight="131.0" prefWidth="205.0" />
+         </children>
+      </VBox>
+      <GridPane fx:id="profilePane" alignment="CENTER" layoutX="41.0" layoutY="80.0" prefHeight="450.0" prefWidth="518.0" visible="false" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="80.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="225.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="61.0" minWidth="10.0" prefWidth="58.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="225.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <AnchorPane prefHeight="254.0" prefWidth="238.0" style="-fx-background-color: #FEBB58;" styleClass="round">
+               <children>
+                  <GridPane fx:id="baove" layoutX="12.0" layoutY="32.0" prefHeight="222.0" prefWidth="210.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="32.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="1.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="1.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="1.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="1.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="1.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label id="MaxVPro" fx:id="maxVPro" styleClass="thongsobaove" text="-" GridPane.halignment="RIGHT">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label id="MinVPro" fx:id="minVPro" styleClass="thongsobaove" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label id="TotalMaxVPro" fx:id="sumMaxVPro" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="thongsobaove" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label id="TotalMinVPro" fx:id="sumMinVPro" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="thongsobaove" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label id="DifVPro" fx:id="difVPro" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="thongsobaove" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label id="MaxTemPro" fx:id="maxTPro" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="thongsobaove" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="set1" mnemonicParsing="false" onAction="#popEdit" prefWidth="20.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="set2" mnemonicParsing="false" onAction="#popEdit" prefWidth="20.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="set5" mnemonicParsing="false" onAction="#popEdit" prefWidth="20.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="set6" mnemonicParsing="false" onAction="#popEdit" prefWidth="20.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Label fx:id="setting1" prefHeight="23.0" prefWidth="213.0" text="Bảo vệ điện áp cao cell pin">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="setting2" prefHeight="23.0" prefWidth="205.0" text="Bảo vệ điện áp thấp cell pin" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="setting3" prefHeight="23.0" prefWidth="194.0" text="Bảo vệ tổng điện áp cao" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="setting4" prefHeight="23.0" prefWidth="191.0" text="Bảo vệ tổng điện áp thấp" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="setting5" prefHeight="23.0" prefWidth="183.0" text="Bảo vệ chênh lệch áp" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="setting6" prefHeight="23.0" prefWidth="169.0" text="Bảo vệ nhiệt độ cao" GridPane.rowIndex="10">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <VBox prefHeight="2.0" prefWidth="201.0" style="-fx-background-color: #000000;" GridPane.rowIndex="1" />
+                        <VBox prefHeight="19.0" prefWidth="201.0" style="-fx-background-color: #000000;" GridPane.rowIndex="3" />
+                        <VBox prefHeight="2.0" prefWidth="201.0" style="-fx-background-color: #000000;" GridPane.rowIndex="5" />
+                        <VBox prefHeight="2.0" prefWidth="201.0" style="-fx-background-color: #000000;" GridPane.rowIndex="7" />
+                        <VBox prefHeight="2.0" prefWidth="201.0" style="-fx-background-color: #000000;" GridPane.rowIndex="9" />
+                        <TextField fx:id="minVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="42.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="169.0" />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <TextField fx:id="difVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10000.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.rowIndex="8">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="169.0" />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <TextField fx:id="maxTProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10000.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.rowIndex="10">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="169.0" />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <TextField fx:id="maxVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10000.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.halignment="RIGHT">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                           <GridPane.margin>
+                              <Insets left="169.0" />
+                           </GridPane.margin>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="5.0" />
+                     </padding>
+                  </GridPane>
+                  <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="29.0" layoutY="6.0" prefHeight="27.0" prefWidth="169.0" text="THÔNG SỐ BẢO VỆ" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="6.0">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="save" layoutX="195.0" layoutY="20.0" mnemonicParsing="false" onAction="#onSaveAllChangesAction" style="-fx-background-color: transparent;" visible="false" AnchorPane.rightAnchor="6.0">
+                     <graphic>
+                        <ImageView fitHeight="11.0" fitWidth="19.0" preserveRatio="true" scaleX="1.5" scaleY="1.5" scaleZ="1.5">
+                           <image>
+                              <Image url="@../images/save.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="261.0" prefWidth="225.0" style="-fx-background-color: #FEBB58;" styleClass="round" GridPane.columnIndex="2">
+               <children>
+                  <GridPane layoutX="12.0" layoutY="33.0" prefHeight="222.0" prefWidth="200.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="33.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="1.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="1.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="1.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="1.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="1.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label id="maxTempLabel" fx:id="typeLabel" text="-" GridPane.halignment="RIGHT">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label id="avgTempLabel" fx:id="numCellLabel" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label id="avgTempLabel" fx:id="ratioLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label id="avgTempLabel" fx:id="chargeLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label id="avgTempLabel" fx:id="capacityLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label id="avgTempLabel" fx:id="drainLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label prefHeight="18.0" prefWidth="73.0" text="Loại Pin">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="23.0" prefWidth="98.0" text="Tổng số cell" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="15.0" prefWidth="127.0" text="Tỷ số C xả tối đa" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="15.0" prefWidth="127.0" text="Dòng sạc tối đa" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="15.0" prefWidth="127.0" text="Dòng xả tối đa" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="15.0" prefWidth="127.0" text="Dung lượng" GridPane.rowIndex="10">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <VBox prefHeight="24.0" prefWidth="200.0" style="-fx-background-color: #000000;" GridPane.rowIndex="1" />
+                        <VBox prefHeight="24.0" prefWidth="200.0" style="-fx-background-color: #000000;" GridPane.rowIndex="3" />
+                        <VBox prefHeight="24.0" prefWidth="200.0" style="-fx-background-color: #000000;" GridPane.rowIndex="5" />
+                        <VBox prefHeight="24.0" prefWidth="200.0" style="-fx-background-color: #000000;" GridPane.rowIndex="7" />
+                        <VBox prefHeight="24.0" prefWidth="200.0" style="-fx-background-color: #000000;" GridPane.rowIndex="9" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="5.0" />
+                     </padding>
+                  </GridPane>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="6.0" prefHeight="24.0" prefWidth="156.0" text="ĐẶC TÍNH PIN" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="6.0">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+      <Button id="chartButton" disable="true" layoutX="91.0" layoutY="138.0" mnemonicParsing="false" onAction="#chart" text="Button" />
+   </children>
+</AnchorPane>

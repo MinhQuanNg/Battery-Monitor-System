@@ -1,3 +1,5 @@
+package constants;
+
 public class LabelConstants {
     // VNM ScreenMain labels
     public static final String VNM_LOOKING_FOR_DEVICES = "ĐANG TÌM THIẾT BỊ….";

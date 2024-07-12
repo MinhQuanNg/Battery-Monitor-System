@@ -1,7 +1,9 @@
-import com.fazecast.jSerialComm.SerialPort;
+package utilities;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import controllers.ControllerGeneral;
 
 import java.io.InputStream;
 import java.util.Date;
@@ -20,7 +22,8 @@ public class DataReader implements Runnable {
     @Override
     public void run() {
         try (Scanner scanner = new Scanner(input)) {
-            scanner.nextLine(); // Skip first line
+            // Skip first line of potentially incomplete data
+            scanner.nextLine();
 
             // Infinite loop to continuously read data from port
             while (true) {
@@ -31,7 +34,7 @@ public class DataReader implements Runnable {
 
                     controller.processData(dataArray, new Date());
                 } catch (JSONException e) {
-                    e.printStackTrace(); // TODO: modal data not formatted as JSON
+                    System.out.println("Data not formatted as JSON");
                 } 
             }
         } catch (NoSuchElementException e) {

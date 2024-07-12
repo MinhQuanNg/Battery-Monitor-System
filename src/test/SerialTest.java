@@ -1,3 +1,4 @@
+package test;
 import com.fazecast.jSerialComm.SerialPort;
 import java.util.Scanner;
 import java.util.concurrent.Executors;

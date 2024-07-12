@@ -1,3 +1,7 @@
+package controllers;
+import constants.*;
+import utilities.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,6 +31,8 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -53,7 +59,7 @@ public class ControllerGeneral {
     private Scene scene;
     private Gauge gauge;
     private Scene manualScene = null;
-    private Stage manualStage = null;
+    private Stage manualStage = null, chartStage = null;
 
     // ScreenGeneral
     @FXML private AnchorPane generalPane;
@@ -79,15 +85,15 @@ public class ControllerGeneral {
     private String currentScreen;
 
     private Excel excel;
-    List<TextField> textFields = Arrays.asList(minVProText, difVProText, maxTProText);
-    private int numCell;
+    private int numCell = 0;
     private Hashtable<String, String> characteristics;
     private double ov, uv, os, us, ot, dv;
 
-    private boolean run = false;
+    private boolean runCharts = false;
     private SerialPort port;
-    private ChartController ctrl;
-    private boolean first;
+    private Charts ctrlCharts;
+    private boolean first = true;
+    private List<Boolean> runCellChart = new ArrayList<>();
 
     // Note: JavaFX optimization doesn't rerender old properties
     public void initialize() {
@@ -112,12 +118,34 @@ public class ControllerGeneral {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        for (int rowIndex = 0; rowIndex < cellPane.getRowCount(); rowIndex++) {
+            for (int columnIndex = 0; columnIndex < cellPane.getColumnCount(); columnIndex++) {
+                Button button = new Button();
+                GridPane.setHalignment(button, HPos.CENTER);
+                GridPane.setValignment(button, VPos.BOTTOM);
+                button.getStyleClass().add("cell-chart-button");
+                final int cell = rowIndex * cellPane.getColumnCount() + columnIndex;
+                button.onActionProperty().set(e -> {
+                    try {
+                        Stage stage = initCellChart(cell + 1, getCurrentTimeStamp(new Date()));
+                        stage.show();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    runCellChart.set(cell, true);
+                });
+                button.setDisable(true);
+                cellPane.add(button, columnIndex, rowIndex);
+            }
+        }
     }
 
+    // TODO: reuse?
     public void back(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ScreenMain.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../resources/ScreenMain.fxml"));
         stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root, 800, 600);
+        scene = new Scene(root, Style.WIDTH, Style.HEIGHT);
         stage.setScene(scene);
         stage.show();
         port.closePort();
@@ -126,7 +154,7 @@ public class ControllerGeneral {
     public void manual(ActionEvent e) throws IOException {
         // Load the manual scene only once and reuse if already loaded
         if (manualScene == null) {
-            Parent manual = FXMLLoader.load(getClass().getResource("Manual.fxml"));
+            Parent manual = FXMLLoader.load(getClass().getResource("../resources/Manual.fxml"));
             manualScene = new Scene(manual, 600, 400);
         }
 
@@ -219,15 +247,44 @@ public class ControllerGeneral {
                 dataScreenProfile(dataArray);
             }
 
-            // Update chart
-            if (run) {
-                if (first) {
-                    first = false;
-                    ctrl.initSeries(maxmin);
-                    ctrl.setNumCell(numCell);
+            // Init chart
+            if (first) {
+                first = false;
+                for (int cell = 0; cell < numCell; cell++) {
+                    runCellChart.add(false);
+                    int row = cell / cellPane.getColumnCount();
+                    int column = cell % cellPane.getColumnCount();
+                    Button button = (Button) cellPane.getChildren().stream()
+                        .filter(node -> {
+                            Integer rowIdx = GridPane.getRowIndex(node);
+                            Integer colIdx = GridPane.getColumnIndex(node);
+                            return (node instanceof Button) && 
+                                rowIdx != null && rowIdx == row && 
+                                colIdx != null && colIdx == column;
+                        })
+                        .findFirst()
+                        .orElse(null);
+                    if (button != null) {
+                        button.setDisable(false);
+                    } else {
+                        System.out.println("Button not found.");
+                    }
                 }
 
-                ctrl.updateSeries(maxmin, now);
+                Platform.runLater(() -> {
+                    try {
+                        initCharts(numCell, timestamp);
+                        ctrlCharts.initSeries(maxmin);
+                        generalPane.lookup("#chartButton").setDisable(false);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+
+            // Update chart
+            if (runCharts) {
+                ctrlCharts.updateSeries(maxmin, now);
             }
 
         } catch (Exception e) {
@@ -236,7 +293,7 @@ public class ControllerGeneral {
     }
 
     private static String getCurrentTimeStamp(Date now) {
-        SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
         String strDate = sdfDate.format(now);
         return strDate;
     }
@@ -397,7 +454,7 @@ public class ControllerGeneral {
     }
 
     private void updateCellImage(ImageView node, String state) {
-        String url = "images/" + state + ".png";
+        String url = "../images/" + state + ".png";
 
         Image image = new Image(getClass().getResourceAsStream(url));
         Platform.runLater(() -> node.setImage(image));
@@ -426,6 +483,8 @@ public class ControllerGeneral {
 
     public void save(ActionEvent e) throws FileNotFoundException, IOException {
         FileChooser fileChooser = new FileChooser();
+        // Set the initial filename (optional)
+        fileChooser.setInitialFileName("BMS Data " + getCurrentTimeStamp(new Date()) + ".xlsx");
         File selectedFile = fileChooser.showSaveDialog(null);
 
         if (selectedFile != null) {
@@ -697,32 +756,42 @@ public class ControllerGeneral {
     }
 
     public void chart(ActionEvent e) throws IOException {
-        Scene chartScene = null;
-        Stage chartStage = null;
-        ctrl = new ChartController();
+        chartStage.show();
+        runCharts = true;
+    }
 
-        // Load the manual scene only once and reuse if already loaded
-        if (chartScene == null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Charts.fxml"));
-            loader.setController(ctrl);
-            Parent root = loader.load();
-            chartScene = new Scene(root, 600, 400);
-        }
+    private void initCharts(int numCell, String timestamp) throws IOException {
+        chartStage = null;
+        ctrlCharts = new Charts(numCell);
 
-        // Use a single instance of the manual stage if it's already been created
-        if (chartStage == null) {
-            chartStage = new Stage();
-            chartStage.setTitle("Đồ thị trạng thái pin");
-            chartStage.initOwner(((Node) e.getSource()).getScene().getWindow());
-            chartStage.setScene(chartScene);
-        }
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/Charts.fxml"));
+        loader.setController(ctrlCharts);
+        Parent root = loader.load();
+        Scene chartScene = new Scene(root, Style.CHART_WIDTH, Style.CHART_HEIGHT);
+        
+        chartStage = new Stage();
+        chartStage.setTitle("Đồ thị trạng thái pin " + timestamp);
+        chartStage.setScene(chartScene);
         chartStage.setOnCloseRequest(event -> {
-            run = false;
+            runCharts = false;
+        });
+    }
+
+    private Stage initCellChart(int cell, String timestamp) throws IOException {
+        CellChart ctrlCellChart = new CellChart(cell);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/CellChart.fxml"));
+        loader.setController(ctrlCellChart);
+        Parent root = loader.load();
+        Scene chartScene = new Scene(root, Style.CHART_WIDTH, Style.CHART_HEIGHT);
+
+        Stage chartStage = new Stage();
+        chartStage.setTitle("Đồ thị trạng thái pin " + timestamp);
+        chartStage.setScene(chartScene);
+        chartStage.setOnCloseRequest(event -> {
+            runCellChart.set(cell, false);
         });
 
-        run = true;
-
-        chartStage.show();
+        return chartStage;
     }
 }

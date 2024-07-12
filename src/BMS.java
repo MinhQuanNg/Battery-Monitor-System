@@ -1,3 +1,5 @@
+import constants.Style;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -8,8 +10,8 @@ public class BMS extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("ScreenMain.fxml"));            
-            Scene scene = new Scene(root, 800, 600);
+            Parent root = FXMLLoader.load(getClass().getResource("./resources/ScreenMain.fxml"));            
+            Scene scene = new Scene(root, Style.WIDTH, Style.HEIGHT);
             stage.setScene(scene);
             stage.setTitle("Quản lý hệ thống pin");
             stage.show();

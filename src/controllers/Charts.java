@@ -1,3 +1,5 @@
+package controllers;
+
 import java.util.Date;
 import java.util.Hashtable;
 import javafx.application.Platform;
@@ -6,17 +8,21 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.layout.GridPane;
 
-public class ChartController {
+public class Charts {
     @FXML private GridPane grid;
     String[] chartIds = {"maxVChart", "maxTChart", "sumVChart", "delVChart"};
     private Date startTime;
     Hashtable<String, LineChart.Series<Number, Number>> seriesList;
     private int numCell;
 
+    public Charts(int numCell) {
+        this.numCell = numCell;
+    }
+
     public void initialize() {
         int lowerV = 2;
         int upperV = 4;
-        double tickUnit = (upperV - lowerV) / 20;
+        double tickUnit = (double) (upperV - lowerV) / 20;
 
         for (String chartId : chartIds) {
             @SuppressWarnings("unchecked")
@@ -79,42 +85,57 @@ public class ChartController {
 
     public void initSeries(Hashtable<String, Double> maxmin) {
         for (String key : maxmin.keySet()) {
-            seriesList.put(key, new LineChart.Series<Number, Number>());
-        }
-
-        for (String chartId : chartIds) {
-            @SuppressWarnings("unchecked")
-            LineChart<Number, Number> chart = (LineChart<Number, Number>) grid.lookup("#" + chartId);
-            switch (chartId) {
-                case "maxVChart":
-                    chart.getData().add(seriesList.get("maxV"));
-                    chart.getData().add(seriesList.get("minV"));
-                    break;
-                case "maxTChart":
-                    chart.getData().add(seriesList.get("maxT"));
-                    break;
-                case "sumVChart":
-                    chart.getData().add(seriesList.get("sumV"));
-
-                    break;
-                case "delVChart":
-                    chart.getData().add(seriesList.get("delV"));
-                    break;
-                default:
-                    break;
+            if (!key.equals("sumT")) {
+                seriesList.put(key, new LineChart.Series<Number, Number>());
             }
         }
+
+        Platform.runLater(() -> {
+            for (String chartId : chartIds) {
+                @SuppressWarnings("unchecked")
+                LineChart<Number, Number> chart = (LineChart<Number, Number>) grid.lookup("#" + chartId);
+                switch (chartId) {
+                    case "maxVChart":
+                        seriesList.get("maxV").setName("Max V");
+                        chart.getData().add(seriesList.get("maxV"));
+
+                        seriesList.get("minV").setName("Min V");
+                        chart.getData().add(seriesList.get("minV"));
+
+                        chart.getStyleClass().add("maxV-chart");
+                        break;
+                    case "maxTChart":
+                        seriesList.get("maxT").setName("Max T");
+                        chart.getData().add(seriesList.get("maxT"));
+
+                        chart.getStyleClass().add("maxT-chart");
+                        break;
+                    case "sumVChart":
+                        seriesList.get("sumV").setName("Sum V");
+                        chart.getData().add(seriesList.get("sumV"));
+
+                        chart.getStyleClass().add("sumV-chart");
+                        break;
+                    case "delVChart":
+                        seriesList.get("delV").setName("Delta V");
+                        chart.getData().add(seriesList.get("delV"));
+
+                        chart.getStyleClass().add("delV-chart");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
     public void updateSeries(Hashtable<String, Double> maxmin, Date timestamp) {
         int secondsElapsed = (int) ((timestamp.getTime() - startTime.getTime()) / 1000);
         // System.out.println(secondsElapsed);
         for (String key : maxmin.keySet()) {
-            Platform.runLater(() -> seriesList.get(key).getData().add(new LineChart.Data<Number, Number>(secondsElapsed, maxmin.get(key))));
+            if (!key.equals("sumT")) {
+                Platform.runLater(() -> seriesList.get(key).getData().add(new LineChart.Data<Number, Number>(secondsElapsed, maxmin.get(key))));
+            }
         }
-    }
-
-    public void setNumCell(int numCell) {
-        this.numCell = numCell;
     }
 }
