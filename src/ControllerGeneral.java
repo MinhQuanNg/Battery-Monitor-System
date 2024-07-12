@@ -120,6 +120,7 @@ public class ControllerGeneral {
         scene = new Scene(root, 800, 600);
         stage.setScene(scene);
         stage.show();
+        port.closePort();
     }
 
     public void manual(ActionEvent e) throws IOException {

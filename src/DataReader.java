@@ -36,7 +36,6 @@ public class DataReader implements Runnable {
             }
         } catch (NoSuchElementException e) {
             System.out.println("No more data.");
-            System.exit(0);
         }
     }
 

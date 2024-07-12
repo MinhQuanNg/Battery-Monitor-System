@@ -97,6 +97,7 @@ public class Controller {
             stage.show();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+<<<<<<< HEAD
             Platform.runLater(() -> {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Lỗi kết nối");
@@ -106,6 +107,10 @@ public class Controller {
                 alert.showAndWait();
             });
         } 
+=======
+            // TODO: modal error message
+        }
+>>>>>>> c3f20a7 (add eng support)
     }
 
     public SerialPort getPort() {
