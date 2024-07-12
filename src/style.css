@@ -32,4 +32,12 @@
 .chart-line-symbol {
     -fx-background-radius: 0px;
     -fx-padding: 2px;
-  }
+}
+
+.toggle-button {
+    -fx-background-color: transparent; /* Default background color */
+}
+
+.toggle-button:selected {
+    -fx-background-color: rgba(159, 159, 159, 0.635); /* Background color when selected */
+}
