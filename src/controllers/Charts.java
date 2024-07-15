@@ -15,8 +15,9 @@ public class Charts {
     Hashtable<String, LineChart.Series<Number, Number>> seriesList;
     private int numCell;
 
-    public Charts(int numCell) {
+    public Charts(int numCell, Date startime) {
         this.numCell = numCell;
+        this.startTime = startime;
     }
 
     public void initialize() {
@@ -80,7 +81,6 @@ public class Charts {
         }
 
         seriesList = new Hashtable<>();
-        startTime = new Date();
     }
 
     public void initSeries(Hashtable<String, Double> maxmin) {

@@ -88,3 +88,18 @@
     -fx-pref-height: 32px;
     -fx-margin-bottom: 2px;
 }
+
+.v-chart .default-color0.chart-series-line {
+    -fx-stroke: rgb(60, 245, 60);
+}
+
+.chart-transparent .default-color0.chart-series-line {
+    -fx-stroke: red;
+}
+
+.chart-transparent .chart-plot-background,
+.chart-transparent .chart-tick-labels,
+.chart-transparent .chart-tick-marks,
+.chart-transparent .chart-title {
+    -fx-opacity: 0;
+}

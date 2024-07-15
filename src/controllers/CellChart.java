@@ -2,14 +2,16 @@ package controllers;
 
 import java.util.Date;
 
+import constants.Style;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 
 public class CellChart {
     private int cell;
-    @FXML private LineChart<Number, Number> chart;
-    @FXML private NumberAxis xAxis, vAxis, tAxis;
+    @FXML private LineChart<Number, Number> chartV, chartT;
+    @FXML private NumberAxis VxAxis, TxAxis, vAxis, tAxis;
     private Date startTime;
 
     public CellChart(int cell) {
@@ -17,14 +19,22 @@ public class CellChart {
     }
 
     public void initialize() {
-        chart.setTitle("Cell " + cell);
+        chartV.setTitle("Cell " + cell);
+        chartT.setTitle("Cell " + cell); // this will be invisible, it's only for aligning the charts
 
-        xAxis.setAutoRanging(false);
-        xAxis.setTickLabelsVisible(true);
-        xAxis.setLabel("Time (s)");
-        xAxis.setLowerBound(0);
-        xAxis.setUpperBound(600);
-        xAxis.setTickUnit(30);
+        VxAxis.setAutoRanging(false);
+        VxAxis.setTickLabelsVisible(true);
+        VxAxis.setLabel("Time (s)");
+        VxAxis.setLowerBound(0);
+        VxAxis.setUpperBound(600);
+        VxAxis.setTickUnit(30);
+        
+        TxAxis.setAutoRanging(false);
+        TxAxis.setTickLabelsVisible(true);
+        TxAxis.setLabel("Time (s)");
+        TxAxis.setLowerBound(0);
+        TxAxis.setUpperBound(600);
+        TxAxis.setTickUnit(30);
 
         vAxis.setAutoRanging(false);
         vAxis.setTickLabelsVisible(true);
@@ -36,9 +46,9 @@ public class CellChart {
         tAxis.setAutoRanging(false);
         tAxis.setTickLabelsVisible(true);
         tAxis.setLabel("Temperature (°C)");
-        tAxis.setLowerBound(2);
-        tAxis.setUpperBound(4);
-        tAxis.setTickUnit(0.1);
+        tAxis.setLowerBound(0);
+        tAxis.setUpperBound(100);
+        tAxis.setTickUnit(5);
 
         LineChart.Series<Number, Number> voltage = new LineChart.Series<Number, Number>();
         LineChart.Series<Number, Number> temperature = new LineChart.Series<Number, Number>();
@@ -46,8 +56,8 @@ public class CellChart {
         voltage.setName("Voltage");
         temperature.setName("Temperature");
 
-        chart.getData().add(voltage);
-        chart.getData().add(temperature);
+        chartV.getData().add(voltage);
+        chartT.getData().add(temperature);
 
         startTime = new Date();
     }
@@ -55,10 +65,12 @@ public class CellChart {
     public void updateSeries(double voltage, double temperature, Date timestamp) {
         int secondsElapsed = (int) ((timestamp.getTime() - startTime.getTime()) / 1000);
 
-        LineChart.Series<Number, Number> voltageSeries = chart.getData().get(0);
-        LineChart.Series<Number, Number> temperatureSeries = chart.getData().get(1);
+        LineChart.Series<Number, Number> voltageSeries = chartV.getData().get(0);
+        LineChart.Series<Number, Number> temperatureSeries = chartT.getData().get(0);
 
-        voltageSeries.getData().add(new LineChart.Data<Number, Number>(secondsElapsed, voltage));
-        temperatureSeries.getData().add(new LineChart.Data<Number, Number>(secondsElapsed, temperature));
+        Platform.runLater(() -> {
+            voltageSeries.getData().add(new LineChart.Data<Number, Number>(secondsElapsed, voltage));
+            temperatureSeries.getData().add(new LineChart.Data<Number, Number>(secondsElapsed, temperature));
+        });
     }
 }

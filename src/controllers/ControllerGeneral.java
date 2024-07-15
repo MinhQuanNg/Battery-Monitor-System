@@ -133,13 +133,14 @@ public class ControllerGeneral {
                 final int cell = rowIndex * cellPane.getColumnCount() + columnIndex;
                 button.onActionProperty().set(e -> {
                     try {
-                        Stage stage = initCellChart(cell + 1, getCurrentTimeStamp(new Date()));
-                        stage.show();
+                        CellChart ctrl = initCellChart(cell + 1, getCurrentTimeStamp(new Date()));
+                        button.setUserData(ctrl);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
                     runCellChart.set(cell, true);
                 });
+
                 button.setDisable(true);
                 cellPane.add(button, columnIndex, rowIndex);
             }
@@ -264,23 +265,14 @@ public class ControllerGeneral {
                 dataScreenProfile(dataArray);
             }
 
-            // Init chart
+            // Init axes and series for charts
             if (first) {
-                first = false;
+                generalPane.lookup("#chartButton").setDisable(false);
+
                 for (int cell = 0; cell < numCell; cell++) {
                     runCellChart.add(false);
-                    int row = cell / cellPane.getColumnCount();
-                    int column = cell % cellPane.getColumnCount();
-                    Button button = (Button) cellPane.getChildren().stream()
-                        .filter(node -> {
-                            Integer rowIdx = GridPane.getRowIndex(node);
-                            Integer colIdx = GridPane.getColumnIndex(node);
-                            return (node instanceof Button) && 
-                                rowIdx != null && rowIdx == row && 
-                                colIdx != null && colIdx == column;
-                        })
-                        .findFirst()
-                        .orElse(null);
+                    Button button  = getButton(cell);
+
                     if (button != null) {
                         button.setDisable(false);
                     } else {
@@ -288,25 +280,49 @@ public class ControllerGeneral {
                     }
                 }
 
-                Platform.runLater(() -> {
-                    try {
-                        initCharts(numCell, timestamp);
+                if (runCharts) {
+                    Platform.runLater(() -> {
                         ctrlCharts.initSeries(maxmin);
-                        generalPane.lookup("#chartButton").setDisable(false);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+                    });
+
+                    first = false;
+                }
             }
 
-            // Update chart
+            // Update charts
             if (runCharts) {
                 ctrlCharts.updateSeries(maxmin, now);
+            }
+
+            // Update opened cell charts
+            for (int cell = 0; cell < numCell; cell++) {
+                if (runCellChart.get(cell)) {
+                    CellChart ctrl = (CellChart) getButton(cell).getUserData();
+                    ctrl.updateSeries(dataArray.getJSONObject(cell).optDouble("voltage", Double.NaN),
+                        dataArray.getJSONObject(cell).optDouble("temperature", Double.NaN), now);
+                }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private Button getButton(int cell) {
+        int row = cell / cellPane.getColumnCount();
+        int column = cell % cellPane.getColumnCount();
+        Button button = (Button) cellPane.getChildren().stream()
+            .filter(node -> {
+                Integer rowIdx = GridPane.getRowIndex(node);
+                Integer colIdx = GridPane.getColumnIndex(node);
+                return (node instanceof Button) && 
+                    rowIdx != null && rowIdx == row && 
+                    colIdx != null && colIdx == column;
+            })
+            .findFirst()
+            .orElse(null);
+
+        return button;
     }
 
     private static String getCurrentTimeStamp(Date now) {
@@ -446,6 +462,7 @@ public class ControllerGeneral {
 
         return maxmin;
     }
+
     private List<Node> findNodesByClass(Parent root, String className) {
         List<Node> matchingNodes = new ArrayList<>();
         for (Node node : root.getChildrenUnmodifiable()) {
@@ -594,7 +611,6 @@ public class ControllerGeneral {
         });
     }
     
-
     private void updateVisibilityAndFocus(Button btn, TextField textField, Label label) {
         save.setVisible(true);
         textField.setVisible(true);
@@ -624,8 +640,60 @@ public class ControllerGeneral {
         }
     }
 
+<<<<<<< HEAD
     public void SaveChanges(ActionEvent e) {
         List<TextField> textFieldsToSave = getAllTextFields(profilePane);
+=======
+
+    public void onSaveAllChangesAction() {
+        // StringBuilder allData = new StringBuilder();
+        // // Assuming you have TextField instances for each of your inputs
+        // TextField[] textFields = {maxVProText, minVProText, difVProText, maxTProText,
+        // sumMaxVProText, sumMinVProText};
+        // for (TextField textField : textFields) {
+        // String formattedData = formatData(textField.getText(), textField); //
+        // Assuming formatData method takes the text value and the TextField itself
+        // allData.append(formattedData).append("\n"); // Append a newline or other
+        // delimiter as needed
+        // }
+        // writeBoard(allData.toString());
+    }
+
+    private String getCorrespondingLabel(String textFieldId) {
+        // Example mapping, replace with actual logic
+        switch (textFieldId) {
+            case "maxVProText":
+                return setting1.getText();
+            case "minVProText":
+                return setting2.getText();
+            case "difVProText":
+                return setting5.getText();
+            case "maxTProText":
+                return setting6.getText();
+            default:
+                return null;
+        }
+    }
+
+    private boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?"); // Match a number with optional '-' and decimal.
+    }
+
+    private void showSaveConfirmationPopup(TextField textField) {
+        // IDs that require numeric input
+        List<String> numericFields = Arrays.asList("maxVProText");
+        if (numericFields.contains(textField.getId()) && !isNumeric(textField.getText())) {
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Invalid Input");
+            errorAlert.setHeaderText("Invalid Number Format");
+            errorAlert.setContentText(
+                    "Please enter a valid number for \"" + getCorrespondingLabel(textField.getId()) + "\"" + ".");
+            errorAlert.showAndWait();
+            return; // Exit the method early
+        }
+
+        // Create a custom ButtonType for "Save"
+>>>>>>> dc72b2a (fixing cellchart)
         ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "", saveButtonType, ButtonType.CANCEL);
         confirmationAlert.setTitle("Confirm Changes");
@@ -898,13 +966,15 @@ public class ControllerGeneral {
     }
 
     public void chart(ActionEvent e) throws IOException {
+        initCharts(numCell, new Date());
         chartStage.show();
+        first = true;
         runCharts = true;
     }
 
-    private void initCharts(int numCell, String timestamp) throws IOException {
+    private void initCharts(int numCell, Date timestamp) throws IOException {
         chartStage = null;
-        ctrlCharts = new Charts(numCell);
+        ctrlCharts = new Charts(numCell, timestamp);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/Charts.fxml"));
         loader.setController(ctrlCharts);
@@ -912,20 +982,20 @@ public class ControllerGeneral {
         Scene chartScene = new Scene(root, Style.CHART_WIDTH, Style.CHART_HEIGHT);
         
         chartStage = new Stage();
-        chartStage.setTitle("Đồ thị trạng thái pin " + timestamp);
+        chartStage.setTitle("Đồ thị trạng thái pin " + getCurrentTimeStamp(timestamp));
         chartStage.setScene(chartScene);
         chartStage.setOnCloseRequest(event -> {
             runCharts = false;
         });
     }
 
-    private Stage initCellChart(int cell, String timestamp) throws IOException {
+    private CellChart initCellChart(int cell, String timestamp) throws IOException {
         CellChart ctrlCellChart = new CellChart(cell);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/CellChart.fxml"));
         loader.setController(ctrlCellChart);
         Parent root = loader.load();
-        Scene chartScene = new Scene(root, Style.CHART_WIDTH, Style.CHART_HEIGHT);
+        Scene chartScene = new Scene(root, Style.CELL_CHART_WIDTH, Style.CELL_CHART_HEIGHT);
 
         Stage chartStage = new Stage();
         chartStage.setTitle("Đồ thị trạng thái pin " + timestamp);
@@ -934,6 +1004,8 @@ public class ControllerGeneral {
             runCellChart.set(cell, false);
         });
 
-        return chartStage;
+        chartStage.show();
+
+        return ctrlCellChart;
     }
 }
