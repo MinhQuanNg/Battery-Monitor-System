@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -46,6 +47,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -77,7 +79,7 @@ public class ControllerGeneral {
     @FXML private GridPane profilePane;
     @FXML private Label setting1, setting2, setting5, setting6;
     @FXML private Label maxVPro, minVPro, sumMaxVPro, sumMinVPro, difVPro, maxTPro;
-    @FXML private Button set1, set2, set5, set6, save;
+    @FXML private Button set1, set2, set5, set6, save, focus;
     @FXML private TextField maxVProText, minVProText, difVProText, maxTProText;
     @FXML private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
 
@@ -97,10 +99,12 @@ public class ControllerGeneral {
 
     // Note: JavaFX optimization doesn't rerender old properties
     public void initialize() {
+        // port.openPort();
         currentScreen = screen[0];
 
         initCharacteristics();
 
+        
         // Add SoC gauge on ScreenGeneral
         gauge = GaugeBuilder.create()
         .skinType(SkinType.BATTERY)
@@ -185,7 +189,6 @@ public class ControllerGeneral {
 
     public void detail(ActionEvent e) {
         currentScreen = screen[1];
-
         for (Node node : findNodesByClass(generalPane, "general")) {
             node.setVisible(false);  // Hide nodes on ScreenGeneral
         }
@@ -199,7 +202,16 @@ public class ControllerGeneral {
 
     public void profile(ActionEvent e) {
         currentScreen = screen[2];
-
+        List<TextField> TextFields = getAllTextFields(profilePane);
+        profilePane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            Node target = (Node) event.getTarget(); // Get the target of the click event
+            if (!(target instanceof TextField) && !(target instanceof Button)) {
+                for (TextField textField : TextFields){
+                    textField.setVisible(false);
+                    save.setVisible(false);
+                }
+            }
+        });
         for (Node node : findNodesByClass(generalPane, "general")) {
             node.setVisible(false);  // Hide nodes on ScreenGeneral
         }
@@ -367,8 +379,8 @@ public class ControllerGeneral {
         Platform.runLater(() -> {
             maxVPro.setText(String.valueOf(ov));
             minVPro.setText(String.valueOf(uv));
-            sumMaxVPro.setText(String.valueOf(os));
-            sumMinVPro.setText(String.valueOf(us));
+            sumMaxVPro.setText(String.format("%.2f", os));
+            sumMinVPro.setText(String.format("%.2f", us));
             maxTPro.setText(String.valueOf(ot));
             difVPro.setText(String.valueOf(dv));
         });
@@ -451,6 +463,22 @@ public class ControllerGeneral {
           }
         }
         return labels;
+    }
+
+    public List<TextField> getAllTextFields(Parent root) {
+        List<TextField> textFields = new ArrayList<>();
+        findAllTextFields(root, textFields);
+        return textFields;
+    }
+
+    private void findAllTextFields(Parent parent, List<TextField> textFields) {
+        for (Node node : parent.getChildrenUnmodifiable()) {
+            if (node instanceof TextField) {
+                textFields.add((TextField) node);
+            } else if (node instanceof Parent) {
+                findAllTextFields((Parent) node, textFields);
+            }
+        }
     }
 
     private void updateCellImage(ImageView node, String state) {
@@ -567,92 +595,172 @@ public class ControllerGeneral {
         textField.setVisible(true);
         textField.setText(label.getText());
         textField.requestFocus();
+        // focus.setDisable(false);   
     }
+
+    // @Override
+    // public void mouseExited(MouseEvent e) {
+    //         profilePane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+    //             List<TextField> textFieldsToSave = getAllTextFields(profilePane);
+    //             for (TextField textField : textFieldsToSave) {
+    //                 if (textField.isVisible()) {
+    //             if (!(event.getTarget() instanceof TextField) || event.getTarget() != textField) {
+    //                 textField.setVisible(false);
+    //             }
+    //         }
+    //     }
+    //         });
+    //     });
+    // }
 
     public void finishEdit(KeyEvent e) {
         if (e.getCode() == KeyCode.ENTER) {
-            TextField text = (TextField) e.getSource();
-            showSaveConfirmationPopup(text);
+            SaveChanges(null);
         }
     }
 
-    
-    public void onSaveAllChangesAction() {
-        // StringBuilder allData = new StringBuilder();
-        // // Assuming you have TextField instances for each of your inputs
-        // TextField[] textFields = {maxVProText, minVProText, difVProText, maxTProText,
-        // sumMaxVProText, sumMinVProText};
-        // for (TextField textField : textFields) {
-        // String formattedData = formatData(textField.getText(), textField); //
-        // Assuming formatData method takes the text value and the TextField itself
-        // allData.append(formattedData).append("\n"); // Append a newline or other
-        // delimiter as needed
-        // }
-        // writeBoard(allData.toString());
-    }
-
-    private String getCorrespondingLabel(String textFieldId) {
-        // Example mapping, replace with actual logic
-        switch (textFieldId) {
-            case "maxVProText":
-                return setting1.getText();
-            case "minVProText":
-                return setting2.getText();
-            case "difVProText":
-                return setting5.getText();
-            case "maxTProText":
-                return setting6.getText();
-            default:
-                return null;
-        }
-    }
-
-    private boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?"); // Match a number with optional '-' and decimal.
-    }
-
-    private void showSaveConfirmationPopup(TextField textField) {
-        // IDs that require numeric input
-        List<String> numericFields = Arrays.asList("maxVProText");
-        if (numericFields.contains(textField.getId()) && !isNumeric(textField.getText())) {
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setTitle("Invalid Input");
-            errorAlert.setHeaderText("Invalid Number Format");
-            errorAlert.setContentText(
-                    "Please enter a valid number for \"" + getCorrespondingLabel(textField.getId()) + "\"" + ".");
-            errorAlert.showAndWait();
-            return; // Exit the method early
-        }
-
-        // Create a custom ButtonType for "Save"
+    public void SaveChanges(ActionEvent e) {
+        List<TextField> textFieldsToSave = getAllTextFields(profilePane);
         ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "", saveButtonType, ButtonType.CANCEL);
         confirmationAlert.setTitle("Confirm Changes");
-        confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu thay đổi");
-        confirmationAlert.setContentText(getCorrespondingLabel(textField.getId()) + "  " + "\"" + textField.getText() + "\"");
-
-        // Show the alert and wait for response
-        confirmationAlert.showAndWait().ifPresent(response -> {
-            if (response == saveButtonType) {
-                writeBoard(formatAndWriteValue(textField, textField.getText()));
-                updateLabel(textField);
-                save.setVisible(false);
-            } else {
-                textField.setVisible(false); // Hide the text field if not saved
-                save.setVisible(false);
+        confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu tất cả thay đổi?");
+        Optional<ButtonType> response = confirmationAlert.showAndWait();
+    
+        if (response.isPresent() && response.get() == saveButtonType) {
+            for (TextField textField : textFieldsToSave) {
+                if (textField.isVisible() && isNumeric(textField.getText())) { // Check if the TextField is visible and numeric
+                    writeBoard(formatAndWriteValue(textField, textField.getText()));
+                    updateLabel(textField);
+                    // focus.setDisable(true);
+                } 
             }
-        });
+        } else {
+            for (TextField textField : textFieldsToSave) {
+                if (textField.isVisible()) {
+                    textField.setVisible(false); 
+                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                    errorAlert.setTitle("Invalid Input");
+                    errorAlert.setHeaderText("Invalid Number Format");
+                    errorAlert.setContentText("Please enter a valid number.");
+                    errorAlert.showAndWait();
+                    return; // Exit the method early
+                }
+            }
+        }
+    }
+    
+
+    // showSaveConfirmationPopup(text);
+    // StringBuilder allData = new StringBuilder();
+    // // Assuming you have TextField instances for each of your inputs
+    // TextField[] textFields = {maxVProText, minVProText, difVProText, maxTProText,
+    // sumMaxVProText, sumMinVProText};
+    // for (TextField textField : textFields) {
+    // String formattedData = formatData(textField.getText(), textField); //
+    // Assuming formatData method takes the text value and the TextField itself
+    // allData.append(formattedData).append("\n"); // Append a newline or other
+    // delimiter as needed
+    // }
+    // writeBoard(allData.toString());
+
+    private boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?"); 
     }
 
+    // private String getCorrespondingLabel(String textFieldId) {
+    //     // Example mapping, replace with actual logic
+    //     switch (textFieldId) {
+    //         case "maxVProText":
+    //             return setting1.getText();
+    //         case "minVProText":
+    //             return setting2.getText();
+    //         case "difVProText":
+    //             return setting5.getText();
+    //         case "maxTProText":
+    //             return setting6.getText();
+    //         default:
+    //             return null;
+    //     }
+    // }
+    
+    // public void finishEdit(KeyEvent e) {
+    //     if (e.getCode() == KeyCode.ENTER) {
+    //         TextField text = (TextField) e.getSource();
+    //         showSaveConfirmationPopup(text);
+    //     }
+    //     else if(e.getCode() == KeyCode.ESCAPE){
+    //         TextField text = (TextField) e.getSource();
+    //         text.setVisible(false);
+    //         save.setVisible(false);
+    //     } 
+    // }
+
+    // private void showSaveConfirmationPopup(TextField textField) {
+    //     // IDs that require numeric input
+    //     List<String> numericFields = Arrays.asList("maxVProText");
+    //     if (numericFields.contains(textField.getId()) && !isNumeric(textField.getText())) {
+    //         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+    //         errorAlert.setTitle("Invalid Input");
+    //         errorAlert.setHeaderText("Invalid Number Format");
+    //         errorAlert.setContentText(
+    //                 "Please enter a valid number for \"" + getCorrespondingLabel(textField.getId()) + "\"" + ".");
+    //         errorAlert.showAndWait();
+    //         return; // Exit the method early
+    //     }
+
+    //     // Create a custom ButtonType for "Save"
+    //     ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+    //     Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "", saveButtonType, ButtonType.CANCEL);
+    //     confirmationAlert.setTitle("Confirm Changes");
+    //     confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu thay đổi");
+    //     confirmationAlert.setContentText(getCorrespondingLabel(textField.getId()) + "  " + "\"" + textField.getText() + "\"");
+
+    //     // Show the alert and wait for response
+    //     confirmationAlert.showAndWait().ifPresent(response -> {
+    //         if (response == saveButtonType) {
+    //             writeBoard(formatAndWriteValue(textField, textField.getText()));
+    //             updateLabel(textField);
+    //             save.setVisible(false);
+    //         } else {
+    //             textField.setVisible(false); // Hide the text field if not saved
+    //             save.setVisible(false);
+    //         }
+    //     });
+    // }
+    
+    // // private void popAlert(Alert.AlertType type, String title, String header, String content, TextField textField){
+    // //     Alert alert = new Alert(type);
+    // //     alert.setTitle(title);
+    // //     alert.setHeaderText(header);
+    // //     alert.setContentText(content);
+    // //     ButtonType btn = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+    // //     alert.showAndWait().ifPresent(response -> {
+    // //         if (response == btn) {
+    // //             writeBoard(formatAndWriteValue(textField, textField.getText()));
+    // //             updateLabel(textField);
+    // //             save.setVisible(false);
+    // //         } else {
+    // //             textField.setVisible(false); // Hide the text field if not saved
+    // //             save.setVisible(false);
+    // //         }
+    // //     });
+    // // }
+    
+    
+    
     private void updateLabel(TextField textField) {
-        Label targetLabel = null;
+
+        Platform.runLater(() -> {
+            Label targetLabel = null;
         switch (textField.getId()) {
             case "maxVProText":
                 targetLabel = maxVPro;
                 // Assuming numCell is already defined and converted to a numeric value
                 try {
                     double maxVProValue = Double.parseDouble(textField.getText());
-                    sumMaxVPro.setText(String.format("%.2f", maxVProValue * numCell)); // Corrected this line
+                    sumMaxVPro.setText(String.format("%.2f", maxVProValue * numCell));
+                     // Corrected this line
                 } catch (NumberFormatException e) {
                     // Handle invalid input
                     sumMaxVPro.setText("Invalid input");
@@ -681,7 +789,8 @@ public class ControllerGeneral {
             targetLabel.setVisible(true);
             textField.setVisible(false); 
         }
-    }
+    });
+}
 
     private void updateFault(Hashtable<String, Double> maxmin) {
         ArrayList<String> fault = new ArrayList<>();
@@ -728,7 +837,7 @@ public class ControllerGeneral {
             case "minVProText":
                 output = String.format("%d.u", (int) (setValue * 100));
                 break;
-            case "diffVProText":
+            case "difVProText":
                 output = String.format("%d.d", (int) (setValue * 100));
                 break;
             case "maxTProText":

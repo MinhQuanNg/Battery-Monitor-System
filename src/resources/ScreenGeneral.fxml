@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="generalPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerGeneral">
    <children>
@@ -1702,19 +1703,25 @@
                      <children>
                         <Label id="MaxVPro" fx:id="maxVPro" styleClass="thongsobaove" text="-" GridPane.halignment="RIGHT">
                            <cursor>
-                              <Cursor fx:constant="DEFAULT" />
+                              <Cursor fx:constant="TEXT" />
                            </cursor>
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets right="14.0" />
+                           </GridPane.margin>
                         </Label>
                         <Label id="MinVPro" fx:id="minVPro" styleClass="thongsobaove" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                            <cursor>
-                              <Cursor fx:constant="DEFAULT" />
+                              <Cursor fx:constant="TEXT" />
                            </cursor>
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets right="14.0" />
+                           </GridPane.margin>
                         </Label>
                         <Label id="TotalMaxVPro" fx:id="sumMaxVPro" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="thongsobaove" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                            <cursor>
@@ -1723,6 +1730,9 @@
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets right="14.0" />
+                           </GridPane.margin>
                         </Label>
                         <Label id="TotalMinVPro" fx:id="sumMinVPro" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="thongsobaove" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
                            <cursor>
@@ -1731,24 +1741,33 @@
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets right="14.0" />
+                           </GridPane.margin>
                         </Label>
                         <Label id="DifVPro" fx:id="difVPro" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="thongsobaove" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
                            <cursor>
-                              <Cursor fx:constant="DEFAULT" />
+                              <Cursor fx:constant="TEXT" />
                            </cursor>
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets right="14.0" />
+                           </GridPane.margin>
                         </Label>
                         <Label id="MaxTemPro" fx:id="maxTPro" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="thongsobaove" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
                            <cursor>
-                              <Cursor fx:constant="DEFAULT" />
+                              <Cursor fx:constant="TEXT" />
                            </cursor>
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin>
                         </Label>
-                        <Button fx:id="set1" mnemonicParsing="false" onAction="#popEdit" prefWidth="20.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT">
+                        <Button fx:id="set1" mnemonicParsing="false" onAction="#popEdit" prefHeight="35.0" prefWidth="60.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor>
@@ -1756,7 +1775,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="set2" mnemonicParsing="false" onAction="#popEdit" prefWidth="20.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                        <Button fx:id="set2" mnemonicParsing="false" onAction="#popEdit" prefWidth="60.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor>
@@ -1764,7 +1783,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="set5" mnemonicParsing="false" onAction="#popEdit" prefWidth="20.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                        <Button fx:id="set5" mnemonicParsing="false" onAction="#popEdit" prefWidth="60.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor>
@@ -1772,7 +1791,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="set6" mnemonicParsing="false" onAction="#popEdit" prefWidth="20.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
+                        <Button fx:id="set6" mnemonicParsing="false" onAction="#popEdit" prefWidth="60.0" style="-fx-background-color: transparent;" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor>
@@ -1815,12 +1834,57 @@
                         <VBox prefHeight="2.0" prefWidth="201.0" style="-fx-background-color: #000000;" GridPane.rowIndex="5" />
                         <VBox prefHeight="2.0" prefWidth="201.0" style="-fx-background-color: #000000;" GridPane.rowIndex="7" />
                         <VBox prefHeight="2.0" prefWidth="201.0" style="-fx-background-color: #000000;" GridPane.rowIndex="9" />
-                        <TextField fx:id="minVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="42.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.rowIndex="2">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="°C" GridPane.halignment="RIGHT" GridPane.rowIndex="10" GridPane.valignment="CENTER">
                            <font>
                               <Font size="18.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="169.0" />
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </Text>
+                        <TextField fx:id="minVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="40.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="250.0" />
                            </GridPane.margin>
                            <cursor>
                               <Cursor fx:constant="TEXT" />
@@ -1831,7 +1895,7 @@
                               <Font size="18.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="169.0" />
+                              <Insets left="250.0" />
                            </GridPane.margin>
                            <cursor>
                               <Cursor fx:constant="TEXT" />
@@ -1842,7 +1906,7 @@
                               <Font size="18.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="169.0" />
+                              <Insets left="250.0" />
                            </GridPane.margin>
                            <cursor>
                               <Cursor fx:constant="TEXT" />
@@ -1856,7 +1920,7 @@
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                            <GridPane.margin>
-                              <Insets left="169.0" />
+                              <Insets left="250.0" />
                            </GridPane.margin>
                         </TextField>
                      </children>
@@ -1869,7 +1933,7 @@
                         <Font name="System Bold" size="25.0" />
                      </font>
                   </Label>
-                  <Button fx:id="save" layoutX="195.0" layoutY="20.0" mnemonicParsing="false" onAction="#onSaveAllChangesAction" style="-fx-background-color: transparent;" visible="false" AnchorPane.rightAnchor="6.0">
+                  <Button fx:id="save" layoutX="195.0" layoutY="20.0" mnemonicParsing="false" onAction="#SaveChanges" style="-fx-background-color: transparent;" visible="false" AnchorPane.rightAnchor="6.0">
                      <graphic>
                         <ImageView fitHeight="11.0" fitWidth="19.0" preserveRatio="true" scaleX="1.5" scaleY="1.5" scaleZ="1.5">
                            <image>
