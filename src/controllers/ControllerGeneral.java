@@ -53,6 +53,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -205,12 +206,16 @@ public class ControllerGeneral {
         List<TextField> TextFields = getAllTextFields(profilePane);
         profilePane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
             Node target = (Node) event.getTarget(); // Get the target of the click event
-            if (!(target instanceof TextField) && !(target instanceof Button)) {
+            if (!(target instanceof Button)) {
+                if(!(target instanceof TextField)){
+                    return;
+                }
                 for (TextField textField : TextFields){
                     textField.setVisible(false);
                     save.setVisible(false);
+                    }
                 }
-            }
+            
         });
         for (Node node : findNodesByClass(generalPane, "general")) {
             node.setVisible(false);  // Hide nodes on ScreenGeneral
@@ -629,22 +634,50 @@ public class ControllerGeneral {
     
         if (response.isPresent() && response.get() == saveButtonType) {
             for (TextField textField : textFieldsToSave) {
-                if (textField.isVisible() && isNumeric(textField.getText())) { // Check if the TextField is visible and numeric
-                    writeBoard(formatAndWriteValue(textField, textField.getText()));
-                    updateLabel(textField);
-                    // focus.setDisable(true);
-                } 
+                if (textField.isVisible() && isNumeric(textField.getText())) {
+                    double value = Double.parseDouble(textField.getText());
+                    boolean isValid = false;
+                    String errorText = "";
+    
+                    switch (textField.getId()) {
+                        case "maxVProText":
+                            isValid = value >= 0 && value <= 10;
+                            errorText = "Please enter a valid overvoltage value between 0 and 10.";
+                            break;
+                        case "minVProText":
+                            isValid = value >= 0 && value <= 10;
+                            errorText = "Please enter a valid undervoltage value between 0 and 10.";
+                            break;
+                        case "maxTProText":
+                            isValid = value >= 0 && value <= 200;
+                            errorText = "Please enter a valid temperature protection value between 0 and 200.";
+                            break;
+                        case "difVProText":
+                            isValid = value >= 0 && value <= 1;
+                            errorText = "Please enter a valid differential voltage value between 0 and 1.";
+                            break;
+                        default:
+                            isValid = true; // Assume other fields don't have specific validation rules
+                            break;
+                    }
+    
+                    if (isValid) {
+                        writeBoard(formatAndWriteValue(textField, textField.getText()));
+                        updateLabel(textField);
+                    } else {
+                        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                        errorAlert.setTitle("Invalid Input");
+                        errorAlert.setHeaderText("Invalid Number Format");
+                        errorAlert.setContentText(errorText);
+                        errorAlert.showAndWait();
+                    }
+                }
             }
         } else {
             for (TextField textField : textFieldsToSave) {
                 if (textField.isVisible()) {
-                    textField.setVisible(false); 
-                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                    errorAlert.setTitle("Invalid Input");
-                    errorAlert.setHeaderText("Invalid Number Format");
-                    errorAlert.setContentText("Please enter a valid number.");
-                    errorAlert.showAndWait();
-                    return; // Exit the method early
+                    textField.setVisible(false);
+                    save.setVisible(false);
                 }
             }
         }
