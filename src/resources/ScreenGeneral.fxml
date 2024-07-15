@@ -48,7 +48,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell2Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -56,7 +56,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell3Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -64,7 +64,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell4Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -72,7 +72,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell5Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -80,7 +80,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell6Label" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -88,7 +88,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell7Label" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -96,7 +96,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell8Label" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -104,7 +104,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell9Label" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -112,7 +112,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell10Label" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -120,7 +120,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell11Label" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -128,7 +128,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell12Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -136,7 +136,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell13Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -144,7 +144,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell14Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -152,7 +152,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell15Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -160,7 +160,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell16Label" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -168,7 +168,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell17Label" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -176,7 +176,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell18Label" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -184,7 +184,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell19Label" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -192,7 +192,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell20Label" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -200,7 +200,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell21Label" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
@@ -208,7 +208,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell22Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
@@ -216,7 +216,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell23Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
@@ -224,7 +224,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell24Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
@@ -232,7 +232,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell25Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
@@ -240,7 +240,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell26Label" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
@@ -248,7 +248,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell27Label" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
@@ -256,7 +256,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell28Label" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
@@ -264,7 +264,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell29Label" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
@@ -272,7 +272,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell30Label" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
@@ -280,7 +280,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell31Label" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -288,7 +288,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell32Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -296,7 +296,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell33Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -304,7 +304,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell34Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -312,7 +312,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell35Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -320,7 +320,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell36Label" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -328,7 +328,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell37Label" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -336,7 +336,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell38Label" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -344,7 +344,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell39Label" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -352,7 +352,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="cell40Label" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -360,167 +360,167 @@
                   <Font name="System Bold" size="11.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="8.0" />
                </GridPane.margin>
             </Label>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" preserveRatio="true" styleClass="detailImage" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
-            <ImageView fitHeight="32.0" fitWidth="51.0" styleClass="detailImage" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="50.0" fitWidth="70.0" styleClass="detailImage" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="2.0" />
                </GridPane.margin></ImageView>
