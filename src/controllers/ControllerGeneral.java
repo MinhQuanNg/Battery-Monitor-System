@@ -33,6 +33,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -128,8 +129,11 @@ public class ControllerGeneral {
             for (int columnIndex = 0; columnIndex < cellPane.getColumnCount(); columnIndex++) {
                 Button button = new Button();
                 GridPane.setHalignment(button, HPos.CENTER);
-                GridPane.setValignment(button, VPos.BOTTOM);
+                GridPane.setValignment(button, VPos.CENTER);
                 button.getStyleClass().add("cell-chart-button");
+                button.setPrefSize(70, 52);
+                button.setStyle("-fx-background-color: transparent;"); // Set button background to transparent
+                button.setCursor(Cursor.HAND);
                 final int cell = rowIndex * cellPane.getColumnCount() + columnIndex;
                 button.onActionProperty().set(e -> {
                     try {
@@ -174,6 +178,7 @@ public class ControllerGeneral {
 
         manualStage.show();
     }
+
 
     public void general(ActionEvent e) {
         currentScreen = screen[0];
