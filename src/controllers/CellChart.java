@@ -2,17 +2,20 @@ package controllers;
 
 import java.util.Date;
 
-import constants.Style;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.input.ScrollEvent;
 
 public class CellChart {
     private int cell;
     @FXML private LineChart<Number, Number> chartV, chartT;
     @FXML private NumberAxis VxAxis, TxAxis, vAxis, tAxis;
     private Date startTime;
+    private int xUpperBound = 5;
+    private int xTickUnit = xUpperBound / 10;
+    private double secondsElapsed;
 
     public CellChart(int cell) {
         this.cell = cell;
@@ -26,15 +29,13 @@ public class CellChart {
         VxAxis.setTickLabelsVisible(true);
         VxAxis.setLabel("Time (s)");
         VxAxis.setLowerBound(0);
-        VxAxis.setUpperBound(600);
-        VxAxis.setTickUnit(30);
+        VxAxis.setUpperBound(xUpperBound);
+        VxAxis.setTickUnit(xTickUnit);
         
+        // invisible, setting these for alignment
         TxAxis.setAutoRanging(false);
-        TxAxis.setTickLabelsVisible(true);
-        TxAxis.setLabel("Time (s)");
         TxAxis.setLowerBound(0);
-        TxAxis.setUpperBound(600);
-        TxAxis.setTickUnit(30);
+        TxAxis.setUpperBound(xUpperBound);
 
         vAxis.setAutoRanging(false);
         vAxis.setTickLabelsVisible(true);
@@ -57,7 +58,9 @@ public class CellChart {
         temperature.setName("Temperature");
 
         chartV.getData().add(voltage);
+        chartV.getStyleClass().add("chart-voltage");
         chartT.getData().add(temperature);
+        chartT.getStyleClass().add("chart-temperature");
 
         startTime = new Date();
     }
@@ -71,6 +74,33 @@ public class CellChart {
         Platform.runLater(() -> {
             voltageSeries.getData().add(new LineChart.Data<Number, Number>(secondsElapsed, voltage));
             temperatureSeries.getData().add(new LineChart.Data<Number, Number>(secondsElapsed, temperature));
+
+            if (secondsElapsed >= VxAxis.getUpperBound()) {
+                VxAxis.setLowerBound(VxAxis.getLowerBound() + xTickUnit);
+                VxAxis.setUpperBound(VxAxis.getUpperBound() + xTickUnit);
+            }
         });
+    }
+
+    @SuppressWarnings("unchecked")
+    public void scroll(ScrollEvent e) {
+        LineChart<Number, Number> chart = (LineChart<Number, Number>) e.getSource();
+        NumberAxis xAxis = (NumberAxis) chart.getXAxis();
+
+        // On scroll left, move the x-axis to the left by xTickUnit
+        if (e.getDeltaX() > 0) {
+            double newLowerBound = xAxis.getLowerBound() - xTickUnit;
+            double newUpperBound = xAxis.getUpperBound() - xTickUnit;
+            xAxis.setLowerBound(Math.max(0, newLowerBound)); // Prevent going below 0
+            xAxis.setUpperBound(Math.max(xUpperBound, newUpperBound));
+        }
+
+        // On scroll right, only shift if there is data to show
+        else if (xAxis.getUpperBound() <= secondsElapsed) {
+            double newLowerBound = xAxis.getLowerBound() + xTickUnit;
+            double newUpperBound = xAxis.getUpperBound() + xTickUnit;
+            xAxis.setLowerBound(newLowerBound);
+            xAxis.setUpperBound(newUpperBound);
+        }
     }
 }

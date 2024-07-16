@@ -19,7 +19,7 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <LineChart fx:id="maxVChart" animated="false" createSymbols="false" prefHeight="169.0" prefWidth="245.0">
+            <LineChart id="maxVChart" animated="false" createSymbols="false" onScroll="#scroll" prefHeight="169.0" prefWidth="245.0">
               <xAxis>
                 <NumberAxis side="BOTTOM" />
               </xAxis>
@@ -27,7 +27,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </LineChart>
-            <LineChart fx:id="maxTChart" animated="false" createSymbols="false" prefHeight="169.0" prefWidth="245.0" GridPane.columnIndex="1">
+            <LineChart id="maxTChart" animated="false" createSymbols="false" onScroll="#scroll" prefHeight="169.0" prefWidth="245.0" GridPane.columnIndex="1">
                <xAxis>
                   <NumberAxis side="BOTTOM" />
                </xAxis>
@@ -35,7 +35,7 @@
                   <NumberAxis side="LEFT" />
                </yAxis>
             </LineChart>
-            <LineChart fx:id="sumVChart" animated="false" createSymbols="false" prefHeight="169.0" prefWidth="245.0" GridPane.rowIndex="1">
+            <LineChart id="sumVChart" animated="false" createSymbols="false" onScroll="#scroll" prefHeight="169.0" prefWidth="245.0" GridPane.rowIndex="1">
                <xAxis>
                   <NumberAxis side="BOTTOM" />
                </xAxis>
@@ -43,7 +43,7 @@
                   <NumberAxis side="LEFT" />
                </yAxis>
             </LineChart>
-            <LineChart fx:id="delVChart" animated="false" createSymbols="false" prefHeight="169.0" prefWidth="245.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <LineChart id="delVChart" animated="false" createSymbols="false" onScroll="#scroll" prefHeight="169.0" prefWidth="245.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <xAxis>
                   <NumberAxis side="BOTTOM" />
                </xAxis>

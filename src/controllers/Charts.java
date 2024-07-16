@@ -6,14 +6,19 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.GridPane;
 
 public class Charts {
     @FXML private GridPane grid;
-    String[] chartIds = {"maxVChart", "maxTChart", "sumVChart", "delVChart"};
+    private String[] chartIds = {"maxVChart", "maxTChart", "sumVChart", "delVChart"};
     private Date startTime;
-    Hashtable<String, LineChart.Series<Number, Number>> seriesList;
+    private Hashtable<String, LineChart.Series<Number, Number>> seriesList;
     private int numCell;
+
+    private int xUpperBound = 600;
+    private double xTickUnit = (double) xUpperBound / 20;
+    private int secondsElapsed;
 
     public Charts(int numCell, Date startime) {
         this.numCell = numCell;
@@ -36,8 +41,8 @@ public class Charts {
             xAxis.setTickLabelsVisible(true);
             xAxis.setLabel("Time (s)");
             xAxis.setLowerBound(0);
-            xAxis.setUpperBound(600);
-            xAxis.setTickUnit(30);
+            xAxis.setUpperBound(xUpperBound);
+            xAxis.setTickUnit(xTickUnit);
 
             yAxis.setAutoRanging(false);
             yAxis.setTickLabelsVisible(true);
@@ -83,6 +88,7 @@ public class Charts {
         seriesList = new Hashtable<>();
     }
 
+    // Initialize data series for each chart
     public void initSeries(Hashtable<String, Double> maxmin) {
         for (String key : maxmin.keySet()) {
             if (!key.equals("sumT")) {
@@ -129,13 +135,50 @@ public class Charts {
         });
     }
 
+    // Update chart with new data
     public void updateSeries(Hashtable<String, Double> maxmin, Date timestamp) {
-        int secondsElapsed = (int) ((timestamp.getTime() - startTime.getTime()) / 1000);
-        // System.out.println(secondsElapsed);
+        secondsElapsed = (int) ((timestamp.getTime() - startTime.getTime()) / 1000);
+
         for (String key : maxmin.keySet()) {
             if (!key.equals("sumT")) {
-                Platform.runLater(() -> seriesList.get(key).getData().add(new LineChart.Data<Number, Number>(secondsElapsed, maxmin.get(key))));
+                Platform.runLater(() -> {
+                    LineChart.Series<Number, Number> series = seriesList.get(key);
+                    series.getData().add(new LineChart.Data<Number, Number>(secondsElapsed, maxmin.get(key)));
+                    
+                    // Series might not have been added to chart yet 
+                    if (series.getChart() != null) {
+                        NumberAxis xAxis = (NumberAxis) series.getChart().getXAxis();
+                    
+                        // Shift the chart to the right if the x-axis is at the end if the chart has not been scrolled
+                        if (secondsElapsed >= xAxis.getUpperBound()) {
+                            xAxis.setLowerBound(xAxis.getLowerBound() + xTickUnit);
+                            xAxis.setUpperBound(xAxis.getUpperBound() + xTickUnit);
+                        }
+                    }
+                });
             }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void scroll(ScrollEvent e) {
+        LineChart<Number, Number> chart = (LineChart<Number, Number>) e.getSource();
+        NumberAxis xAxis = (NumberAxis) chart.getXAxis();
+
+        // On scroll left, move the x-axis to the left by xTickUnit
+        if (e.getDeltaX() > 0) {
+            double newLowerBound = xAxis.getLowerBound() - xTickUnit;
+            double newUpperBound = xAxis.getUpperBound() - xTickUnit;
+            xAxis.setLowerBound(Math.max(0, newLowerBound)); // Prevent going below 0
+            xAxis.setUpperBound(Math.max(xUpperBound, newUpperBound));
+        }
+
+        // On scroll right, only shift if there is data to show
+        else if (xAxis.getUpperBound() <= secondsElapsed) {
+            double newLowerBound = xAxis.getLowerBound() + xTickUnit;
+            double newUpperBound = xAxis.getUpperBound() + xTickUnit;
+            xAxis.setLowerBound(newLowerBound);
+            xAxis.setUpperBound(newUpperBound);
         }
     }
 }

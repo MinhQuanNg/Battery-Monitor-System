@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
@@ -53,7 +52,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -95,7 +93,9 @@ public class ControllerGeneral {
     private boolean runCharts = false;
     private SerialPort port;
     private Charts ctrlCharts;
-    private boolean first = true;
+    private boolean firstEnable = true;
+    private boolean firstCharts = true;
+    private boolean firstCellChart = true;
     private List<Boolean> runCellChart = new ArrayList<>();
 
     // Note: JavaFX optimization doesn't rerender old properties
@@ -265,10 +265,28 @@ public class ControllerGeneral {
                 dataScreenProfile(dataArray);
             }
 
-            // Init axes and series for charts
-            if (first) {
+            // Enable chart button when data is available
+            if (firstEnable) {
                 generalPane.lookup("#chartButton").setDisable(false);
+                firstEnable = false;
+            }
 
+            // Init axes and series for charts
+            if (runCharts) {
+                if (firstCharts) {
+                    Platform.runLater(() -> {
+                        ctrlCharts.initSeries(maxmin);
+                    });
+
+                    firstCharts = false;
+                }
+
+                // Update charts
+                ctrlCharts.updateSeries(maxmin, now);
+            }
+
+            // Enable cell chart buttons
+            if (firstCellChart) {
                 for (int cell = 0; cell < numCell; cell++) {
                     runCellChart.add(false);
                     Button button  = getButton(cell);
@@ -280,18 +298,7 @@ public class ControllerGeneral {
                     }
                 }
 
-                if (runCharts) {
-                    Platform.runLater(() -> {
-                        ctrlCharts.initSeries(maxmin);
-                    });
-
-                    first = false;
-                }
-            }
-
-            // Update charts
-            if (runCharts) {
-                ctrlCharts.updateSeries(maxmin, now);
+                firstCellChart = false;
             }
 
             // Update opened cell charts
@@ -302,7 +309,6 @@ public class ControllerGeneral {
                         dataArray.getJSONObject(cell).optDouble("temperature", Double.NaN), now);
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -408,7 +414,7 @@ public class ControllerGeneral {
     }
 
     private Hashtable<String, Double> calculateMaxMin(JSONArray dataArray) throws JSONException {
-        // Reinitialize data
+        // Initialize data
         double maxV = 0;
         double minV = 0;
         double sumV = 0;
@@ -640,60 +646,8 @@ public class ControllerGeneral {
         }
     }
 
-<<<<<<< HEAD
     public void SaveChanges(ActionEvent e) {
         List<TextField> textFieldsToSave = getAllTextFields(profilePane);
-=======
-
-    public void onSaveAllChangesAction() {
-        // StringBuilder allData = new StringBuilder();
-        // // Assuming you have TextField instances for each of your inputs
-        // TextField[] textFields = {maxVProText, minVProText, difVProText, maxTProText,
-        // sumMaxVProText, sumMinVProText};
-        // for (TextField textField : textFields) {
-        // String formattedData = formatData(textField.getText(), textField); //
-        // Assuming formatData method takes the text value and the TextField itself
-        // allData.append(formattedData).append("\n"); // Append a newline or other
-        // delimiter as needed
-        // }
-        // writeBoard(allData.toString());
-    }
-
-    private String getCorrespondingLabel(String textFieldId) {
-        // Example mapping, replace with actual logic
-        switch (textFieldId) {
-            case "maxVProText":
-                return setting1.getText();
-            case "minVProText":
-                return setting2.getText();
-            case "difVProText":
-                return setting5.getText();
-            case "maxTProText":
-                return setting6.getText();
-            default:
-                return null;
-        }
-    }
-
-    private boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?"); // Match a number with optional '-' and decimal.
-    }
-
-    private void showSaveConfirmationPopup(TextField textField) {
-        // IDs that require numeric input
-        List<String> numericFields = Arrays.asList("maxVProText");
-        if (numericFields.contains(textField.getId()) && !isNumeric(textField.getText())) {
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setTitle("Invalid Input");
-            errorAlert.setHeaderText("Invalid Number Format");
-            errorAlert.setContentText(
-                    "Please enter a valid number for \"" + getCorrespondingLabel(textField.getId()) + "\"" + ".");
-            errorAlert.showAndWait();
-            return; // Exit the method early
-        }
-
-        // Create a custom ButtonType for "Save"
->>>>>>> dc72b2a (fixing cellchart)
         ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "", saveButtonType, ButtonType.CANCEL);
         confirmationAlert.setTitle("Confirm Changes");
@@ -968,7 +922,7 @@ public class ControllerGeneral {
     public void chart(ActionEvent e) throws IOException {
         initCharts(numCell, new Date());
         chartStage.show();
-        first = true;
+        firstCharts = true;
         runCharts = true;
     }
 

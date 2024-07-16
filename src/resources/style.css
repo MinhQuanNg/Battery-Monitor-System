@@ -58,27 +58,27 @@
     -fx-background-color: rgb(119, 181, 247);
 }
 
-.maxT-chart .default-color0.chart-series-line {
+.maxT-chart .chart-series-line {
     -fx-stroke: red;
 }
 
-.maxT-chart .default-color0.chart-line-symbol {
+.maxT-chart .chart-line-symbol {
     -fx-background-color: red;
 }
 
-.sumV-chart .default-color0.chart-series-line {
+.sumV-chart .chart-series-line {
     -fx-stroke: black;
 }
 
-.sumV-chart .default-color0.chart-line-symbol {
+.sumV-chart .chart-line-symbol {
     -fx-background-color: black;
 }
 
-.delV-chart .default-color0.chart-series-line {
+.delV-chart .chart-series-line {
     -fx-stroke: grey;
 }
 
-.delV-chart .default-color0.chart-line-symbol {
+.delV-chart .chart-line-symbol {
     -fx-background-color: grey;
 }
 
@@ -89,12 +89,32 @@
     -fx-margin-bottom: 2px;
 }
 
-.v-chart .default-color0.chart-series-line {
+.chart-voltage .chart-series-line {
     -fx-stroke: rgb(60, 245, 60);
 }
 
-.chart-transparent .default-color0.chart-series-line {
+.chart-voltage .chart-line-symbol {
+    -fx-background-color: rgb(60, 245, 60);
+}
+
+.chart-temperature .chart-series-line {
     -fx-stroke: red;
+}
+
+.chart-temperature .chart-line-symbol {
+    -fx-background-color: red;
+}
+
+.chart-voltage .chart-legend {
+    -fx-translate-x: -20px;
+}
+
+.chart-voltage .chart-title {
+    -fx-translate-x: 25px;
+}
+
+.chart-temperature .chart-legend {
+    -fx-translate-x: 20px;
 }
 
 .chart-transparent .chart-plot-background,

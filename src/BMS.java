@@ -13,7 +13,7 @@ public class BMS extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("./resources/ScreenMain.fxml"));            
             Scene scene = new Scene(root, Style.WIDTH, Style.HEIGHT);
             stage.setScene(scene);
-            stage.setTitle("Quản lý hệ thống pin");
+            stage.setTitle("Hệ thống quản lý pin");
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
