@@ -1901,9 +1901,9 @@
                   <Image url="@../images/danger.png" />
                </image>
             </ImageView>
-            <Label fx:id="faultLabel" alignment="TOP_LEFT" layoutX="103.0" layoutY="18.0" prefHeight="36.0" prefWidth="262.0">
+            <Label fx:id="faultLabel" alignment="TOP_LEFT" layoutX="332.0" layoutY="2.0" prefHeight="52.0" prefWidth="315.0">
                <font>
-                  <Font size="10.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
          </children>
@@ -2125,40 +2125,40 @@
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </Text>
-                        <TextField fx:id="minVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="40.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.rowIndex="2">
+                        <TextField fx:id="minVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="40.0" style="-fx-background-color: #d7d3d3; -fx-border-color: black;" visible="false" GridPane.rowIndex="2">
                            <font>
                               <Font size="18.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="250.0" />
+                              <Insets left="270.0" />
                            </GridPane.margin>
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </TextField>
-                        <TextField fx:id="difVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10000.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.rowIndex="8">
+                        <TextField fx:id="difVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10000.0" style="-fx-background-color: #d7d3d3; -fx-border-color: black;" visible="false" GridPane.rowIndex="8">
                            <font>
                               <Font size="18.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="250.0" />
+                              <Insets left="270.0" />
                            </GridPane.margin>
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </TextField>
-                        <TextField fx:id="maxTProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10000.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.rowIndex="10">
+                        <TextField fx:id="maxTProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10000.0" style="-fx-background-color: #d7d3d3; -fx-border-color: black;" visible="false" GridPane.rowIndex="10">
                            <font>
                               <Font size="18.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="250.0" />
+                              <Insets left="270.0" />
                            </GridPane.margin>
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </TextField>
-                        <TextField fx:id="maxVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10000.0" style="-fx-background-color: #FED758; -fx-border-color: black;" visible="false" GridPane.halignment="RIGHT">
+                        <TextField fx:id="maxVProText" alignment="CENTER_RIGHT" onKeyPressed="#finishEdit" prefHeight="17.0" prefWidth="10000.0" style="-fx-background-color: #d7d3d3; -fx-border-color: black;" visible="false" GridPane.halignment="RIGHT">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -2166,7 +2166,7 @@
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                            <GridPane.margin>
-                              <Insets left="250.0" />
+                              <Insets left="270.0" />
                            </GridPane.margin>
                         </TextField>
                      </children>

@@ -1,20 +1,4 @@
-:root {
-    --primary-color: #87a4c8; /* Base color */
-    --primary-dark: #5a7088; /* Darker shade of the base color for depth */
-    --primary-light: #a9c9e8; /* Lighter shade of the base color for highlights */
 
-    --background-dark: #2e3136; /* Dark background, similar to Discord's main background */
-    --background-light: #36393f; /* Lighter dark shade for secondary elements */
-    --background-lightest: #40444b; /* Even lighter for tertiary elements, panels, or modals */
-
-    --text-primary: #ffffff; /* Primary text color */
-    --text-secondary: #b9bbbe; /* Secondary text color for less emphasis */
-    --text-muted: #72767d; /* Muted text color for less important text */
-
-    --accent-green: #43b581; /* Success or online status */
-    --accent-red: #f04747; /* Errors or offline status */
-    --accent-yellow: #faa61a; /* Warnings or away status */
-}
 #background {
     -fx-background-image: url("../images/hinhnen.jpg");
     -fx-background-size: 100% 100%;
@@ -28,11 +12,11 @@
 .nav-header {
     -fx-background-radius: 0 0 7 7;
     -fx-border-radius: 0 0 7 7;
-    -fx-background-color: var(--primary-color);
+    -fx-background-color: #87a4c8;
     -fx-text-fill: rgb(0, 0, 0);
 }
 .nav-footer {
-    -fx-background-color: var(--primary-color);
+    -fx-background-color: #87a4c8;
     -fx-text-fill: white;
 }
 
@@ -41,11 +25,11 @@
 }
 
 .pane-c {
-    -fx-background-color: var(--primary-light);  
+    -fx-background-color: #d7d3d3;  
 }
 
 .profile-pane{
-    -fx-background-color: var(--primary-light);
+    -fx-background-color: #d7d3d3;
     -fx-text-fill: black;
 
 }
@@ -71,7 +55,7 @@
 }
 
 .toggle-button:selected {
-    -fx-background-color: var(--primary-dark);
+    -fx-background-color: #5a7088;
 }
 
 .maxV-chart .default-color0.chart-series-line {
