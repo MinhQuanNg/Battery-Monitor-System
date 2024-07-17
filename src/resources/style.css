@@ -8,15 +8,30 @@
     -fx-border-radius: 10px;
 }
 
-.nav {
+.nav-header {
     -fx-background-radius: 0 0 7 7;
     -fx-border-radius: 0 0 7 7;
+    -fx-background-color: #677f9c;
+    -fx-text-fill: rgb(0, 0, 0);
+}
+.nav-footer {
+    -fx-background-color: #677f9c;
+    -fx-text-fill: white;
 }
 
 .nav-button {
     -fx-background-color: transparent;
 }
 
+.pane-c {
+    -fx-background-color: #d7d3d3;  
+}
+
+.profile-pane{
+    -fx-background-color: #d7d3d3;
+    -fx-text-fill: black;
+
+}
 .selected {
     -fx-background-color: rgb(171, 169, 169);
     -fx-opacity: 0.4;
@@ -81,7 +96,9 @@
 .delV-chart .chart-line-symbol {
     -fx-background-color: grey;
 }
-
+.cell-text{
+    -fx-font-size: 16px;
+}
 .cell-chart-button {
     /* -fx-background-color: transparent; */
     -fx-pref-width: 70px;
@@ -127,3 +144,4 @@
 .chart-transparent .chart-title {
     -fx-opacity: 0;
 }
+}   

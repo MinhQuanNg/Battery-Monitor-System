@@ -14,7 +14,7 @@ public class CellChart {
     @FXML private NumberAxis VxAxis, TxAxis, vAxis, tAxis;
     private Date startTime;
     private int xUpperBound = 5;
-    private int xTickUnit = xUpperBound / 10;
+    private double xTickUnit = (double) xUpperBound / 10;
     private double secondsElapsed;
 
     public CellChart(int cell) {
@@ -34,6 +34,7 @@ public class CellChart {
         
         // invisible, setting these for alignment
         TxAxis.setAutoRanging(false);
+        TxAxis.setLabel("...");
         TxAxis.setLowerBound(0);
         TxAxis.setUpperBound(xUpperBound);
 

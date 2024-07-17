@@ -43,321 +43,321 @@
             <RowConstraints fillHeight="false" minHeight="-Infinity" prefHeight="100.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <Label fx:id="cell1Label" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell1Label" styleClass="cell-text" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell2Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell2Label" styleClass="cell-text" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell3Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell3Label" styleClass="cell-text" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell4Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell4Label" styleClass="cell-text" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell5Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell5Label" styleClass="cell-text" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell6Label" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell6Label" styleClass="cell-text" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell7Label" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell7Label" styleClass="cell-text" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell8Label" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell8Label" styleClass="cell-text" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell9Label" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell9Label" styleClass="cell-text" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell10Label" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell10Label" styleClass="cell-text" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell11Label" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell11Label" styleClass="cell-text" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell12Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell12Label" styleClass="cell-text" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell13Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell13Label" styleClass="cell-text" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell14Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell14Label" styleClass="cell-text" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell15Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell15Label" styleClass="cell-text" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell16Label" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell16Label" styleClass="cell-text" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell17Label" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell17Label" styleClass="cell-text" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell18Label" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell18Label" styleClass="cell-text" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell19Label" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell19Label" styleClass="cell-text" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell20Label" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell20Label" styleClass="cell-text" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell21Label" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell21Label" styleClass="cell-text" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell22Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell22Label" styleClass="cell-text" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell23Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell23Label" styleClass="cell-text" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell24Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell24Label" styleClass="cell-text" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell25Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell25Label" styleClass="cell-text" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell26Label" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell26Label" styleClass="cell-text" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell27Label" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell27Label" styleClass="cell-text" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell28Label" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell28Label" styleClass="cell-text" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell29Label" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell29Label" styleClass="cell-text" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell30Label" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell30Label" styleClass="cell-text" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell31Label" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell31Label" styleClass="cell-text" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell32Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell32Label" styleClass="cell-text" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell33Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell33Label" styleClass="cell-text" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell34Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell34Label" styleClass="cell-text" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell35Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell35Label" styleClass="cell-text" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell36Label" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell36Label" styleClass="cell-text" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell37Label" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell37Label" styleClass="cell-text" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell38Label" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell38Label" styleClass="cell-text" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell39Label" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell39Label" styleClass="cell-text" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="cell40Label" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <Label fx:id="cell40Label" styleClass="cell-text" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets top="18.0" />
@@ -1562,7 +1562,7 @@
             </VBox>
          </children>
       </GridPane>
-      <GridPane prefHeight="67.0" prefWidth="900.0" style="-fx-background-color: #FEBB58;" styleClass="nav" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane prefHeight="67.0" prefWidth="900.0" styleClass="nav-header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="59.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="465.5" />
@@ -1609,7 +1609,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Label text="HỆ THỐNG QUẢN LÝ PIN" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+            <Label styleClass="nav-header" text="HỆ THỐNG QUẢN LÝ PIN" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
@@ -1625,7 +1625,7 @@
             <Insets right="10.0" />
          </opaqueInsets>
       </GridPane>
-      <GridPane layoutY="356.0" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #FEBB58;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <GridPane layoutY="356.0" prefHeight="60.0" prefWidth="600.0" styleClass="nav-footer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -1635,7 +1635,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ToggleButton fx:id="nav1" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#general" prefHeight="156.0" prefWidth="600.0" text="Thông tin chung" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ToggleButton fx:id="nav1" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#general" prefHeight="156.0" prefWidth="600.0" selected="true" styleClass="nav-footer" text="Thông tin chung" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <toggleGroup>
                   <ToggleGroup fx:id="nav" />
                </toggleGroup>
@@ -1643,11 +1643,11 @@
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="nav2" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#detail" prefHeight="340.0" prefWidth="600.0" text="Thông tin chi tiết" textAlignment="CENTER" toggleGroup="$nav" GridPane.columnIndex="1">
+            <ToggleButton fx:id="nav2" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#detail" prefHeight="340.0" prefWidth="600.0" styleClass="nav-footer" text="Thông tin chi tiết" textAlignment="CENTER" toggleGroup="$nav" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
                </font></ToggleButton>
-            <ToggleButton fx:id="nav3" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#profile" prefHeight="223.0" prefWidth="600.0" text="Hồ sơ thiết lập" textAlignment="CENTER" toggleGroup="$nav" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ToggleButton fx:id="nav3" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#profile" prefHeight="223.0" prefWidth="600.0" styleClass="nav-footer" text="Hồ sơ thiết lập" textAlignment="CENTER" toggleGroup="$nav" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font></ToggleButton>
@@ -1823,7 +1823,7 @@
             </ImageView>
          </children>
       </GridPane>
-      <Pane layoutX="50.0" layoutY="407.0" prefHeight="56.0" prefWidth="800.0" style="-fx-background-color: #FEBB58;" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+      <Pane layoutX="50.0" layoutY="407.0" prefHeight="56.0" prefWidth="800.0" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
          <children>
             <GridPane alignment="CENTER" layoutX="103.0" layoutY="1.0" prefHeight="56.0" prefWidth="208.0">
               <columnConstraints>
@@ -1868,9 +1868,10 @@
          <styleClass>
             <String fx:value="round" />
             <String fx:value="general" />
+            <String fx:value="pane-c" />
          </styleClass>
       </Pane>
-      <Pane fx:id="errorPane" layoutX="50.0" layoutY="473.0" prefHeight="56.0" prefWidth="800.0" style="-fx-background-color: #FEBB58;" styleClass="round" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+      <Pane fx:id="errorPane" layoutX="50.0" layoutY="473.0" prefHeight="56.0" prefWidth="800.0" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
          <children>
             <GridPane layoutX="103.0" layoutY="11.0" prefHeight="15.0" prefWidth="147.0">
               <columnConstraints>
@@ -1901,6 +1902,10 @@
                </font>
             </Label>
          </children>
+         <styleClass>
+            <String fx:value="round" />
+            <String fx:value="pane-c" />
+         </styleClass>
       </Pane>
       <VBox alignment="CENTER" layoutX="199.0" layoutY="50.0" prefHeight="120.0" prefWidth="200.0" styleClass="general" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="50.0">
          <children>
@@ -1917,7 +1922,7 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <AnchorPane prefHeight="254.0" prefWidth="238.0" style="-fx-background-color: #FEBB58;" styleClass="round">
+            <AnchorPane prefHeight="254.0" prefWidth="238.0">
                <children>
                   <GridPane fx:id="baove" layoutX="12.0" layoutY="32.0" prefHeight="222.0" prefWidth="210.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="32.0">
                      <columnConstraints>
@@ -2164,7 +2169,7 @@
                         <Insets bottom="10.0" top="5.0" />
                      </padding>
                   </GridPane>
-                  <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="29.0" layoutY="6.0" prefHeight="27.0" prefWidth="169.0" text="THÔNG SỐ BẢO VỆ" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="6.0">
+                  <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="29.0" layoutY="6.0" prefHeight="27.0" prefWidth="169.0" styleClass="profile-pane" text="THÔNG SỐ BẢO VỆ" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="6.0">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
@@ -2182,8 +2187,12 @@
                      </cursor>
                   </Button>
                </children>
+               <styleClass>
+                  <String fx:value="round" />
+                  <String fx:value="profile-pane" />
+               </styleClass>
             </AnchorPane>
-            <AnchorPane prefHeight="261.0" prefWidth="225.0" style="-fx-background-color: #FEBB58;" styleClass="round" GridPane.columnIndex="2">
+            <AnchorPane prefHeight="261.0" prefWidth="225.0" GridPane.columnIndex="2">
                <children>
                   <GridPane layoutX="12.0" layoutY="33.0" prefHeight="222.0" prefWidth="200.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="33.0">
                      <columnConstraints>
@@ -2267,12 +2276,16 @@
                         <Insets bottom="10.0" top="5.0" />
                      </padding>
                   </GridPane>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="6.0" prefHeight="24.0" prefWidth="156.0" text="ĐẶC TÍNH PIN" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="6.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="6.0" prefHeight="24.0" prefWidth="156.0" styleClass="profile-pane" text="ĐẶC TÍNH PIN" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="6.0">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
                   </Label>
                </children>
+               <styleClass>
+                  <String fx:value="round" />
+                  <String fx:value="profile-pane" />
+               </styleClass>
             </AnchorPane>
          </children>
       </GridPane>
