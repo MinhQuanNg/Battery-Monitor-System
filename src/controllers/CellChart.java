@@ -13,7 +13,7 @@ public class CellChart {
     @FXML private LineChart<Number, Number> chartV, chartT;
     @FXML private NumberAxis VxAxis, TxAxis, vAxis, tAxis;
     private Date startTime;
-    private int xUpperBound = 5;
+    private int xUpperBound = 20;
     private double xTickUnit = (double) xUpperBound / 10;
     private double secondsElapsed;
 
@@ -59,15 +59,13 @@ public class CellChart {
         temperature.setName("Temperature");
 
         chartV.getData().add(voltage);
-        chartV.getStyleClass().add("chart-voltage");
         chartT.getData().add(temperature);
-        chartT.getStyleClass().add("chart-temperature");
 
         startTime = new Date();
     }
 
     public void updateSeries(double voltage, double temperature, Date timestamp) {
-        int secondsElapsed = (int) ((timestamp.getTime() - startTime.getTime()) / 1000);
+        secondsElapsed = (int) ((timestamp.getTime() - startTime.getTime()) / 1000);
 
         LineChart.Series<Number, Number> voltageSeries = chartV.getData().get(0);
         LineChart.Series<Number, Number> temperatureSeries = chartT.getData().get(0);
@@ -79,29 +77,31 @@ public class CellChart {
             if (secondsElapsed >= VxAxis.getUpperBound()) {
                 VxAxis.setLowerBound(VxAxis.getLowerBound() + xTickUnit);
                 VxAxis.setUpperBound(VxAxis.getUpperBound() + xTickUnit);
+                TxAxis.setLowerBound(TxAxis.getLowerBound() + xTickUnit);
+                TxAxis.setUpperBound(TxAxis.getUpperBound() + xTickUnit);
             }
         });
     }
 
-    @SuppressWarnings("unchecked")
     public void scroll(ScrollEvent e) {
-        LineChart<Number, Number> chart = (LineChart<Number, Number>) e.getSource();
-        NumberAxis xAxis = (NumberAxis) chart.getXAxis();
-
         // On scroll left, move the x-axis to the left by xTickUnit
         if (e.getDeltaX() > 0) {
-            double newLowerBound = xAxis.getLowerBound() - xTickUnit;
-            double newUpperBound = xAxis.getUpperBound() - xTickUnit;
-            xAxis.setLowerBound(Math.max(0, newLowerBound)); // Prevent going below 0
-            xAxis.setUpperBound(Math.max(xUpperBound, newUpperBound));
+            double newLowerBound = VxAxis.getLowerBound() - xTickUnit;
+            double newUpperBound = VxAxis.getUpperBound() - xTickUnit;
+            VxAxis.setLowerBound(Math.max(0, newLowerBound)); // Prevent going below 0
+            VxAxis.setUpperBound(Math.max(xUpperBound, newUpperBound));
+            TxAxis.setLowerBound(Math.max(0, newLowerBound));
+            TxAxis.setUpperBound(Math.max(xUpperBound, newUpperBound));
         }
 
         // On scroll right, only shift if there is data to show
-        else if (xAxis.getUpperBound() <= secondsElapsed) {
-            double newLowerBound = xAxis.getLowerBound() + xTickUnit;
-            double newUpperBound = xAxis.getUpperBound() + xTickUnit;
-            xAxis.setLowerBound(newLowerBound);
-            xAxis.setUpperBound(newUpperBound);
+        else if (VxAxis.getUpperBound() <= secondsElapsed) {
+            double newLowerBound = TxAxis.getLowerBound() + xTickUnit;
+            double newUpperBound = TxAxis.getUpperBound() + xTickUnit;
+            VxAxis.setLowerBound(newLowerBound);
+            VxAxis.setUpperBound(newUpperBound);
+            TxAxis.setLowerBound(newLowerBound);
+            TxAxis.setUpperBound(newUpperBound);
         }
     }
 }

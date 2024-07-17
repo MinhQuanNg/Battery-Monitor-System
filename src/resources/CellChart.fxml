@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <LineChart fx:id="chartV" animated="false" horizontalZeroLineVisible="false" prefHeight="480.0" prefWidth="595.0" verticalZeroLineVisible="false">
+      <LineChart fx:id="chartV" animated="false" horizontalZeroLineVisible="false" prefHeight="480.0" prefWidth="597.0" styleClass="chart-voltage" verticalZeroLineVisible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="0.0">
         <xAxis>
           <NumberAxis fx:id="VxAxis" side="BOTTOM" />
         </xAxis>
@@ -14,13 +16,20 @@
           <NumberAxis fx:id="vAxis" side="LEFT" />
         </yAxis>
       </LineChart>
-      <LineChart fx:id="chartT" animated="false" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutX="48.0" prefHeight="480.0" prefWidth="597.0" styleClass="chart-transparent" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+      <LineChart fx:id="chartT" animated="false" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutX="16.0" prefHeight="480.0" prefWidth="621.0" verticalGridLinesVisible="false" verticalZeroLineVisible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <xAxis>
           <NumberAxis fx:id="TxAxis" opacity="0.0" side="BOTTOM" />
         </xAxis>
         <yAxis>
           <NumberAxis fx:id="tAxis" side="RIGHT" />
         </yAxis>
+         <padding>
+            <Insets bottom="4.5" left="34.0" />
+         </padding>
+         <styleClass>
+            <String fx:value="chart-transparent" />
+            <String fx:value="chart-temperature" />
+         </styleClass>
       </LineChart>
    </children>
 </AnchorPane>

@@ -31,11 +31,11 @@ public class Excel {
     private String sheetName;
 
     public Excel() throws IOException {
-        fileName = new File("data/data.xlsx");
+        fileName = new File("data/buffer.xlsx");
         sheetName = "Data";
 
         XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet(sheetName);
+        workbook.createSheet(sheetName);
 
         // Save the workbook
         FileOutputStream outputStream = new FileOutputStream(fileName);

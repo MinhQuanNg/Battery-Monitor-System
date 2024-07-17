@@ -100,7 +100,6 @@ public class Controller {
                 Platform.exit();
             });
 
-            stage.setTitle("Hệ thống quản lý pin");
             stage.show();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

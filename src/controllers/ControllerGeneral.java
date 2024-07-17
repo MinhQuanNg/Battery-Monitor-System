@@ -10,7 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import javafx.util.Duration;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
@@ -28,10 +27,6 @@ import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.Gauge.SkinType;
 import eu.hansolo.medusa.GaugeBuilder;
 import eu.hansolo.medusa.Section;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -120,7 +115,6 @@ public class ControllerGeneral {
     public void initialize() {
         // port.openPort();
         currentScreen = screen[0];
-
        
         initCharacteristics();
         // Add SoC gauge on ScreenGeneral
@@ -134,7 +128,8 @@ public class ControllerGeneral {
                         new Section(10, 20, Color.rgb(255, 235, 59)), // YELLOW
                         new Section(20, 100, Color.GREEN))
                 .build();
-        batteryBox.getChildren().add(gauge);
+        
+                batteryBox.getChildren().add(gauge);
 
         // Create excel
         try {
@@ -297,6 +292,7 @@ public class ControllerGeneral {
                 if (firstCharts) {
                     Platform.runLater(() -> {
                         ctrlCharts.initSeries(maxmin);
+                        chartStage.show();
                     });
 
                     firstCharts = false;
@@ -670,6 +666,8 @@ public class ControllerGeneral {
         }
     }
 
+    // Board expects data in the format "o:100;u:100;d:100;t:100\n"
+    
     public void SaveChanges(ActionEvent e) {
         List<TextField> textFieldsToSave = getAllTextFields(profilePane);
         ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
@@ -708,7 +706,7 @@ public class ControllerGeneral {
                     }
 
                     if (isValid) {
-                        writeBoard(formatAndWriteValue(textField, textField.getText()));
+                        writeBoard(formatForWrite(textField.getId(), textField.getText()));
                         updateLabel(textField);
                         System.out.println(textField.getText() + " saved.");
                         System.out.println("-----");
@@ -721,6 +719,8 @@ public class ControllerGeneral {
                     }
                 }
             }
+
+            writeBoard("\n");
         } else {
             for (TextField textField : textFieldsToSave) {
                 if (textField.isVisible()) {
@@ -909,26 +909,27 @@ public class ControllerGeneral {
         });
     }
 
-    private String formatAndWriteValue(TextField textField, String inputValue) {
+
+    private String formatForWrite(String id, String inputValue) {
         String output = "";
         double setValue = Double.parseDouble(inputValue);
 
-        switch (textField.getId()) {
+        switch (id) {
             case "maxVProText":
-                output = String.format("%d.o", (int) (setValue * 100));
+                output = String.format("o:%d", (int) (setValue * 100));
                 break;
             case "minVProText":
-                output = String.format("%d.u", (int) (setValue * 100));
+                output = String.format("u:%d", (int) (setValue * 100));
                 break;
             case "difVProText":
-                output = String.format("%d.d", (int) (setValue * 100));
+                output = String.format("d:%d", (int) (setValue * 100));
                 break;
             case "maxTProText":
-                output = String.format("%d.t", (int) (setValue * 10));
+                output = String.format("t:%d", (int) (setValue * 10));
                 break;
         }
 
-        return output;
+        return output + ";";
     }
 
     public void setPort(SerialPort port) {
@@ -949,7 +950,6 @@ public class ControllerGeneral {
 
     public void chart(ActionEvent e) throws IOException {
         initCharts(numCell, new Date());
-        chartStage.show();
         firstCharts = true;
         runCharts = true;
     }
@@ -979,14 +979,14 @@ public class ControllerGeneral {
         Parent root = loader.load();
         Scene chartScene = new Scene(root, Style.CELL_CHART_WIDTH, Style.CELL_CHART_HEIGHT);
 
-        Stage chartStage = new Stage();
-        chartStage.setTitle("Đồ thị trạng thái pin " + timestamp);
-        chartStage.setScene(chartScene);
-        chartStage.setOnCloseRequest(event -> {
+        Stage ccStage = new Stage();
+        ccStage.setTitle("Đồ thị trạng thái pin " + timestamp);
+        ccStage.setScene(chartScene);
+        ccStage.setOnCloseRequest(event -> {
             runCellChart.set(cell, false);
         });
 
-        chartStage.show();
+        ccStage.show();
 
         return ctrlCellChart;
     }
