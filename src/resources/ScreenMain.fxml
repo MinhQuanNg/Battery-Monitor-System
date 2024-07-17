@@ -17,7 +17,7 @@
          <children>
             <ImageView fitHeight="229.0" fitWidth="186.0" preserveRatio="true">
                <image>
-                  <Image url="@../images/logo4.png" />
+                  <Image url="@../../bin/images/logo.png" />
                </image>
                <VBox.margin>
                   <Insets bottom="20.0" />

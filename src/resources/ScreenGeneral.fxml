@@ -1656,7 +1656,7 @@
                   <Image url="@../images/battery.png" />
                </image>
                <GridPane.margin>
-                  <Insets top="4.0" />
+                  <Insets top="10.0" />
                </GridPane.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -1667,7 +1667,7 @@
                   <Image url="@../images/ellipsis.png" />
                </image>
                <GridPane.margin>
-                  <Insets />
+                  <Insets top="5.0" />
                </GridPane.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -1678,7 +1678,7 @@
                   <Image url="@../images/info.png" />
                </image>
                <GridPane.margin>
-                  <Insets top="3.0" />
+                  <Insets top="10.0" />
                </GridPane.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -1864,6 +1864,11 @@
                   <Image url="@../images/temper.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="39.0" layoutX="743.0" layoutY="7.0" preserveRatio="true" styleClass="general">
+               <image>
+                  <Image url="@../../bin/images/chart.png" />
+               </image>
+            </ImageView>
          </children>
          <styleClass>
             <String fx:value="round" />
@@ -1909,7 +1914,7 @@
       </Pane>
       <VBox alignment="CENTER" layoutX="199.0" layoutY="50.0" prefHeight="120.0" prefWidth="200.0" styleClass="general" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="50.0">
          <children>
-            <HBox fx:id="batteryBox" alignment="CENTER" prefHeight="131.0" prefWidth="205.0" />
+            <HBox fx:id="batteryBox" alignment="CENTER" prefHeight="190.0" prefWidth="500.0" />
          </children>
       </VBox>
       <GridPane fx:id="profilePane" alignment="CENTER" layoutX="41.0" layoutY="80.0" prefHeight="450.0" prefWidth="518.0" visible="false" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="80.0">
@@ -2289,6 +2294,6 @@
             </AnchorPane>
          </children>
       </GridPane>
-      <Button id="chartButton" disable="true" layoutX="91.0" layoutY="138.0" mnemonicParsing="false" onAction="#chart" text="Button" />
+      <Button id="chartButton" disable="true" layoutX="92.0" layoutY="142.0" mnemonicParsing="false" onAction="#chart" style="-fx-background-color: transparent;" />
    </children>
 </AnchorPane>

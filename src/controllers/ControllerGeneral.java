@@ -1,4 +1,5 @@
 package controllers;
+
 import constants.*;
 import utilities.*;
 
@@ -9,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javafx.util.Duration;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
@@ -26,7 +28,10 @@ import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.Gauge.SkinType;
 import eu.hansolo.medusa.GaugeBuilder;
 import eu.hansolo.medusa.Section;
-
+import javafx.animation.Interpolator;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,26 +69,38 @@ public class ControllerGeneral {
     private Stage manualStage = null, chartStage = null;
 
     // ScreenGeneral
-    @FXML private AnchorPane generalPane;
-    @FXML private HBox batteryBox;
-    @FXML private Label maxVLabel, minVLabel, delVLabel, sumVLabel, avgVLabel, maxTLabel, avgTLabel;
-    @FXML private Label numFaultLabel, faultLabel;
+    @FXML
+    private AnchorPane generalPane;
+    @FXML
+    private HBox batteryBox;
+    @FXML
+    private Label maxVLabel, minVLabel, delVLabel, sumVLabel, avgVLabel, maxTLabel, avgTLabel;
+    @FXML
+    private Label numFaultLabel, faultLabel;
 
     // ScreenDetail
-    @FXML private GridPane cellPane;
+    @FXML
+    private GridPane cellPane;
 
     // Shared
-    @FXML private Pane errorPane;
+    @FXML
+    private Pane errorPane;
 
     // ScreenProfile
-    @FXML private GridPane profilePane;
-    @FXML private Label setting1, setting2, setting5, setting6;
-    @FXML private Label maxVPro, minVPro, sumMaxVPro, sumMinVPro, difVPro, maxTPro;
-    @FXML private Button set1, set2, set5, set6, save, focus;
-    @FXML private TextField maxVProText, minVProText, difVProText, maxTProText;
-    @FXML private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
+    @FXML
+    private GridPane profilePane;
+    @FXML
+    private Label setting1, setting2, setting5, setting6;
+    @FXML
+    private Label maxVPro, minVPro, sumMaxVPro, sumMinVPro, difVPro, maxTPro;
+    @FXML
+    private Button set1, set2, set5, set6, save, focus;
+    @FXML
+    private TextField maxVProText, minVProText, difVProText, maxTProText;
+    @FXML
+    private Label typeLabel, numCellLabel, ratioLabel, chargeLabel, drainLabel, capacityLabel;
 
-    final private String[] screen = {"General", "Detail", "Profile"};
+    final private String[] screen = { "General", "Detail", "Profile" };
     private String currentScreen;
 
     private Excel excel;
@@ -104,18 +121,19 @@ public class ControllerGeneral {
         // port.openPort();
         currentScreen = screen[0];
 
+       
         initCharacteristics();
-
-        
         // Add SoC gauge on ScreenGeneral
         gauge = GaugeBuilder.create()
-        .skinType(SkinType.BATTERY)
-        .animated(true)
-        .sectionsVisible(true)
-        .sections(new Section(0, 10, Color.RED),
-                    new Section(10, 20, Color.rgb(255,235,59)), //YELLOW
-                    new Section(20, 100, Color.GREEN))
-        .build();
+                .skinType(SkinType.BATTERY)
+                .animated(true)
+                .prefHeight(generalPane.getHeight() / 2)
+                .prefWidth(generalPane.getWidth() / 2)
+                .sectionsVisible(true)
+                .sections(new Section(0, 10, Color.RED),
+                        new Section(10, 20, Color.rgb(255, 235, 59)), // YELLOW
+                        new Section(20, 100, Color.GREEN))
+                .build();
         batteryBox.getChildren().add(gauge);
 
         // Create excel
@@ -154,7 +172,7 @@ public class ControllerGeneral {
     // TODO: reuse?
     public void back(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("../resources/ScreenMain.fxml"));
-        stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root, Style.WIDTH, Style.HEIGHT);
         stage.setScene(scene);
         stage.show();
@@ -186,7 +204,6 @@ public class ControllerGeneral {
         for (Node node : findNodesByClass(generalPane, "general")) {
             node.setVisible(true);
         }
-
         errorPane.setVisible(true);
 
         cellPane.setVisible(false);
@@ -197,9 +214,8 @@ public class ControllerGeneral {
     public void detail(ActionEvent e) {
         currentScreen = screen[1];
         for (Node node : findNodesByClass(generalPane, "general")) {
-            node.setVisible(false);  // Hide nodes on ScreenGeneral
+            node.setVisible(false); // Hide nodes on ScreenGeneral
         }
-
         errorPane.setVisible(true);
 
         cellPane.setVisible(true);
@@ -213,25 +229,25 @@ public class ControllerGeneral {
         profilePane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
             Node target = (Node) event.getTarget(); // Get the target of the click event
             if (!(target instanceof Button)) {
-                if(!(target instanceof TextField)){
+                if (!(target instanceof TextField)) {
                     return;
                 }
-                for (TextField textField : TextFields){
+                for (TextField textField : TextFields) {
                     textField.setVisible(false);
                     save.setVisible(false);
-                    }
                 }
-            
+            }
+
         });
         for (Node node : findNodesByClass(generalPane, "general")) {
-            node.setVisible(false);  // Hide nodes on ScreenGeneral
+            node.setVisible(false); // Hide nodes on ScreenGeneral
         }
-
         errorPane.setVisible(false);
 
         cellPane.setVisible(false);
 
         profilePane.setVisible(true);
+    
     }
 
     public void processData(JSONArray dataArray, Date now) {
@@ -245,7 +261,7 @@ public class ControllerGeneral {
         // TODO: get battery characteristics
         // characteristics.put(...);
         updateCharacteristics();
-        
+
         try {
             Hashtable<String, Double> maxmin = calculateMaxMin(dataArray);
 
@@ -294,7 +310,7 @@ public class ControllerGeneral {
             if (firstCellChart) {
                 for (int cell = 0; cell < numCell; cell++) {
                     runCellChart.add(false);
-                    Button button  = getButton(cell);
+                    Button button = getButton(cell);
 
                     if (button != null) {
                         button.setDisable(false);
@@ -311,7 +327,7 @@ public class ControllerGeneral {
                 if (runCellChart.get(cell)) {
                     CellChart ctrl = (CellChart) getButton(cell).getUserData();
                     ctrl.updateSeries(dataArray.getJSONObject(cell).optDouble("voltage", Double.NaN),
-                        dataArray.getJSONObject(cell).optDouble("temperature", Double.NaN), now);
+                            dataArray.getJSONObject(cell).optDouble("temperature", Double.NaN), now);
                 }
             }
         } catch (Exception e) {
@@ -323,15 +339,15 @@ public class ControllerGeneral {
         int row = cell / cellPane.getColumnCount();
         int column = cell % cellPane.getColumnCount();
         Button button = (Button) cellPane.getChildren().stream()
-            .filter(node -> {
-                Integer rowIdx = GridPane.getRowIndex(node);
-                Integer colIdx = GridPane.getColumnIndex(node);
-                return (node instanceof Button) && 
-                    rowIdx != null && rowIdx == row && 
-                    colIdx != null && colIdx == column;
-            })
-            .findFirst()
-            .orElse(null);
+                .filter(node -> {
+                    Integer rowIdx = GridPane.getRowIndex(node);
+                    Integer colIdx = GridPane.getColumnIndex(node);
+                    return (node instanceof Button) &&
+                            rowIdx != null && rowIdx == row &&
+                            colIdx != null && colIdx == column;
+                })
+                .findFirst()
+                .orElse(null);
 
         return button;
     }
@@ -341,6 +357,7 @@ public class ControllerGeneral {
         String strDate = sdfDate.format(now);
         return strDate;
     }
+
     // Update ScreenGeneral
     private void dataScreenGeneral(JSONArray dataArray, Hashtable<String, Double> maxmin) throws JSONException {
         final double maxV = maxmin.get("maxV");
@@ -360,7 +377,7 @@ public class ControllerGeneral {
             sumVLabel.setText(String.format("%.2f", sumV) + "V");
             avgVLabel.setText(String.format("%.2f", avgV) + "V");
             avgVLabel.setText(String.format("%.2f", avgV) + "V");
-            
+
             maxTLabel.setText(String.format("%.2f", maxT) + "°C");
             avgTLabel.setText(String.format("%.2f", avgT) + "°C");
         });
@@ -401,7 +418,8 @@ public class ControllerGeneral {
 
             updateDataLabels((Parent) dataBoxes.get(cellNo), voltage, temperature, state);
 
-            // System.out.println("Cell " + i + ": " + "Voltage: " + voltage + ", Temperature: " + temperature);
+            // System.out.println("Cell " + i + ": " + "Voltage: " + voltage + ",
+            // Temperature: " + temperature);
         }
 
         updateFault(maxmin);
@@ -432,7 +450,7 @@ public class ControllerGeneral {
 
             double voltage = dataObject.optDouble("voltage", Double.NaN);
             double temperature = dataObject.optDouble("temperature", Double.NaN);
-            
+
             if (i == 0) {
                 int SOC = dataObject.optInt("SOC", 0);
 
@@ -463,7 +481,7 @@ public class ControllerGeneral {
         delV = maxV - minV;
 
         Hashtable<String, Double> maxmin = new Hashtable<>();
-        
+
         maxmin.put("maxV", maxV);
         maxmin.put("minV", minV);
         maxmin.put("maxT", maxT);
@@ -477,12 +495,12 @@ public class ControllerGeneral {
     private List<Node> findNodesByClass(Parent root, String className) {
         List<Node> matchingNodes = new ArrayList<>();
         for (Node node : root.getChildrenUnmodifiable()) {
-          if (node.getStyleClass().contains(className)) {
-            matchingNodes.add(node);
-          }
-          if (node instanceof Parent) {
-            matchingNodes.addAll(findNodesByClass((Parent) node, className));
-          }
+            if (node.getStyleClass().contains(className)) {
+                matchingNodes.add(node);
+            }
+            if (node instanceof Parent) {
+                matchingNodes.addAll(findNodesByClass((Parent) node, className));
+            }
         }
         return matchingNodes;
     }
@@ -491,9 +509,9 @@ public class ControllerGeneral {
     private List<Label> findLabels(Parent root) {
         List<Label> labels = new ArrayList<>();
         for (Node node : root.getChildrenUnmodifiable()) {
-          if (node instanceof Label) {
-            labels.add((Label) node);
-          }
+            if (node instanceof Label) {
+                labels.add((Label) node);
+            }
         }
         return labels;
     }
@@ -551,19 +569,19 @@ public class ControllerGeneral {
         if (selectedFile != null) {
             String fileName = selectedFile.getName();
             if (!fileName.endsWith(".xlsx")) {
-              fileName += ".xlsx";
+                fileName += ".xlsx";
             }
             selectedFile = new File(selectedFile.getParent(), fileName);
-            
+
             // Proceed with saving the Excel file to the selected path
             XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(excel.getFileName()));
-  
+
             // Write the workbook to the chosen file
             FileOutputStream outputStream = new FileOutputStream(selectedFile);
             workbook.write(outputStream);
             outputStream.close();
             workbook.close();
-            
+
             System.out.println("Excel file saved successfully!");
         } else {
             // Handle case where user cancels the dialog
@@ -621,28 +639,29 @@ public class ControllerGeneral {
             }
         });
     }
-    
+
     private void updateVisibilityAndFocus(Button btn, TextField textField, Label label) {
         save.setVisible(true);
         textField.setVisible(true);
         textField.setText(label.getText());
         textField.requestFocus();
-        // focus.setDisable(false);   
+        // focus.setDisable(false);
     }
 
     // @Override
     // public void mouseExited(MouseEvent e) {
-    //         profilePane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-    //             List<TextField> textFieldsToSave = getAllTextFields(profilePane);
-    //             for (TextField textField : textFieldsToSave) {
-    //                 if (textField.isVisible()) {
-    //             if (!(event.getTarget() instanceof TextField) || event.getTarget() != textField) {
-    //                 textField.setVisible(false);
-    //             }
-    //         }
-    //     }
-    //         });
-    //     });
+    // profilePane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+    // List<TextField> textFieldsToSave = getAllTextFields(profilePane);
+    // for (TextField textField : textFieldsToSave) {
+    // if (textField.isVisible()) {
+    // if (!(event.getTarget() instanceof TextField) || event.getTarget() !=
+    // textField) {
+    // textField.setVisible(false);
+    // }
+    // }
+    // }
+    // });
+    // });
     // }
 
     public void finishEdit(KeyEvent e) {
@@ -658,14 +677,14 @@ public class ControllerGeneral {
         confirmationAlert.setTitle("Confirm Changes");
         confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu tất cả thay đổi?");
         Optional<ButtonType> response = confirmationAlert.showAndWait();
-    
+
         if (response.isPresent() && response.get() == saveButtonType) {
             for (TextField textField : textFieldsToSave) {
                 if (textField.isVisible() && isNumeric(textField.getText())) {
                     double value = Double.parseDouble(textField.getText());
                     boolean isValid = false;
                     String errorText = "";
-    
+
                     switch (textField.getId()) {
                         case "maxVProText":
                             isValid = value >= 0 && value <= 10;
@@ -687,10 +706,12 @@ public class ControllerGeneral {
                             isValid = true; // Assume other fields don't have specific validation rules
                             break;
                     }
-    
+
                     if (isValid) {
                         writeBoard(formatAndWriteValue(textField, textField.getText()));
                         updateLabel(textField);
+                        System.out.println(textField.getText() + " saved.");
+                        System.out.println("-----");
                     } else {
                         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                         errorAlert.setTitle("Invalid Input");
@@ -709,7 +730,6 @@ public class ControllerGeneral {
             }
         }
     }
-    
 
     // showSaveConfirmationPopup(text);
     // StringBuilder allData = new StringBuilder();
@@ -725,132 +745,136 @@ public class ControllerGeneral {
     // writeBoard(allData.toString());
 
     private boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?"); 
+        return str.matches("-?\\d+(\\.\\d+)?");
     }
 
     // private String getCorrespondingLabel(String textFieldId) {
-    //     // Example mapping, replace with actual logic
-    //     switch (textFieldId) {
-    //         case "maxVProText":
-    //             return setting1.getText();
-    //         case "minVProText":
-    //             return setting2.getText();
-    //         case "difVProText":
-    //             return setting5.getText();
-    //         case "maxTProText":
-    //             return setting6.getText();
-    //         default:
-    //             return null;
-    //     }
+    // // Example mapping, replace with actual logic
+    // switch (textFieldId) {
+    // case "maxVProText":
+    // return setting1.getText();
+    // case "minVProText":
+    // return setting2.getText();
+    // case "difVProText":
+    // return setting5.getText();
+    // case "maxTProText":
+    // return setting6.getText();
+    // default:
+    // return null;
     // }
-    
+    // }
+
     // public void finishEdit(KeyEvent e) {
-    //     if (e.getCode() == KeyCode.ENTER) {
-    //         TextField text = (TextField) e.getSource();
-    //         showSaveConfirmationPopup(text);
-    //     }
-    //     else if(e.getCode() == KeyCode.ESCAPE){
-    //         TextField text = (TextField) e.getSource();
-    //         text.setVisible(false);
-    //         save.setVisible(false);
-    //     } 
+    // if (e.getCode() == KeyCode.ENTER) {
+    // TextField text = (TextField) e.getSource();
+    // showSaveConfirmationPopup(text);
+    // }
+    // else if(e.getCode() == KeyCode.ESCAPE){
+    // TextField text = (TextField) e.getSource();
+    // text.setVisible(false);
+    // save.setVisible(false);
+    // }
     // }
 
     // private void showSaveConfirmationPopup(TextField textField) {
-    //     // IDs that require numeric input
-    //     List<String> numericFields = Arrays.asList("maxVProText");
-    //     if (numericFields.contains(textField.getId()) && !isNumeric(textField.getText())) {
-    //         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-    //         errorAlert.setTitle("Invalid Input");
-    //         errorAlert.setHeaderText("Invalid Number Format");
-    //         errorAlert.setContentText(
-    //                 "Please enter a valid number for \"" + getCorrespondingLabel(textField.getId()) + "\"" + ".");
-    //         errorAlert.showAndWait();
-    //         return; // Exit the method early
-    //     }
-
-    //     // Create a custom ButtonType for "Save"
-    //     ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
-    //     Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "", saveButtonType, ButtonType.CANCEL);
-    //     confirmationAlert.setTitle("Confirm Changes");
-    //     confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu thay đổi");
-    //     confirmationAlert.setContentText(getCorrespondingLabel(textField.getId()) + "  " + "\"" + textField.getText() + "\"");
-
-    //     // Show the alert and wait for response
-    //     confirmationAlert.showAndWait().ifPresent(response -> {
-    //         if (response == saveButtonType) {
-    //             writeBoard(formatAndWriteValue(textField, textField.getText()));
-    //             updateLabel(textField);
-    //             save.setVisible(false);
-    //         } else {
-    //             textField.setVisible(false); // Hide the text field if not saved
-    //             save.setVisible(false);
-    //         }
-    //     });
+    // // IDs that require numeric input
+    // List<String> numericFields = Arrays.asList("maxVProText");
+    // if (numericFields.contains(textField.getId()) &&
+    // !isNumeric(textField.getText())) {
+    // Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+    // errorAlert.setTitle("Invalid Input");
+    // errorAlert.setHeaderText("Invalid Number Format");
+    // errorAlert.setContentText(
+    // "Please enter a valid number for \"" +
+    // getCorrespondingLabel(textField.getId()) + "\"" + ".");
+    // errorAlert.showAndWait();
+    // return; // Exit the method early
     // }
-    
-    // // private void popAlert(Alert.AlertType type, String title, String header, String content, TextField textField){
-    // //     Alert alert = new Alert(type);
-    // //     alert.setTitle(title);
-    // //     alert.setHeaderText(header);
-    // //     alert.setContentText(content);
-    // //     ButtonType btn = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
-    // //     alert.showAndWait().ifPresent(response -> {
-    // //         if (response == btn) {
-    // //             writeBoard(formatAndWriteValue(textField, textField.getText()));
-    // //             updateLabel(textField);
-    // //             save.setVisible(false);
-    // //         } else {
-    // //             textField.setVisible(false); // Hide the text field if not saved
-    // //             save.setVisible(false);
-    // //         }
-    // //     });
+
+    // // Create a custom ButtonType for "Save"
+    // ButtonType saveButtonType = new ButtonType("Save",
+    // ButtonBar.ButtonData.OK_DONE);
+    // Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "",
+    // saveButtonType, ButtonType.CANCEL);
+    // confirmationAlert.setTitle("Confirm Changes");
+    // confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu thay đổi");
+    // confirmationAlert.setContentText(getCorrespondingLabel(textField.getId()) + "
+    // " + "\"" + textField.getText() + "\"");
+
+    // // Show the alert and wait for response
+    // confirmationAlert.showAndWait().ifPresent(response -> {
+    // if (response == saveButtonType) {
+    // writeBoard(formatAndWriteValue(textField, textField.getText()));
+    // updateLabel(textField);
+    // save.setVisible(false);
+    // } else {
+    // textField.setVisible(false); // Hide the text field if not saved
+    // save.setVisible(false);
+    // }
+    // });
+    // }
+
+    // // private void popAlert(Alert.AlertType type, String title, String header,
+    // String content, TextField textField){
+    // // Alert alert = new Alert(type);
+    // // alert.setTitle(title);
+    // // alert.setHeaderText(header);
+    // // alert.setContentText(content);
+    // // ButtonType btn = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+    // // alert.showAndWait().ifPresent(response -> {
+    // // if (response == btn) {
+    // // writeBoard(formatAndWriteValue(textField, textField.getText()));
+    // // updateLabel(textField);
+    // // save.setVisible(false);
+    // // } else {
+    // // textField.setVisible(false); // Hide the text field if not saved
+    // // save.setVisible(false);
     // // }
-    
-    
-    
+    // // });
+    // // }
+
     private void updateLabel(TextField textField) {
 
         Platform.runLater(() -> {
             Label targetLabel = null;
-        switch (textField.getId()) {
-            case "maxVProText":
-                targetLabel = maxVPro;
-                // Assuming numCell is already defined and converted to a numeric value
-                try {
-                    double maxVProValue = Double.parseDouble(textField.getText());
-                    sumMaxVPro.setText(String.format("%.2f", maxVProValue * numCell));
-                     // Corrected this line
-                } catch (NumberFormatException e) {
-                    // Handle invalid input
-                    sumMaxVPro.setText("Invalid input");
-                }
-                break;
-            case "minVProText":
-                targetLabel = minVPro;
-                try {
-                    double minVProValue = Double.parseDouble(textField.getText());
-                    sumMinVPro.setText(String.format("%.2f", minVProValue * numCell)); // Added this line
-                } catch (NumberFormatException e) {
-                    // Handle invalid input
-                    sumMinVPro.setText("Invalid input");
-                }
-                break;
-            case "difVProText":
-                targetLabel = difVPro;
-                break;
-            case "maxTProText":
-                targetLabel = maxTPro;
-                break;
-        }
-    
-        if (targetLabel != null) {
-            targetLabel.setText(textField.getText());
-            targetLabel.setVisible(true);
-            textField.setVisible(false); 
-        }
-    });
-}
+            switch (textField.getId()) {
+                case "maxVProText":
+                    targetLabel = maxVPro;
+                    // Assuming numCell is already defined and converted to a numeric value
+                    try {
+                        double maxVProValue = Double.parseDouble(textField.getText());
+                        sumMaxVPro.setText(String.format("%.2f", maxVProValue * numCell));
+                        // Corrected this line
+                    } catch (NumberFormatException e) {
+                        // Handle invalid input
+                        sumMaxVPro.setText("Invalid input");
+                    }
+                    break;
+                case "minVProText":
+                    targetLabel = minVPro;
+                    try {
+                        double minVProValue = Double.parseDouble(textField.getText());
+                        sumMinVPro.setText(String.format("%.2f", minVProValue * numCell)); // Added this line
+                    } catch (NumberFormatException e) {
+                        // Handle invalid input
+                        sumMinVPro.setText("Invalid input");
+                    }
+                    break;
+                case "difVProText":
+                    targetLabel = difVPro;
+                    break;
+                case "maxTProText":
+                    targetLabel = maxTPro;
+                    break;
+            }
+
+            if (targetLabel != null) {
+                targetLabel.setText(textField.getText());
+                targetLabel.setVisible(true);
+                textField.setVisible(false);
+            }
+        });
+    }
 
     private void updateFault(Hashtable<String, Double> maxmin) {
         ArrayList<String> fault = new ArrayList<>();
@@ -866,15 +890,15 @@ public class ControllerGeneral {
         if (maxmin.get("sumV") >= os) {
             fault.add("Bảo vệ tổng điện áp cao");
         }
-    
+
         if (maxmin.get("sumV") <= us) {
             fault.add("Bảo vệ tổng điện áp thấp");
         }
-    
+
         if (maxmin.get("delV") > dv) {
             fault.add("Bảo vệ chênh lệch áp");
         }
-    
+
         if (maxmin.get("maxT") >= ot) {
             fault.add("Bảo vệ nhiệt độ cao");
         }
@@ -884,7 +908,6 @@ public class ControllerGeneral {
             faultLabel.setText(fault.stream().collect(Collectors.joining("\n")));
         });
     }
-
 
     private String formatAndWriteValue(TextField textField, String inputValue) {
         String output = "";
@@ -917,8 +940,8 @@ public class ControllerGeneral {
         try {
             byte[] bytes = data.getBytes();
             port.writeBytes(bytes, bytes.length);
-        } catch( NullPointerException e) {
-            System.out.println("No port.");  // debug
+        } catch (NullPointerException e) {
+            System.out.println("No port."); // debug
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -939,7 +962,7 @@ public class ControllerGeneral {
         loader.setController(ctrlCharts);
         Parent root = loader.load();
         Scene chartScene = new Scene(root, Style.CHART_WIDTH, Style.CHART_HEIGHT);
-        
+
         chartStage = new Stage();
         chartStage.setTitle("Đồ thị trạng thái pin " + getCurrentTimeStamp(timestamp));
         chartStage.setScene(chartScene);
