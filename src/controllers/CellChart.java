@@ -13,8 +13,8 @@ public class CellChart {
     @FXML private LineChart<Number, Number> chartV, chartT;
     @FXML private NumberAxis VxAxis, TxAxis, vAxis, tAxis;
     private Date startTime;
-    private int xUpperBound = 20;
-    private double xTickUnit = (double) xUpperBound / 10;
+    private int xUpperBound = 600;
+    private double xTickUnit = (double) xUpperBound / 20;
     private double secondsElapsed;
 
     public CellChart(int cell) {

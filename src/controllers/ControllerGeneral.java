@@ -735,7 +735,6 @@ public class ControllerGeneral {
     }
     
     // Board expects data in the format "o:100;u:100;d:100;t:100\n"
-    
     public void SaveChanges(ActionEvent e) {
         List<TextField> textFieldsToSave = getAllTextFields(profilePane);
         ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
@@ -760,16 +759,19 @@ public class ControllerGeneral {
                         text.setVisible(false);
                     }
                 }
-                
             } else {
                 // All fields are valid, proceed with saving
                 for (TextField textField : textFieldsToSave) {
                     if (textField.isVisible()) { 
-                        writeBoard(formatAndWriteValue(textField, textField.getText()));
+                        System.out.println("Saving changes...");
+                        writeBoard(formatForWrite(textField.getId(), textField.getText()));
                         updateLabel(textField);
                     }
                 }
+
+                writeBoard("\n");
             }
+            save.setVisible(false);
         }
     }
 
@@ -851,27 +853,28 @@ public class ControllerGeneral {
     }
 
 
-    private String formatAndWriteValue(TextField textField, String inputValue) {
+    private String formatForWrite(String id, String inputValue) {
         String output = "";
         double setValue = Double.parseDouble(inputValue);
-
-        switch (textField.getId()) {
+        switch (id) {
             case "maxVProText":
-                output = String.format("o:%d", (int) (setValue * 100));
+                output = String.format("o:%.0f", (setValue * 100));
                 break;
             case "minVProText":
-                output = String.format("u:%d", (int) (setValue * 100));
+                output = String.format("u:%.0f", (setValue * 100));
                 break;
             case "difVProText":
-                output = String.format("d:%d", (int) (setValue * 100));
+                output = String.format("d:%.0f", (setValue * 100));
                 break;
             case "maxTProText":
-                output = String.format("t:%d", (int) (setValue * 10));
+                output = String.format("t:%.0f", (setValue * 10));
                 break;
         }
 
         return output + ";";
     }
+
+
 
     public void setPort(SerialPort port) {
         this.port = port;
@@ -882,12 +885,13 @@ public class ControllerGeneral {
         try {
             byte[] bytes = data.getBytes();
             port.writeBytes(bytes, bytes.length);
-        } catch (NullPointerException e) {
-            System.out.println("No port."); // debug
+        } catch( NullPointerException e) {
+            System.out.println("No port.");  // debug
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     public void chart(ActionEvent e) throws IOException {
         initCharts(numCell, new Date());
@@ -921,7 +925,7 @@ public class ControllerGeneral {
         Scene chartScene = new Scene(root, Style.CELL_CHART_WIDTH, Style.CELL_CHART_HEIGHT);
 
         Stage ccStage = new Stage();
-        ccStage.setTitle("Đồ thị trạng thái pin " + timestamp);
+        ccStage.setTitle("Đồ thị Cell " + cell + " " + timestamp);
         ccStage.setScene(chartScene);
         ccStage.setOnCloseRequest(event -> {
             runCellChart.set(cell, false);

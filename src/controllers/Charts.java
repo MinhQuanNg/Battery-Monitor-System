@@ -16,8 +16,8 @@ public class Charts {
     private Hashtable<String, LineChart.Series<Number, Number>> seriesList;
     private int numCell;
 
-    private int xUpperBound = 20;
-    private double xTickUnit = (double) xUpperBound / 10;
+    private int xUpperBound = 600;
+    private double xTickUnit = (double) xUpperBound / 20;
     private int secondsElapsed;
 
     public Charts(int numCell, Date startime) {
