@@ -223,10 +223,7 @@ public class ControllerGeneral {
         List<TextField> TextFields = getAllTextFields(profilePane);
         profilePane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
             Node target = (Node) event.getTarget(); // Get the target of the click event
-            if (!(target instanceof Button)) {
-                if (!(target instanceof TextField)) {
-                    return;
-                }
+            if (!(target instanceof Button) && !(target instanceof TextField)) {
                 for (TextField textField : TextFields) {
                     textField.setVisible(false);
                     save.setVisible(false);
@@ -249,7 +246,13 @@ public class ControllerGeneral {
         for (Node node : cellPane.getChildren()) {
             Integer row = GridPane.getRowIndex(node);
             Integer column = GridPane.getColumnIndex(node);
-            if (row != null && column != null && row == rowIndex && column == columnIndex) {
+
+            if (row == null)
+                row = 0;
+            if (column == null)
+                column = 0;
+
+            if (row == rowIndex && column == columnIndex) {
                 if (node instanceof ImageView) {
                     return (ImageView) node;
                 }
@@ -654,31 +657,83 @@ public class ControllerGeneral {
         textField.setVisible(true);
         textField.setText(label.getText());
         textField.requestFocus();
-        // focus.setDisable(false);
     }
 
-    // @Override
-    // public void mouseExited(MouseEvent e) {
-    // profilePane.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-    // List<TextField> textFieldsToSave = getAllTextFields(profilePane);
-    // for (TextField textField : textFieldsToSave) {
-    // if (textField.isVisible()) {
-    // if (!(event.getTarget() instanceof TextField) || event.getTarget() !=
-    // textField) {
-    // textField.setVisible(false);
-    // }
-    // }
-    // }
-    // });
-    // });
-    // }
 
     public void finishEdit(KeyEvent e) {
         if (e.getCode() == KeyCode.ENTER) {
             SaveChanges(null);
+        } if (e.getCode() == KeyCode.ESCAPE){
+            List<TextField> textFieldsToSave = getAllTextFields(profilePane);
+            for (TextField text : textFieldsToSave) {
+                if(text.isVisible()){
+                    text.setVisible(false);
+                    save.setVisible(false);
+                }
+            }
         }
     }
 
+    private boolean validateInput(TextField text, String input) {
+        if (!input.matches("-?\\d+(\\.\\d+)?")) {
+            showInputError("Invalid Input", "Vui lòng không nhập kí tự đặc biệt");
+            return false;
+        }
+    
+        double value;
+        try {
+            value = Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            showInputError("Invalid Input", "Vui lòng nhập số");
+            return false;
+        }
+    
+        boolean isValid = true;
+        String errorMessage = ""; // Initialize an empty error message string
+    
+        switch (text.getId()) {
+            case "maxVProText":
+                if (!(value >= 0 && value <= 10)) {
+                    isValid = false;
+                    errorMessage = "Thông số phải nằm trong khoảng từ 0 đến 10.";
+                }
+                break;
+            case "minVProText":
+                if (!(value >= 0 && value <= 10)) {
+                    isValid = false;
+                    errorMessage = "Thông số phải nằm trong khoảng từ 0 đến 10.";
+                }
+                break;
+            case "maxTProText":
+                if (!(value >= 0 && value <= 200)) {
+                    isValid = false;
+                    errorMessage = "Thông số phải nằm trong khoảng từ 0 đến 200.";
+                }
+                break;
+            case "difVProText":
+                if (!(value >= 0 && value <= 1)) {
+                    isValid = false;
+                    errorMessage = "Thông số phải nằm trong khoảng từ 0 đến 1.";
+                }
+                break;
+            // Add more cases as needed with specific error messages
+        }
+    
+        if (!isValid) {
+            showInputError("INPUT KHÔNG HỢP LỆ", errorMessage); // Use the specific error message
+        }
+    
+        return isValid;
+    }
+    
+    private void showInputError(String header, String content) {
+        Alert errorAlert = new Alert(Alert.AlertType.WARNING);
+        errorAlert.setTitle("Cảnh Báo");
+        errorAlert.setHeaderText(header);
+        errorAlert.setContentText(content);
+        errorAlert.showAndWait();
+    }
+    
     // Board expects data in the format "o:100;u:100;d:100;t:100\n"
     
     public void SaveChanges(ActionEvent e) {
@@ -686,165 +741,38 @@ public class ControllerGeneral {
         ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "", saveButtonType, ButtonType.CANCEL);
         confirmationAlert.setTitle("Confirm Changes");
-        confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu tất cả thay đổi?");
+        confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu thay đổi?");
         Optional<ButtonType> response = confirmationAlert.showAndWait();
-
+    
         if (response.isPresent() && response.get() == saveButtonType) {
+            boolean allFieldsValid = true;
             for (TextField textField : textFieldsToSave) {
-                if (textField.isVisible() && isNumeric(textField.getText())) {
-                    double value = Double.parseDouble(textField.getText());
-                    boolean isValid = false;
-                    String errorText = "";
-
-                    switch (textField.getId()) {
-                        case "maxVProText":
-                            isValid = value >= 0 && value <= 10;
-                            errorText = "Please enter a valid overvoltage value between 0 and 10.";
-                            break;
-                        case "minVProText":
-                            isValid = value >= 0 && value <= 10;
-                            errorText = "Please enter a valid undervoltage value between 0 and 10.";
-                            break;
-                        case "maxTProText":
-                            isValid = value >= 0 && value <= 200;
-                            errorText = "Please enter a valid temperature protection value between 0 and 200.";
-                            break;
-                        case "difVProText":
-                            isValid = value >= 0 && value <= 1;
-                            errorText = "Please enter a valid differential voltage value between 0 and 1.";
-                            break;
-                        default:
-                            isValid = true; // Assume other fields don't have specific validation rules
-                            break;
-                    }
-
-                    if (isValid) {
-                        writeBoard(formatForWrite(textField.getId(), textField.getText()));
-                        updateLabel(textField);
-                        System.out.println(textField.getText() + " saved.");
-                        System.out.println("-----");
-                    } else {
-                        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                        errorAlert.setTitle("Invalid Input");
-                        errorAlert.setHeaderText("Invalid Number Format");
-                        errorAlert.setContentText(errorText);
-                        errorAlert.showAndWait();
-                    }
+                if (textField.isVisible() && !validateInput(textField, textField.getText())) {
+                    allFieldsValid = false;
+                    break; // Found an invalid field, no need to check further
                 }
             }
-
-            writeBoard("\n");
-        } else {
-            for (TextField textField : textFieldsToSave) {
-                if (textField.isVisible()) {
-                    textField.setVisible(false);
-                    save.setVisible(false);
+    
+            if (!allFieldsValid) {
+                // Hide all text fields and show error alert
+                for (TextField text : textFieldsToSave) {
+                    if (text.isVisible()) {
+                        text.setVisible(false);
+                    }
+                }
+                
+            } else {
+                // All fields are valid, proceed with saving
+                for (TextField textField : textFieldsToSave) {
+                    if (textField.isVisible()) { 
+                        writeBoard(formatAndWriteValue(textField, textField.getText()));
+                        updateLabel(textField);
+                    }
                 }
             }
         }
     }
 
-    // showSaveConfirmationPopup(text);
-    // StringBuilder allData = new StringBuilder();
-    // // Assuming you have TextField instances for each of your inputs
-    // TextField[] textFields = {maxVProText, minVProText, difVProText, maxTProText,
-    // sumMaxVProText, sumMinVProText};
-    // for (TextField textField : textFields) {
-    // String formattedData = formatData(textField.getText(), textField); //
-    // Assuming formatData method takes the text value and the TextField itself
-    // allData.append(formattedData).append("\n"); // Append a newline or other
-    // delimiter as needed
-    // }
-    // writeBoard(allData.toString());
-
-    private boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?");
-    }
-
-    // private String getCorrespondingLabel(String textFieldId) {
-    // // Example mapping, replace with actual logic
-    // switch (textFieldId) {
-    // case "maxVProText":
-    // return setting1.getText();
-    // case "minVProText":
-    // return setting2.getText();
-    // case "difVProText":
-    // return setting5.getText();
-    // case "maxTProText":
-    // return setting6.getText();
-    // default:
-    // return null;
-    // }
-    // }
-
-    // public void finishEdit(KeyEvent e) {
-    // if (e.getCode() == KeyCode.ENTER) {
-    // TextField text = (TextField) e.getSource();
-    // showSaveConfirmationPopup(text);
-    // }
-    // else if(e.getCode() == KeyCode.ESCAPE){
-    // TextField text = (TextField) e.getSource();
-    // text.setVisible(false);
-    // save.setVisible(false);
-    // }
-    // }
-
-    // private void showSaveConfirmationPopup(TextField textField) {
-    // // IDs that require numeric input
-    // List<String> numericFields = Arrays.asList("maxVProText");
-    // if (numericFields.contains(textField.getId()) &&
-    // !isNumeric(textField.getText())) {
-    // Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-    // errorAlert.setTitle("Invalid Input");
-    // errorAlert.setHeaderText("Invalid Number Format");
-    // errorAlert.setContentText(
-    // "Please enter a valid number for \"" +
-    // getCorrespondingLabel(textField.getId()) + "\"" + ".");
-    // errorAlert.showAndWait();
-    // return; // Exit the method early
-    // }
-
-    // // Create a custom ButtonType for "Save"
-    // ButtonType saveButtonType = new ButtonType("Save",
-    // ButtonBar.ButtonData.OK_DONE);
-    // Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "",
-    // saveButtonType, ButtonType.CANCEL);
-    // confirmationAlert.setTitle("Confirm Changes");
-    // confirmationAlert.setHeaderText("Bạn có chắc chắn muốn lưu thay đổi");
-    // confirmationAlert.setContentText(getCorrespondingLabel(textField.getId()) + "
-    // " + "\"" + textField.getText() + "\"");
-
-    // // Show the alert and wait for response
-    // confirmationAlert.showAndWait().ifPresent(response -> {
-    // if (response == saveButtonType) {
-    // writeBoard(formatAndWriteValue(textField, textField.getText()));
-    // updateLabel(textField);
-    // save.setVisible(false);
-    // } else {
-    // textField.setVisible(false); // Hide the text field if not saved
-    // save.setVisible(false);
-    // }
-    // });
-    // }
-
-    // // private void popAlert(Alert.AlertType type, String title, String header,
-    // String content, TextField textField){
-    // // Alert alert = new Alert(type);
-    // // alert.setTitle(title);
-    // // alert.setHeaderText(header);
-    // // alert.setContentText(content);
-    // // ButtonType btn = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
-    // // alert.showAndWait().ifPresent(response -> {
-    // // if (response == btn) {
-    // // writeBoard(formatAndWriteValue(textField, textField.getText()));
-    // // updateLabel(textField);
-    // // save.setVisible(false);
-    // // } else {
-    // // textField.setVisible(false); // Hide the text field if not saved
-    // // save.setVisible(false);
-    // // }
-    // // });
-    // // }
 
     private void updateLabel(TextField textField) {
 
@@ -923,11 +851,11 @@ public class ControllerGeneral {
     }
 
 
-    private String formatForWrite(String id, String inputValue) {
+    private String formatAndWriteValue(TextField textField, String inputValue) {
         String output = "";
         double setValue = Double.parseDouble(inputValue);
 
-        switch (id) {
+        switch (textField.getId()) {
             case "maxVProText":
                 output = String.format("o:%d", (int) (setValue * 100));
                 break;

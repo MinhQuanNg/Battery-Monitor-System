@@ -19,7 +19,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text fill="#3c3c3c" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" text="Battery Management System" textAlignment="CENTER" wrappingWidth="246.98740935325623" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text fill="#3c3c3c" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="0.0" text="Battery Management System" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="19.0" />
                </font>
