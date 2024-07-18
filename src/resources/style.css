@@ -101,9 +101,8 @@
     -fx-font-size: 16px;
 }
 .cell-chart-button {
-    /* -fx-background-color: transparent; */
-    -fx-pref-width: 70px;
-    -fx-pref-height: 51px;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
 }
 
 .chart-voltage .chart-series-line {
@@ -115,7 +114,6 @@
 }
 
 .chart-temperature .chart-series-line {
-.v-chart .chart-series-line {
     -fx-stroke: rgb(60, 245, 60);
 }
 

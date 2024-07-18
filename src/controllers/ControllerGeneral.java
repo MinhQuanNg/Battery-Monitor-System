@@ -33,7 +33,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -144,9 +143,10 @@ public class ControllerGeneral {
                 GridPane.setHalignment(button, HPos.CENTER);
                 GridPane.setValignment(button, VPos.CENTER);
                 button.getStyleClass().add("cell-chart-button");
-                button.setPrefSize(70, 52);
-                button.setStyle("-fx-background-color: transparent;"); // Set button background to transparent
-                button.setCursor(Cursor.HAND);
+                
+                ImageView imageView = findImageView(rowIndex, columnIndex);
+                button.setPrefSize(imageView.getFitWidth(), imageView.getFitHeight());
+                
                 final int cell = rowIndex * cellPane.getColumnCount() + columnIndex;
                 button.onActionProperty().set(e -> {
                     try {
@@ -243,6 +243,19 @@ public class ControllerGeneral {
 
         profilePane.setVisible(true);
     
+    }
+
+    private ImageView findImageView(int rowIndex, int columnIndex) {
+        for (Node node : cellPane.getChildren()) {
+            Integer row = GridPane.getRowIndex(node);
+            Integer column = GridPane.getColumnIndex(node);
+            if (row != null && column != null && row == rowIndex && column == columnIndex) {
+                if (node instanceof ImageView) {
+                    return (ImageView) node;
+                }
+            }
+        }
+        return null;
     }
 
     public void processData(JSONArray dataArray, Date now) {
