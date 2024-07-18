@@ -28,7 +28,7 @@
     -fx-background-color: #d7d3d3;  
 }
 
-.profile-pane{
+.profile-pane {
     -fx-background-color: #d7d3d3;
     -fx-text-fill: black;
 
@@ -58,6 +58,9 @@
     -fx-background-color: #5a7088;
 }
 
+
+/* Charts */
+
 .maxV-chart .default-color0.chart-series-line {
     -fx-stroke: rgb(126, 255, 75);
 }
@@ -67,11 +70,11 @@
 }
 
 .maxV-chart .default-color1.chart-series-line {
-    -fx-stroke: rgb(119, 181, 247);
+    -fx-stroke: rgb(48, 104, 163);
 }
 
 .maxV-chart .default-color1.chart-line-symbol {
-    -fx-background-color: rgb(119, 181, 247);
+    -fx-background-color: rgb(48, 104, 163);
 }
 
 .maxT-chart .chart-series-line {
@@ -97,9 +100,26 @@
 .delV-chart .chart-line-symbol {
     -fx-background-color: grey;
 }
-.cell-text{
+
+.charts .chart-title {
+    -fx-translate-x: 25px;
+}
+
+.charts .chart-legend {
+    -fx-translate-x: 25px;
+}
+
+
+
+.cell-text {
     -fx-font-size: 16px;
 }
+
+
+
+
+/* Cell charts */
+
 .cell-chart-button {
     -fx-background-color: transparent;
     -fx-cursor: hand;
@@ -113,18 +133,6 @@
     -fx-background-color: rgb(60, 245, 60);
 }
 
-.chart-temperature .chart-series-line {
-    -fx-stroke: rgb(60, 245, 60);
-}
-
-.chart-transparent .chart-series-line {
-    -fx-stroke: red;
-}
-
-.chart-temperature .chart-line-symbol {
-    -fx-background-color: red;
-}
-
 .chart-voltage .chart-legend {
     -fx-translate-x: -20px;
 }
@@ -133,13 +141,21 @@
     -fx-translate-x: 25px;
 }
 
+.chart-temperature .chart-series-line {
+    -fx-stroke: red;
+}
+
+.chart-temperature .chart-line-symbol {
+    -fx-background-color: red;
+}
+
 .chart-temperature .chart-legend {
     -fx-translate-x: 20px;
 }
 
-.chart-transparent .chart-plot-background,
-.chart-transparent .chart-tick-labels,
-.chart-transparent .chart-tick-marks,
-.chart-transparent .chart-title {
+.chart-temperature .chart-plot-background,
+.chart-temperature .chart-tick-labels,
+.chart-temperature .chart-tick-marks,
+.chart-temperature .chart-title {
     -fx-opacity: 0;
 }
