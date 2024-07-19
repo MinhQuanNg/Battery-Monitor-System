@@ -1,4 +1,4 @@
-### Battery Management System UI
+### Battery Management System
 
 1. **Device Connection**
    - Displays connection status with the battery monitoring device.
