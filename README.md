@@ -1,4 +1,4 @@
-### Battery Management System
+### Battery Monitor System
 
 1. **Device Connection**
    - Displays connection status with the battery monitoring device.
